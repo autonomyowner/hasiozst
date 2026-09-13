@@ -91,7 +91,7 @@ export default function SignInScreen() {
       >
         {/* Top background image */}
         <BackgroundImage
-          uri="https://secret-toad-401.eu-west-1.convex.cloud/api/storage/b46f16bd-6422-47f6-ba06-0d7e1cd2ae50"
+          source={require("@/assets/images/profile-cover-gold.jpg")}
           height={320}
         >
           <View className="px-6 pt-14">

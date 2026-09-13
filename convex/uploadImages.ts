@@ -2,7 +2,9 @@ import { v } from "convex/values";
 import { internalAction, internalMutation } from "./_generated/server";
 import { internal } from "./_generated/api";
 
-const STORAGE_BASE = "https://secret-toad-401.eu-west-1.convex.cloud/api/storage";
+// TODO(hasio): legacy import helper. Empty by default so it cannot pull from
+// another project's deployment; set LEGACY_STORAGE_BASE to re-import old assets.
+const STORAGE_BASE = `${process.env.LEGACY_STORAGE_BASE ?? ""}/api/storage`;
 
 // All image assets — now permanently stored in Convex storage (migrated from Figma MCP)
 const STORAGE_ASSETS: Record<string, string> = {

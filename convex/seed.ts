@@ -3,10 +3,14 @@ import { internalMutation, internalAction } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
 
-// ── Permanent image assets stored in Convex storage ──
-// These URLs are permanent and do not expire.
+// ── Seed image assets ──
+// TODO(hasio): this seed data is inherited marketplace mock content and points at
+// a storage base that is no longer provisioned. Replace wholesale with travel
+// seed data against Hasio's own Convex storage. Set LEGACY_STORAGE_BASE only if
+// you are intentionally re-importing old assets; it is empty by default so the
+// seed never reaches another project's backend.
 
-const STORAGE = "https://secret-toad-401.eu-west-1.convex.cloud/api/storage";
+const STORAGE = `${process.env.LEGACY_STORAGE_BASE ?? ""}/api/storage`;
 
 // ── Convex storage image assets (originally extracted from Figma design file XZvvee3bk05zr9IEzb9NFM) ──
 const figmaImgs = {
@@ -87,7 +91,7 @@ const wholesaleImgs = {
 export const transferBannerImage = internalAction({
   args: {},
   handler: async (ctx) => {
-    const DEV_URL = "https://silent-chipmunk-103.eu-west-1.convex.cloud/api/storage/68352d85-3efc-44c1-8bcd-435f40c0c501";
+    const DEV_URL = `${process.env.LEGACY_STORAGE_BASE ?? ""}/api/storage/68352d85-3efc-44c1-8bcd-435f40c0c501`;
 
     // Download image from dev storage
     const response = await fetch(DEV_URL);

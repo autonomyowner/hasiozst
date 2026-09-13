@@ -1,9 +1,12 @@
-import { View, ImageBackground, StyleSheet } from "react-native";
+import { View, ImageBackground, StyleSheet, type ImageSourcePropType } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode } from "react";
 
 interface BackgroundImageProps {
-  uri: string;
+  /** Remote image URL. Ignored when `source` is given. */
+  uri?: string;
+  /** Local asset via require(). Takes precedence over `uri`. */
+  source?: ImageSourcePropType;
   children: ReactNode;
   height?: number;
   overlayOpacity?: number;
@@ -11,13 +14,14 @@ interface BackgroundImageProps {
 
 export function BackgroundImage({
   uri,
+  source,
   children,
   height = 280,
   overlayOpacity = 0.6,
 }: BackgroundImageProps) {
   return (
     <ImageBackground
-      source={{ uri }}
+      source={source ?? { uri: uri as string }}
       style={[styles.container, { height }]}
       resizeMode="cover"
     >

@@ -55,7 +55,8 @@ const STORAGE_ASSETS = {
   importerSupplier: "b71ad660-57a4-4bec-b71a-a81f747a3127",
 };
 
-const STORAGE_BASE = "https://silent-chipmunk-103.eu-west-1.convex.cloud/api/storage";
+// TODO(hasio): legacy one-off migration script from the AI TRIDI fork.
+const STORAGE_BASE = `${process.env.LEGACY_STORAGE_BASE ?? ""}/api/storage`;
 
 async function migrateImage(name, storageId) {
   const sourceUrl = `${STORAGE_BASE}/${storageId}`;

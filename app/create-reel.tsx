@@ -18,8 +18,9 @@ import { useUserRole } from "@/hooks/useUserRole";
 import { uploadFile } from "@/lib/upload";
 import { useToast } from "@/providers/ToastProvider";
 
-const DEFAULT_THUMBNAIL =
-  "https://secret-toad-401.eu-west-1.convex.cloud/api/storage/d8b3afec-d168-4352-a941-562abcbc5d9f";
+// TODO(hasio): replace with a Hasio-hosted thumbnail once the new Convex
+// storage is provisioned. Must stay a string URL — reels store it in the DB.
+const DEFAULT_THUMBNAIL = "";
 
 export default function CreateReelScreen() {
   const router = useRouter();
