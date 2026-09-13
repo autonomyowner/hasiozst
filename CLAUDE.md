@@ -1,9 +1,109 @@
-# ⚠️ PROJECT FORK NOTICE — READ FIRST (Sept 2026)
+# HASIO — Saudi hotel & service booking app
 
-This repo is **Hasio** (`https://github.com/autonomyowner/hasiozst.git`), a fork of the
-AI TRIDI B2B/B2C marketplace that is being rebuilt into a **travel app**.
+**Read this section before touching anything. The inherited documentation starts
+below the `---` and describes an app we are actively replacing.**
 
-**It is fully disconnected from AI TRIDI's infrastructure. Keep it that way:**
+## What we are building
+
+**Hasio** — the best hotel and service booking app in Saudi Arabia.
+
+Guests discover and book hotels, stays and travel services. **Hotel owners and
+service providers publish their own listings from inside the app**, in two
+formats that already exist in this codebase:
+
+- **Cards** — the static listing (photos, price, details) — inherited from the product card system.
+- **Reels** — short vertical video of the property or service — inherited from the reels system.
+
+Both already work end to end (create screen → Convex storage upload → feed). They
+get re-skinned to the travel domain, not rebuilt.
+
+## How we work on it: one change at a time
+
+This repo is a **fork of AI TRIDI**, a working Algerian B2B/B2C marketplace. It is
+not a greenfield project and must not be treated as one.
+
+**The method is incremental migration.** Each step takes one slice of the
+marketplace and converts it to the booking domain, keeping the app running and
+type-clean (`npx tsc --noEmit`) at every step. Do not attempt a big-bang rewrite,
+do not delete subsystems wholesale because they "look like marketplace code", and
+do not scaffold new modules when an inherited one can be renamed and reshaped.
+
+Before building anything new, **check what the existing structure already gives
+you.** The upload pipeline, media gallery, auth, roles, favorites, notifications,
+search, pagination and dashboards are all built and working.
+
+When you complete a step, add a dated entry under **Migration log** below.
+
+## Domain mapping — marketplace → booking
+
+The inherited concept on the left is the thing to reshape; don't invent the right
+column from scratch.
+
+| Inherited | Becomes | Notes |
+|---|---|---|
+| `products` (cards) | Hotel / room / service **listings** | Keep the multi-image gallery + `videoUrl` auto-reel behaviour |
+| `reels` | Property & service **reels** | Already owner-uploaded; needs travel-domain metadata |
+| `freelanceServices` | **Services** (tours, transport, guides, events) | Closest existing fit; already has `images[]` + search index |
+| `orders` | **Bookings** | Per-seller grouping becomes per-property grouping; status timeline becomes booking lifecycle |
+| `cart` + `checkout` | **Booking flow** | Dates/guests replace quantity; see open questions |
+| `offers` + `bids` | **Quote requests** for group/event bookings | Or removed — decision pending |
+| `demandRequests` | Guest **trip requests** | Or removed — decision pending |
+| `promotions` + subscription plans | **Featured / promoted listings** | Reusable close to as-is |
+| `favorites` | Saved stays | Reusable as-is |
+| `notifications` + push | Booking notifications | Reusable as-is |
+
+### Roles
+
+Current effective roles (`lib/types.ts` → `getEffectiveRole()`) are
+`customer | fournisseur | importateur | grossiste | freelancer`, split across two
+tab groups `(main)` (B2C) and `(grociste)` (B2B).
+
+Target is far simpler: **guest**, **hotel owner**, **service provider**. The
+two-tab-group split and the `(grociste)` naming are almost certainly more
+structure than a booking app needs — but collapsing roles touches routing, every
+layout, and server-side authorization, so it is **its own migration step**, not a
+side effect of another one.
+
+## Saudi localization — required, not cosmetic
+
+The inherited app is Algeria/French. Every one of these is a migration step:
+
+| Area | Now | Target |
+|---|---|---|
+| Geography | `lib/algeriaData.ts` — 58 wilayas + communes (93 lines, used by checkout) | Saudi regions & cities (Riyadh, Makkah, Madinah, Jeddah, Dammam, AlUla, NEOM …) |
+| Currency | `formatPrice()` → `fr-DZ` + `"DA"` | **SAR** (`ar-SA`, ﷼) |
+| Dates | `formatDate()` → `fr-FR` | `ar-SA`; booking flows also need **Hijri** awareness |
+| UI language | English/French strings inline in components | **Arabic-first** |
+| Layout | LTR only | **RTL** — this is structural. NativeWind/RN need `I18nManager` + logical properties; retrofitting it late is expensive, so decide early |
+
+Seed data (`convex/seed.ts`) is inherited Algerian marketplace mock content and
+should be replaced wholesale with Saudi hotel/service data rather than patched.
+
+## Open decisions — ask the owner, don't guess
+
+- Real domain name (`hasio.com` is a **placeholder** in `app/privacy-policy.tsx`,
+  `app/terms-of-service.tsx`, `hooks/useReels.ts`, `convex/auth.ts`, `convex/http.ts`).
+- Arabic-first vs bilingual AR/EN, and whether RTL lands before or after the domain rework.
+- Booking model: instant-book vs request-to-book; does the cart survive as a
+  multi-item basket, or does each booking stand alone?
+- Payments: the inherited subscription screens render payment methods but process
+  nothing real.
+- Whether `offers`/`bids`/`demandRequests` become group-booking quotes or get removed.
+
+## Migration log
+
+Newest last. One entry per completed step.
+
+- **2026-09-13** — Forked from AI TRIDI. Severed all original-app infrastructure
+  (see table below), rebranded identity strings to HASIO, removed hardcoded AI
+  TRIDI storage URLs. App structure otherwise untouched.
+
+---
+
+# Infrastructure isolation — keep it this way
+
+This repo is `https://github.com/autonomyowner/hasiozst.git`. It shares **no**
+git history, backend, or store listing with AI TRIDI.
 
 | Link | Status |
 |---|---|
@@ -13,21 +113,26 @@ AI TRIDI B2B/B2C marketplace that is being rebuilt into a **travel app**.
 | Sentry (org `autonomy-em`, project `react-native`/`aitridi`) | **Removed** from `app.json` + `eas.json`. `lib/sentry.ts` no-ops without a DSN. |
 | Bundle id | `com.hasio.app` (was `com.aitridi.app`) — a separate Play Store / App Store app. |
 | Deep-link scheme | `hasio://` (was `ai-tridi://`) |
+| Legacy storage URLs | Behind `LEGACY_STORAGE_BASE`, empty by default. Do not hardcode another project's storage. |
 | Old builds in `aab appstore/` | Gitignored. Belong to AI TRIDI — do not upload or submit them. |
-| `hasio.com` domain in legal pages / share URLs | **Placeholder** — confirm the real domain with the owner before shipping. |
 
-**Everything below this line is inherited AI TRIDI documentation.** It still describes the
-code accurately (the codebase is unchanged apart from branding), but **every AI TRIDI
-project id, Convex URL, EAS build id, Sentry token and Play Store instruction in it is
-stale and must not be acted on.** In particular, do NOT follow the "OTA workflow" section's
-instruction to write `secret-toad-401` into `.env.local` — that is the *original* app's
-production backend.
+**Everything below this line is inherited AI TRIDI documentation.** It still
+describes the *code* accurately — the codebase is unchanged apart from branding —
+so it remains the best map of how the app works. But **every AI TRIDI project id,
+Convex URL, EAS build id, Sentry token and Play Store instruction in it is stale
+and must not be acted on.** In particular, do NOT follow the "OTA workflow"
+section's instruction to write `secret-toad-401` into `.env.local` — that is the
+*original* app's production backend.
+
+As each subsystem is migrated, update the inherited section below to describe the
+Hasio behaviour instead of appending contradictory notes.
 
 ---
 
-# CLAUDE.md
+# Inherited AI TRIDI documentation
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Accurate as a map of how the code works. Stale wherever it names a project id,
+deployment, build or store listing. Migrate sections here as you migrate the code.
 
 ## Commands
 
