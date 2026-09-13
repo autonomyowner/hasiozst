@@ -32,16 +32,16 @@ SplashScreen.preventAutoHideAsync();
 
 export function ErrorBoundary({ error, retry }: { error: Error; retry: () => void }) {
   return (
-    <View style={{ flex: 1, backgroundColor: "#000", alignItems: "center", justifyContent: "center", paddingHorizontal: 32 }}>
-      <Ionicons name="warning-outline" size={48} color="#FFD400" />
-      <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 20, color: "#fff", marginTop: 16, textAlign: "center" }}>
+    <View style={{ flex: 1, backgroundColor: "#F8F4ED", alignItems: "center", justifyContent: "center", paddingHorizontal: 32 }}>
+      <Ionicons name="warning-outline" size={48} color="#1A4B5F" />
+      <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 20, color: "#0D1A12", marginTop: 16, textAlign: "center" }}>
         Something went wrong
       </Text>
-      <Text style={{ fontFamily: "Montserrat_400Regular", fontSize: 14, color: "#898989", marginTop: 8, textAlign: "center" }}>
+      <Text style={{ fontFamily: "Montserrat_400Regular", fontSize: 14, color: "#5F6E63", marginTop: 8, textAlign: "center" }}>
         {error.message || "An unexpected error occurred."}
       </Text>
-      <Pressable onPress={retry} style={{ marginTop: 24, backgroundColor: "#FFD400", borderRadius: 14, paddingHorizontal: 32, paddingVertical: 12 }}>
-        <Text style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 14, color: "#000" }}>Try Again</Text>
+      <Pressable onPress={retry} style={{ marginTop: 24, backgroundColor: "#1A4B5F", borderRadius: 14, paddingHorizontal: 32, paddingVertical: 12 }}>
+        <Text style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 14, color: "#FFFFFF" }}>Try Again</Text>
       </Pressable>
     </View>
   );
@@ -116,7 +116,7 @@ function RootLayout() {
 
   if (!fontsReady) {
     return (
-      <View style={{ flex: 1, backgroundColor: "#000", alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, backgroundColor: "#F8F4ED", alignItems: "center", justifyContent: "center" }}>
         <Image
           source={require("../assets/splash-icon.png")}
           style={{ width: 120, height: 120 }}
@@ -130,11 +130,11 @@ function RootLayout() {
     <AppProviders>
       {showSplash && <AnimatedSplash onFinish={handleSplashFinish} />}
       <PushRegistration />
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <Stack
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: "#000000" },
+          contentStyle: { backgroundColor: "#F8F4ED" },
           animation: "slide_from_right",
         }}
       >

@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { View, Text, FlatList, Pressable, ActivityIndicator, RefreshControl } from "react-native";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { api } from "../convex/_generated/api";
@@ -25,7 +25,7 @@ export default function FavoritesScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -38,9 +38,9 @@ export default function FavoritesScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
-        <Text className="font-mont-bold text-xl text-white">Favorites</Text>
+        <Text className="font-mont-bold text-xl text-text-primary">Favorites</Text>
       </View>
 
       {products.length === 0 ? (
@@ -65,8 +65,8 @@ export default function FavoritesScreen() {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
-              tintColor="#FFD400"
-              colors={["#FFD400"]}
+              tintColor="#1A4B5F"
+              colors={["#1A4B5F"]}
             />
           }
           renderItem={({ item }) => (
@@ -88,7 +88,7 @@ export default function FavoritesScreen() {
                 </View>
                 <View className="p-3" style={{ gap: 4 }}>
                   <Text
-                    className="font-mont-medium text-sm text-white"
+                    className="font-mont-medium text-sm text-text-primary"
                     numberOfLines={1}
                   >
                     {item.name}

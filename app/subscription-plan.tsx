@@ -22,11 +22,11 @@ export default function SubscriptionPlanScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mb-4"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
 
         {/* Plan name */}
-        <Text className="font-mont-bold text-xl text-white">{plan.name}</Text>
+        <Text className="font-mont-bold text-xl text-text-primary">{plan.name}</Text>
         <Text className="font-mont text-sm text-text-secondary mt-1">
           {plan.id === "free"
             ? "Start selling with no commitment."
@@ -38,7 +38,7 @@ export default function SubscriptionPlanScreen() {
         {/* Price */}
         <View className="flex-row items-baseline mt-4">
           <Text className="font-mont-bold text-4xl text-primary">
-            {plan.price === 0 ? "0" : plan.price.toLocaleString("fr-DZ")}
+            {plan.price === 0 ? "0" : plan.price.toLocaleString("en-US")}
           </Text>
           <Text className="font-mont-medium text-lg text-text-secondary ml-2">
             {plan.period}
@@ -55,15 +55,15 @@ export default function SubscriptionPlanScreen() {
         {/* What's Included */}
         <View className="mt-6">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="checkmark-circle-outline" size={20} color="#FFD400" />
-            <Text className="font-mont-bold text-base text-white ml-2">
+            <Ionicons name="checkmark-circle-outline" size={20} color="#1A4B5F" />
+            <Text className="font-mont-bold text-base text-text-primary ml-2">
               What's Included
             </Text>
           </View>
           <View className="rounded-card bg-card p-4 flex-row flex-wrap" style={{ gap: 12 }}>
             {plan.features.map((feature, i) => (
               <View key={i} className="flex-row items-center" style={{ width: "45%" }}>
-                <Ionicons name="checkmark" size={14} color="#FFD400" />
+                <Ionicons name="checkmark" size={14} color="#1A4B5F" />
                 <Text className="font-mont text-xs text-text-secondary ml-1.5">
                   {feature}
                 </Text>
@@ -76,16 +76,16 @@ export default function SubscriptionPlanScreen() {
         {plan.limitations && (
           <View className="mt-6">
             <View className="flex-row items-center mb-3">
-              <Ionicons name="alert-circle-outline" size={20} color="#FFD400" />
-              <Text className="font-mont-bold text-base text-white ml-2">
+              <Ionicons name="alert-circle-outline" size={20} color="#1A4B5F" />
+              <Text className="font-mont-bold text-base text-text-primary ml-2">
                 Limitations
               </Text>
             </View>
             <View style={{ gap: 12 }}>
               {plan.limitations.map((limitation, i) => (
                 <View key={i} className="flex-row items-center">
-                  <Ionicons name="checkmark" size={16} color="#FFD400" />
-                  <Text className="font-mont text-sm text-white ml-2">
+                  <Ionicons name="checkmark" size={16} color="#1A4B5F" />
+                  <Text className="font-mont text-sm text-text-primary ml-2">
                     {limitation}
                   </Text>
                 </View>
@@ -98,16 +98,16 @@ export default function SubscriptionPlanScreen() {
         {plan.benefits && (
           <View className="mt-6">
             <View className="flex-row items-center mb-3">
-              <Ionicons name="star-outline" size={20} color="#FFD400" />
-              <Text className="font-mont-bold text-base text-white ml-2">
+              <Ionicons name="star-outline" size={20} color="#1A4B5F" />
+              <Text className="font-mont-bold text-base text-text-primary ml-2">
                 {plan.id === "agency" ? "Enterprise Advantages" : "Extra Benefits"}
               </Text>
             </View>
             <View style={{ gap: 10 }}>
               {plan.benefits.map((benefit, i) => (
                 <View key={i} className="flex-row items-center">
-                  <Ionicons name="checkmark-circle" size={16} color="#22C55E" />
-                  <Text className="font-mont text-sm text-white ml-2">
+                  <Ionicons name="checkmark-circle" size={16} color="#1F9D55" />
+                  <Text className="font-mont text-sm text-text-primary ml-2">
                     {benefit}
                   </Text>
                 </View>

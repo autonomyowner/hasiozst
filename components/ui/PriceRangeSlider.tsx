@@ -54,7 +54,7 @@ export function PriceRangeSlider({
   return (
     <View className="mb-3">
       {label && (
-        <Text className="font-mont-medium text-sm text-white mb-1.5">
+        <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
           {label}
         </Text>
       )}
@@ -86,7 +86,7 @@ export function PriceRangeSlider({
             marginLeft: -12,
           }}
         >
-          <View className="h-2 w-2 rounded-full bg-black" />
+          <View className="h-2 w-2 rounded-full bg-background" />
         </View>
         <View
           {...rightResponder.panHandlers}
@@ -97,7 +97,7 @@ export function PriceRangeSlider({
             marginLeft: -12,
           }}
         >
-          <View className="h-2 w-2 rounded-full bg-black" />
+          <View className="h-2 w-2 rounded-full bg-background" />
         </View>
       </View>
     </View>

@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { ScrollView, View, Text, Pressable, ActivityIndicator } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useAction, useMutation, useQuery } from "convex/react";
+import { useAction, useMutation, useQuery } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { TextInput } from "@/components/ui/TextInput";
@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { Dropdown } from "@/components/ui/Dropdown";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
 import { useToast } from "@/providers/ToastProvider";
-import { getWilayaOptions } from "@/lib/algeriaData";
+import { getRegionOptions } from "@/lib/saudiData";
 
 type ProviderId = "yalidine" | "maystro" | "zrexpress";
 
@@ -83,7 +83,7 @@ export default function DeliverySettingsScreen() {
   });
   const [confirmRemove, setConfirmRemove] = useState<ProviderId | null>(null);
 
-  const wilayaOptions = getWilayaOptions();
+  const wilayaOptions = getRegionOptions();
 
   const isConnected = useCallback(
     (providerId: ProviderId): boolean => {
@@ -193,7 +193,7 @@ export default function DeliverySettingsScreen() {
       <View
         key={provider.id}
         className={`bg-card rounded-card p-4 mb-3 border ${
-          connected ? "border-[#FFD400]/30" : "border-[#333]"
+          connected ? "border-primary/30" : "border-border"
         }`}
       >
         {/* Header */}
@@ -203,10 +203,10 @@ export default function DeliverySettingsScreen() {
         >
           <View className="flex-row items-center flex-1">
             {connected && (
-              <View className="w-2.5 h-2.5 rounded-full bg-[#22C55E] mr-3" />
+              <View className="w-2.5 h-2.5 rounded-full bg-success mr-3" />
             )}
             <View className="flex-1">
-              <Text className="font-mont-semibold text-base text-white">
+              <Text className="font-mont-semibold text-base text-text-primary">
                 {provider.name}
               </Text>
               <Text className="font-mont text-xs text-text-secondary mt-0.5">
@@ -218,13 +218,13 @@ export default function DeliverySettingsScreen() {
           <Ionicons
             name={isExpanded ? "chevron-up" : "chevron-down"}
             size={20}
-            color="#898989"
+            color="#5F6E63"
           />
         </Pressable>
 
         {/* Expanded Content */}
         {isExpanded && (
-          <View className="mt-4 pt-4 border-t border-[#333]">
+          <View className="mt-4 pt-4 border-t border-border">
             {/* API Key */}
             <TextInput
               label="مفتاح API"
@@ -252,7 +252,7 @@ export default function DeliverySettingsScreen() {
               />
             )}
 
-            {/* Pickup Wilaya (Yalidine only) */}
+            {/* Pickup region (Yalidine only) */}
             {provider.hasPickup && (
               <>
                 <Dropdown
@@ -281,8 +281,8 @@ export default function DeliverySettingsScreen() {
               <View
                 className={`flex-row items-center rounded-card px-3 py-2 mb-3 ${
                   state.testResult === "success"
-                    ? "bg-[#22C55E]/10"
-                    : "bg-[#EF4444]/10"
+                    ? "bg-success/10"
+                    : "bg-error/10"
                 }`}
               >
                 <Ionicons
@@ -293,14 +293,14 @@ export default function DeliverySettingsScreen() {
                   }
                   size={18}
                   color={
-                    state.testResult === "success" ? "#22C55E" : "#EF4444"
+                    state.testResult === "success" ? "#1F9D55" : "#DC2626"
                   }
                 />
                 <Text
                   className={`font-mont text-sm ml-2 ${
                     state.testResult === "success"
-                      ? "text-[#22C55E]"
-                      : "text-[#EF4444]"
+                      ? "text-success"
+                      : "text-error"
                   }`}
                 >
                   {state.testResult === "success"
@@ -340,8 +340,8 @@ export default function DeliverySettingsScreen() {
                 onPress={() => setConfirmRemove(provider.id)}
                 className="flex-row items-center justify-center mt-3 py-2"
               >
-                <Ionicons name="trash-outline" size={16} color="#EF4444" />
-                <Text className="font-mont-medium text-sm text-[#EF4444] ml-1.5">
+                <Ionicons name="trash-outline" size={16} color="#DC2626" />
+                <Text className="font-mont-medium text-sm text-error ml-1.5">
                   حذف
                 </Text>
               </Pressable>
@@ -364,7 +364,7 @@ export default function DeliverySettingsScreen() {
           >
             <Ionicons name="arrow-back" size={22} color="white" />
           </Pressable>
-          <Text className="font-mont-bold text-lg text-white flex-1 text-center mr-10">
+          <Text className="font-mont-bold text-lg text-text-primary flex-1 text-center mr-10">
             إعدادات التوصيل
           </Text>
         </View>
@@ -372,7 +372,7 @@ export default function DeliverySettingsScreen() {
         {/* Content */}
         {settings === undefined ? (
           <View className="flex-1 items-center justify-center">
-            <ActivityIndicator color="#FFD400" size="large" />
+            <ActivityIndicator color="#1A4B5F" size="large" />
           </View>
         ) : (
           <ScrollView
@@ -381,12 +381,12 @@ export default function DeliverySettingsScreen() {
             showsVerticalScrollIndicator={false}
           >
             {/* Info Banner */}
-            <View className="bg-surface rounded-card p-4 mb-4 border border-[#333]">
+            <View className="bg-surface rounded-card p-4 mb-4 border border-border">
               <View className="flex-row items-start">
                 <Ionicons
                   name="information-circle-outline"
                   size={20}
-                  color="#898989"
+                  color="#5F6E63"
                 />
                 <Text className="font-mont text-xs text-text-secondary ml-2 flex-1 leading-5">
                   قم بربط حساب شركة التوصيل الخاصة بك لتتبع الطرود تلقائيا

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { useRouter } from "expo-router";
 import { api } from "../convex/_generated/api";
 import type { Id } from "../convex/_generated/dataModel";

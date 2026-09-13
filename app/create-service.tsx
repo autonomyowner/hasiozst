@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { TextInput } from "@/components/ui/TextInput";
@@ -171,9 +171,9 @@ export default function CreateServiceScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mb-2"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Create Service
           </Text>
         </View>
@@ -199,7 +199,7 @@ export default function CreateServiceScreen() {
           />
 
           <TextInput
-            label="Price (DA)"
+            label="Price (SAR)"
             value={price}
             onChangeText={setPrice}
             placeholder="15000"
@@ -208,7 +208,7 @@ export default function CreateServiceScreen() {
           />
 
           {/* Category selector */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Category
           </Text>
           <ScrollView
@@ -226,7 +226,7 @@ export default function CreateServiceScreen() {
               >
                 <Text
                   className={`font-mont-medium text-sm ${
-                    category === cat ? "text-black" : "text-text-secondary"
+                    category === cat ? "text-white" : "text-text-secondary"
                   }`}
                 >
                   {cat}
@@ -236,7 +236,7 @@ export default function CreateServiceScreen() {
           </ScrollView>
 
           {/* Portfolio Images */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Portfolio Images ({imageUris.length}/{MAX_IMAGES})
           </Text>
           {errors.images && (
@@ -259,7 +259,7 @@ export default function CreateServiceScreen() {
                   onPress={() => removeImage(index)}
                   className="absolute -top-1.5 -right-1.5 bg-error rounded-full w-5 h-5 items-center justify-center"
                 >
-                  <Ionicons name="close" size={12} color="#fff" />
+                  <Ionicons name="close" size={12} color="#FFFFFF" />
                 </Pressable>
               </View>
             ))}
@@ -269,7 +269,7 @@ export default function CreateServiceScreen() {
                 className="rounded-card bg-card items-center justify-center"
                 style={{ width: 88, height: 88 }}
               >
-                <Ionicons name="add" size={28} color="#888" />
+                <Ionicons name="add" size={28} color="#5F6E63" />
                 <Text className="font-mont text-[10px] text-text-secondary mt-0.5">
                   Add
                 </Text>
@@ -278,7 +278,7 @@ export default function CreateServiceScreen() {
           </ScrollView>
 
           {/* Video picker */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Demo Video (optional, max 60s)
           </Text>
           <Pressable
@@ -289,7 +289,7 @@ export default function CreateServiceScreen() {
             <Ionicons
               name={videoUri ? "videocam" : "videocam-outline"}
               size={22}
-              color={videoUri ? "#FFD400" : "#888"}
+              color={videoUri ? "#1A4B5F" : "#5F6E63"}
             />
             <Text
               className={`font-mont text-sm flex-1 ${
@@ -300,14 +300,14 @@ export default function CreateServiceScreen() {
               {videoUri ? "Video selected — tap to remove" : "Tap to select video"}
             </Text>
             {videoUri && (
-              <Ionicons name="close-circle" size={20} color="#EF4444" />
+              <Ionicons name="close-circle" size={20} color="#DC2626" />
             )}
           </Pressable>
 
           <View className="mt-2 mb-8">
             {uploading ? (
               <View className="items-center" style={{ gap: 8 }}>
-                <ActivityIndicator color="#FFD400" />
+                <ActivityIndicator color="#1A4B5F" />
                 <Text className="font-mont text-xs text-text-secondary">
                   {uploadStep}
                 </Text>

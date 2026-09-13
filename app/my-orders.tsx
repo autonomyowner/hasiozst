@@ -25,14 +25,14 @@ export default function MyOrdersScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
-        <Text className="font-mont-bold text-xl text-white">My Orders</Text>
+        <Text className="font-mont-bold text-xl text-text-primary">My Orders</Text>
       </View>
 
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       ) : orders.length === 0 ? (
         <View className="flex-1 items-center justify-center">

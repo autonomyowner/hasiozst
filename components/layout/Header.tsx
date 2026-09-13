@@ -19,7 +19,7 @@ export function Header({ title, subtitle, rightAction }: HeaderProps) {
           </Text>
         )}
         {title && (
-          <Text className="font-mont-bold text-xl text-white">{title}</Text>
+          <Text className="font-mont-bold text-xl text-text-primary">{title}</Text>
         )}
       </View>
       {rightAction && (

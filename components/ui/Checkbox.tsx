@@ -18,7 +18,7 @@ export function Checkbox({ checked, onChange, label }: CheckboxProps) {
           checked ? "bg-primary border-primary" : "border-text-secondary"
         }`}
       >
-        {checked && <Ionicons name="checkmark" size={14} color="#000" />}
+        {checked && <Ionicons name="checkmark" size={14} color="#FFFFFF" />}
       </View>
       <Text className="font-mont text-sm text-text-secondary ml-2">
         {label}

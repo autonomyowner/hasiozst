@@ -35,13 +35,13 @@ export function GuestSignInPrompt({
             width: 72,
             height: 72,
             borderRadius: 36,
-            backgroundColor: "rgba(255,212,0,0.08)",
+            backgroundColor: "rgba(26,75,95,0.08)",
             alignItems: "center",
             justifyContent: "center",
             marginBottom: 20,
           }}
         >
-          <Ionicons name="lock-open-outline" size={30} color="#FFD400" />
+          <Ionicons name="lock-open-outline" size={30} color="#1A4B5F" />
         </View>
 
         {/* Message */}
@@ -49,7 +49,7 @@ export function GuestSignInPrompt({
           style={{
             fontFamily: "Montserrat_500Medium",
             fontSize: 15,
-            color: "#898989",
+            color: "#5F6E63",
             textAlign: "center",
             lineHeight: 22,
             marginBottom: 24,
@@ -62,7 +62,7 @@ export function GuestSignInPrompt({
         <Pressable
           onPress={handleSignIn}
           style={{
-            backgroundColor: "#FFD400",
+            backgroundColor: "#1A4B5F",
             paddingHorizontal: 32,
             paddingVertical: 14,
             borderRadius: 14,
@@ -72,7 +72,7 @@ export function GuestSignInPrompt({
             style={{
               fontFamily: "Montserrat_700Bold",
               fontSize: 14,
-              color: "#000",
+              color: "#FFFFFF",
             }}
           >
             Sign In

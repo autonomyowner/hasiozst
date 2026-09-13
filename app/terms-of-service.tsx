@@ -17,9 +17,9 @@ export default function TermsOfServiceScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Terms of Service
           </Text>
         </View>
@@ -50,7 +50,7 @@ export default function TermsOfServiceScreen() {
             <BulletList
               items={[
                 "Customers: may browse, purchase products, and interact with reels and services.",
-                "Sellers (Fournisseur, Importateur, Grossiste): may list products, manage orders, participate in B2B offers and demands. Sellers must provide truthful product descriptions, accurate pricing in Algerian Dinar (DA), and fulfill orders in a timely manner.",
+                "Sellers (Fournisseur, Importateur, Grossiste): may list products, manage orders, participate in B2B offers and demands. Sellers must provide truthful product descriptions, accurate pricing in Algerian Dinar (SAR), and fulfill orders in a timely manner.",
                 "Freelancers: may list services and manage client requests. Freelancers must deliver services as described and maintain professional communication.",
               ]}
             />
@@ -60,7 +60,7 @@ export default function TermsOfServiceScreen() {
             <BulletList
               items={[
                 "All product listings must be accurate, lawful, and not misleading.",
-                "Prices must be displayed in Algerian Dinar (DA).",
+                "Prices must be displayed in Algerian Dinar (SAR).",
                 "Sellers are solely responsible for the quality, legality, and delivery of their products.",
                 "HASIO is a platform connecting buyers and sellers — we are not a party to transactions between users.",
                 "B2B offers, bids, and demand requests are binding once accepted by both parties.",
@@ -204,7 +204,7 @@ function Section({
 }) {
   return (
     <View className={last ? "" : "mb-5"}>
-      <Text className="font-mont-bold text-base text-white mb-2">{title}</Text>
+      <Text className="font-mont-bold text-base text-text-primary mb-2">{title}</Text>
       <Text className="font-mont text-sm text-text-secondary leading-[22px]">
         {children}
       </Text>

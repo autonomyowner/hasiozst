@@ -24,12 +24,12 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
   return (
     <View
       className="mx-4 mt-2 mb-4 rounded-card overflow-hidden"
-      style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+      style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
     >
       {/* Cover banner */}
       <View style={{ height: 107 }}>
         <Image
-          source={require("@/assets/images/profile-cover-gold.jpg")}
+          source={require("@/assets/media/photos/mountains.webp")}
           style={{ width: "100%", height: "100%", borderRadius: 9 }}
           resizeMode="cover"
         />
@@ -43,8 +43,8 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
             width: 69,
             height: 69,
             borderWidth: 3,
-            borderColor: "#000",
-            backgroundColor: user.avatar ? "transparent" : "#FFD400",
+            borderColor: "#F8F4ED",
+            backgroundColor: user.avatar ? "transparent" : "#1A4B5F",
           }}
         >
           {user.avatar ? (
@@ -53,7 +53,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
               style={{ width: 63, height: 63, borderRadius: 32 }}
             />
           ) : (
-            <Text style={{ fontSize: 26, fontWeight: "700", color: "#000" }}>
+            <Text style={{ fontSize: 26, fontWeight: "700", color: "#FFFFFF" }}>
               {user.name?.charAt(0)?.toUpperCase() || "?"}
             </Text>
           )}
@@ -62,7 +62,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
 
       {/* Name row: name + edit button + role badge */}
       <View className="px-4 mt-2 flex-row items-center">
-        <Text className="font-mont-bold text-[17px] text-white">
+        <Text className="font-mont-bold text-[17px] text-text-primary">
           {user.name}
         </Text>
 
@@ -73,16 +73,16 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
           style={{
             width: 29,
             height: 29,
-            backgroundColor: "rgba(169,169,169,0.25)",
+            backgroundColor: "rgba(26,75,95,0.14)",
           }}
         >
-          <Ionicons name="pencil" size={14} color="#fff" />
+          <Ionicons name="pencil" size={14} color="#0D1A12" />
         </Pressable>
 
         {/* Role badge */}
         <View
           className="ml-auto rounded-pill px-3.5 py-1"
-          style={{ backgroundColor: "#423B19" }}
+          style={{ backgroundColor: "#EDE3C2" }}
         >
           <Text className="font-mont-medium text-xs text-primary">
             {effectiveRoleLabel[role]}
@@ -93,7 +93,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
       {/* Email */}
       <Text
         className="px-4 mt-0.5 font-mont text-xs"
-        style={{ color: "#A1A1A1", letterSpacing: 0.72 }}
+        style={{ color: "#5F6E63", letterSpacing: 0.72 }}
       >
         {user.email}
       </Text>
@@ -101,7 +101,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
       {/* Divider */}
       <View
         className="mx-4 mt-4"
-        style={{ height: 1, backgroundColor: "rgba(169,169,169,0.2)" }}
+        style={{ height: 1, backgroundColor: "rgba(26,75,95,0.14)" }}
       />
 
       {/* Bottom spacing */}

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
@@ -23,7 +23,7 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import type { Message } from "@/lib/types";
 
 function formatMessageTime(ts: number): string {
-  return new Date(ts).toLocaleTimeString("fr-FR", {
+  return new Date(ts).toLocaleTimeString("en-GB", {
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -37,7 +37,7 @@ function formatDateSeparator(ts: number): string {
   );
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Yesterday";
-  return date.toLocaleDateString("fr-FR", {
+  return date.toLocaleDateString("en-GB", {
     day: "numeric",
     month: "short",
     year: date.getFullYear() !== now.getFullYear() ? "numeric" : undefined,
@@ -149,11 +149,11 @@ export default function ConversationScreen() {
           <View
             style={{
               maxWidth: "75%",
-              backgroundColor: isMine ? "#FFD400" : "#0C0C0C",
+              backgroundColor: isMine ? "#1A4B5F" : "#FFFFFF",
               borderRadius: 18,
               ...(isMine
                 ? { borderBottomRightRadius: 4 }
-                : { borderBottomLeftRadius: 4, borderWidth: 1, borderColor: "#333" }),
+                : { borderBottomLeftRadius: 4, borderWidth: 1, borderColor: "#E3DBCA" }),
               paddingHorizontal: 14,
               paddingVertical: 10,
             }}
@@ -162,7 +162,7 @@ export default function ConversationScreen() {
               style={{
                 fontFamily: "Montserrat_400Regular",
                 fontSize: 14,
-                color: isMine ? "#000" : "#fff",
+                color: isMine ? "#FFFFFF" : "#0D1A12",
               }}
             >
               {item.text}
@@ -175,7 +175,7 @@ export default function ConversationScreen() {
                 style={{
                   fontFamily: "Montserrat_400Regular",
                   fontSize: 10,
-                  color: isMine ? "rgba(0,0,0,0.5)" : "#898989",
+                  color: isMine ? "rgba(0,0,0,0.5)" : "#5F6E63",
                 }}
               >
                 {formatMessageTime(item.createdAt)}
@@ -184,7 +184,7 @@ export default function ConversationScreen() {
                 <Ionicons
                   name={item.isRead ? "checkmark-done" : "checkmark"}
                   size={12}
-                  color={item.isRead ? "#000" : "rgba(0,0,0,0.4)"}
+                  color={item.isRead ? "#FFFFFF" : "rgba(0,0,0,0.4)"}
                 />
               )}
             </View>
@@ -197,19 +197,19 @@ export default function ConversationScreen() {
   return (
     <ScreenContainer edges={["top"]}>
       {/* Header */}
-      <View className="px-4 py-3 flex-row items-center border-b border-[#222]">
+      <View className="px-4 py-3 flex-row items-center border-b border-border">
         <Pressable
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
         <AppImage
           source={otherAvatar}
           style={{ width: 36, height: 36, borderRadius: 18 }}
         />
         <View className="flex-1 ml-3">
-          <Text className="font-mont-semibold text-base text-white" numberOfLines={1}>
+          <Text className="font-mont-semibold text-base text-text-primary" numberOfLines={1}>
             {otherName}
           </Text>
           <Pressable onPress={navigateToContext} className="flex-row items-center">
@@ -225,7 +225,7 @@ export default function ConversationScreen() {
                 "ellipse-outline"
               }
               size={11}
-              color="#898989"
+              color="#5F6E63"
             />
             <Text
               className="font-mont text-xs text-text-secondary ml-1"
@@ -233,7 +233,7 @@ export default function ConversationScreen() {
             >
               {conversation.contextTitle}
             </Text>
-            <Ionicons name="chevron-forward" size={11} color="#898989" style={{ marginLeft: 2 }} />
+            <Ionicons name="chevron-forward" size={11} color="#5F6E63" style={{ marginLeft: 2 }} />
           </Pressable>
         </View>
       </View>
@@ -255,7 +255,7 @@ export default function ConversationScreen() {
           keyboardShouldPersistTaps="handled"
           ListEmptyComponent={
             <View className="items-center justify-center py-20">
-              <Ionicons name="chatbubble-outline" size={32} color="#898989" />
+              <Ionicons name="chatbubble-outline" size={32} color="#5F6E63" />
               <Text className="font-mont text-sm text-text-secondary mt-2">
                 Start the conversation
               </Text>
@@ -265,29 +265,29 @@ export default function ConversationScreen() {
 
         {/* Input bar */}
         <View
-          className="flex-row items-end px-4 pt-3 border-t border-[#222]"
+          className="flex-row items-end px-4 pt-3 border-t border-border"
           style={{ gap: 10, paddingBottom: Math.max(insets.bottom, 16) }}
         >
           <TextInput
             value={inputText}
             onChangeText={setInputText}
             placeholder="Type a message..."
-            placeholderTextColor="#898989"
+            placeholderTextColor="#5F6E63"
             multiline
             maxLength={1000}
             style={{
               flex: 1,
-              backgroundColor: "#0C0C0C",
+              backgroundColor: "#FFFFFF",
               borderRadius: 20,
               paddingHorizontal: 16,
               paddingTop: 10,
               paddingBottom: 10,
               maxHeight: 100,
-              color: "#fff",
+              color: "#0D1A12",
               fontFamily: "Montserrat_400Regular",
               fontSize: 14,
               borderWidth: 1,
-              borderColor: "#333",
+              borderColor: "#E3DBCA",
             }}
           />
           <Pressable
@@ -295,13 +295,13 @@ export default function ConversationScreen() {
             disabled={!inputText.trim() || sending}
             className="h-10 w-10 items-center justify-center rounded-full"
             style={{
-              backgroundColor: inputText.trim() ? "#FFD400" : "#222",
+              backgroundColor: inputText.trim() ? "#1A4B5F" : "#E3DBCA",
             }}
           >
             <Ionicons
               name="send"
               size={18}
-              color={inputText.trim() ? "#000" : "#898989"}
+              color={inputText.trim() ? "#FFFFFF" : "#5F6E63"}
             />
           </Pressable>
         </View>

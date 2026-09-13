@@ -35,7 +35,7 @@ export default function Index() {
   if (isLoading || checkingOnboarding || isGuestLoading) {
     return (
       <View className="flex-1 bg-background items-center justify-center">
-        <ActivityIndicator size="large" color="#FFD400" />
+        <ActivityIndicator size="large" color="#1A4B5F" />
       </View>
     );
   }
@@ -57,7 +57,7 @@ export default function Index() {
   if (isAuthenticated && !currentUser && !userWaitTimedOut) {
     return (
       <View className="flex-1 bg-background items-center justify-center">
-        <ActivityIndicator size="large" color="#FFD400" />
+        <ActivityIndicator size="large" color="#1A4B5F" />
       </View>
     );
   }

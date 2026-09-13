@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { useToast } from "@/providers/ToastProvider";
 
@@ -112,9 +112,9 @@ export function ReportSheet({
           style={{ maxHeight: "80%", paddingBottom: Math.max(insets.bottom, 16) }}
         >
           <View className="flex-row items-center justify-between px-4 py-3 border-b border-card">
-            <Text className="font-mont-bold text-base text-white">Report</Text>
+            <Text className="font-mont-bold text-base text-text-primary">Report</Text>
             <Pressable onPress={handleClose} hitSlop={12}>
-              <Ionicons name="close" size={22} color="#898989" />
+              <Ionicons name="close" size={22} color="#5F6E63" />
             </Pressable>
           </View>
 
@@ -147,7 +147,7 @@ export function ReportSheet({
                     </View>
                     <Text
                       className={`font-mont-medium text-sm ${
-                        selected ? "text-primary" : "text-white"
+                        selected ? "text-primary" : "text-text-primary"
                       }`}
                     >
                       {r.label}
@@ -164,10 +164,10 @@ export function ReportSheet({
               value={details}
               onChangeText={setDetails}
               placeholder="Share any context that helps our team review this..."
-              placeholderTextColor="#666"
+              placeholderTextColor="#5F6E63"
               multiline
               maxLength={500}
-              className="bg-card rounded-card px-4 py-3 text-white font-mont text-sm"
+              className="bg-card rounded-card px-4 py-3 text-text-primary font-mont text-sm"
               style={{ minHeight: 80, textAlignVertical: "top" }}
             />
             <Text className="font-mont text-xs text-text-secondary text-right mt-1">
@@ -181,9 +181,9 @@ export function ReportSheet({
               style={{ opacity: reason && !submitting ? 1 : 0.5 }}
             >
               {submitting ? (
-                <ActivityIndicator color="#000" />
+                <ActivityIndicator color="#FFFFFF" />
               ) : (
-                <Text className="font-mont-bold text-sm text-black">
+                <Text className="font-mont-bold text-sm text-white">
                   Submit report
                 </Text>
               )}

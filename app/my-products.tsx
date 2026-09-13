@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   TextInput as RNTextInput,
 } from "react-native";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { api } from "../convex/_generated/api";
@@ -110,10 +110,10 @@ export default function MyProductsScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
         <View className="flex-1">
-          <Text className="font-mont-bold text-xl text-white">My Products</Text>
+          <Text className="font-mont-bold text-xl text-text-primary">My Products</Text>
           <Text className="font-mont text-sm text-text-secondary">
             {active.length} active
             {inactive.length > 0 ? ` · ${inactive.length} inactive` : ""}
@@ -123,13 +123,13 @@ export default function MyProductsScreen() {
           onPress={() => router.push("/create-product")}
           className="h-10 w-10 items-center justify-center rounded-full bg-card"
         >
-          <Ionicons name="add" size={22} color="#FFD400" />
+          <Ionicons name="add" size={22} color="#1A4B5F" />
         </Pressable>
       </View>
 
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       ) : active.length === 0 && inactive.length === 0 ? (
         <View className="flex-1 items-center justify-center px-8">
@@ -163,7 +163,7 @@ export default function MyProductsScreen() {
                 />
                 <View className="flex-1 p-3 justify-center">
                   <Text
-                    className="font-mont-medium text-sm text-white"
+                    className="font-mont-medium text-sm text-text-primary"
                     numberOfLines={1}
                   >
                     {item.name}
@@ -182,9 +182,9 @@ export default function MyProductsScreen() {
                       {item.stockQuantity < 10 ? (
                         <View
                           className="rounded-pill px-2 py-0.5"
-                          style={{ backgroundColor: "rgba(249,115,22,0.15)" }}
+                          style={{ backgroundColor: "rgba(217,119,6,0.15)" }}
                         >
-                          <Text className="font-mont-semibold text-[10px] text-[#F97316]">
+                          <Text className="font-mont-semibold text-[10px] text-[#D97706]">
                             Low Stock · {item.stockQuantity} left
                           </Text>
                         </View>
@@ -203,7 +203,7 @@ export default function MyProductsScreen() {
                   onPress={() => router.push(`/edit-product?id=${item._id}`)}
                   className="h-8 w-8 rounded-full bg-surface items-center justify-center"
                 >
-                  <Ionicons name="pencil-outline" size={14} color="#898989" />
+                  <Ionicons name="pencil-outline" size={14} color="#5F6E63" />
                 </Pressable>
                 <Pressable
                   onPress={() =>
@@ -211,7 +211,7 @@ export default function MyProductsScreen() {
                   }
                   className="h-8 w-8 rounded-full bg-surface items-center justify-center"
                 >
-                  <Ionicons name="trash-outline" size={14} color="#898989" />
+                  <Ionicons name="trash-outline" size={14} color="#5F6E63" />
                 </Pressable>
               </View>
             </View>
@@ -220,7 +220,7 @@ export default function MyProductsScreen() {
           {/* Inactive / out-of-stock products */}
           {inactive.length > 0 && (
             <View className="mt-4 mb-3">
-              <Text className="font-mont-bold text-base text-white mb-1">
+              <Text className="font-mont-bold text-base text-text-primary mb-1">
                 Out of Stock
               </Text>
               <Text className="font-mont text-xs text-text-secondary mb-3">
@@ -240,7 +240,7 @@ export default function MyProductsScreen() {
                     />
                     <View className="flex-1 p-3 justify-center">
                       <Text
-                        className="font-mont-medium text-sm text-white"
+                        className="font-mont-medium text-sm text-text-primary"
                         numberOfLines={1}
                       >
                         {item.name}
@@ -253,9 +253,9 @@ export default function MyProductsScreen() {
                       </Text>
                       <View
                         className="mt-1 self-start rounded-pill px-2 py-0.5"
-                        style={{ backgroundColor: "rgba(239,68,68,0.15)" }}
+                        style={{ backgroundColor: "rgba(220,38,38,0.15)" }}
                       >
-                        <Text className="font-mont-semibold text-[10px] text-[#EF4444]">
+                        <Text className="font-mont-semibold text-[10px] text-error">
                           Out of Stock
                         </Text>
                       </View>
@@ -273,13 +273,13 @@ export default function MyProductsScreen() {
                         <Ionicons
                           name="trash-outline"
                           size={14}
-                          color="#EF4444"
+                          color="#DC2626"
                         />
                       </Pressable>
                     </View>
                   </View>
                   <View className="px-3 pb-3 pt-1">
-                    <Text className="font-mont-medium text-xs text-white mb-1.5">
+                    <Text className="font-mont-medium text-xs text-text-primary mb-1.5">
                       New Stock
                     </Text>
                     <View
@@ -288,8 +288,8 @@ export default function MyProductsScreen() {
                     >
                       <View className="flex-1">
                         <RNTextInput
-                          className="rounded-card bg-surface px-4 py-3 font-mont text-sm text-white"
-                          placeholderTextColor="#898989"
+                          className="rounded-card bg-surface px-4 py-3 font-mont text-sm text-text-primary"
+                          placeholderTextColor="#5F6E63"
                           value={reactivateInputs[item._id] ?? ""}
                           onChangeText={(v) =>
                             setReactivateInputs((prev) => ({
@@ -308,16 +308,16 @@ export default function MyProductsScreen() {
                           height: 46,
                           paddingHorizontal: 16,
                           borderRadius: 12,
-                          backgroundColor: "#FFD400",
+                          backgroundColor: "#1A4B5F",
                           alignItems: "center",
                           justifyContent: "center",
                           opacity: reactivatingId === item._id ? 0.6 : 1,
                         }}
                       >
                         {reactivatingId === item._id ? (
-                          <ActivityIndicator size="small" color="#000" />
+                          <ActivityIndicator size="small" color="#FFFFFF" />
                         ) : (
-                          <Text className="font-mont-bold text-xs text-black">
+                          <Text className="font-mont-bold text-xs text-white">
                             Reactivate
                           </Text>
                         )}

@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { ScrollView, View, Text, Pressable, FlatList, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { Ionicons } from "@expo/vector-icons";
 import { api } from "../../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
@@ -55,12 +55,12 @@ export default function PromoteBusinessScreen() {
         {/* Header */}
         <View className="px-4 pt-2 pb-3">
           <View className="flex-row items-center" style={{ gap: 8 }}>
-            <Text className="font-mont-bold text-xl text-white">
+            <Text className="font-mont-bold text-xl text-text-primary">
               Promote Your Business
             </Text>
             {isPro && (
-              <View className="rounded-full px-2" style={{ backgroundColor: "#FFD400", paddingVertical: 2 }}>
-                <Text className="font-mont-bold text-[9px] text-black">PRO</Text>
+              <View className="rounded-full px-2" style={{ backgroundColor: "#1A4B5F", paddingVertical: 2 }}>
+                <Text className="font-mont-bold text-[9px] text-white">PRO</Text>
               </View>
             )}
           </View>
@@ -76,20 +76,20 @@ export default function PromoteBusinessScreen() {
           <View
             className="mx-4 mb-6 rounded-card items-center overflow-hidden"
             style={{
-              backgroundColor: "rgba(17,17,17,0.8)",
+              backgroundColor: "rgba(242,234,217,0.8)",
               borderWidth: 1,
-              borderColor: "rgba(255,212,0,0.15)",
+              borderColor: "rgba(26,75,95,0.15)",
               borderRadius: 20,
             }}
           >
             <View style={{ paddingVertical: 28, paddingHorizontal: 24, alignItems: "center" }}>
               <View
                 className="h-14 w-14 rounded-full items-center justify-center mb-3"
-                style={{ backgroundColor: "rgba(255,212,0,0.1)" }}
+                style={{ backgroundColor: "rgba(26,75,95,0.1)" }}
               >
-                <Ionicons name="lock-closed" size={24} color="#FFD400" />
+                <Ionicons name="lock-closed" size={24} color="#1A4B5F" />
               </View>
-              <Text className="font-mont-bold text-base text-white text-center">
+              <Text className="font-mont-bold text-base text-text-primary text-center">
                 Pro Feature
               </Text>
               <Text className="font-mont text-xs text-text-secondary text-center mt-1.5 px-2">
@@ -98,10 +98,10 @@ export default function PromoteBusinessScreen() {
               <View
                 className="mt-4 rounded-full px-6"
                 style={{
-                  backgroundColor: "rgba(255,212,0,0.12)",
+                  backgroundColor: "rgba(26,75,95,0.12)",
                   paddingVertical: 6,
                   borderWidth: 1,
-                  borderColor: "rgba(255,212,0,0.2)",
+                  borderColor: "rgba(26,75,95,0.2)",
                 }}
               >
                 <Text className="font-mont-semibold text-xs text-primary">
@@ -119,9 +119,9 @@ export default function PromoteBusinessScreen() {
             className="mx-4 mb-6 rounded-card border border-dashed border-text-secondary/30 py-8 items-center"
           >
             <View className="h-12 w-12 rounded-full bg-primary items-center justify-center mb-3">
-              <Ionicons name="add" size={28} color="#000" />
+              <Ionicons name="add" size={28} color="#FFFFFF" />
             </View>
-            <Text className="font-mont-bold text-base text-white">
+            <Text className="font-mont-bold text-base text-text-primary">
               Promote a Product
             </Text>
             <Text className="font-mont text-xs text-text-secondary mt-1 text-center px-8">
@@ -132,12 +132,12 @@ export default function PromoteBusinessScreen() {
 
         {/* My Promotions */}
         <View className="px-4 mb-6">
-          <Text className="font-mont-bold text-base text-white mb-3">
+          <Text className="font-mont-bold text-base text-text-primary mb-3">
             My Promotions
           </Text>
 
           {myPromotions === undefined ? (
-            <ActivityIndicator color="#FFD400" />
+            <ActivityIndicator color="#1A4B5F" />
           ) : productLinked.length === 0 && legacy.length === 0 ? (
             <View className="bg-card rounded-card p-6 items-center">
               <Text className="font-mont text-sm text-text-secondary">
@@ -167,7 +167,7 @@ export default function PromoteBusinessScreen() {
                     <View className="p-3">
                       <View className="flex-row items-start justify-between">
                         <View className="flex-1 mr-3">
-                          <Text className="font-mont-semibold text-sm text-white">
+                          <Text className="font-mont-semibold text-sm text-text-primary">
                             {promo.title}
                           </Text>
                           {promo.description ? (
@@ -193,8 +193,8 @@ export default function PromoteBusinessScreen() {
                               </Text>
                             </View>
                             {isExpiringSoon && (
-                              <View className="px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(251,146,60,0.2)" }}>
-                                <Text className="font-mont text-[10px]" style={{ color: "#FB923C" }}>
+                              <View className="px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,158,11,0.2)" }}>
+                                <Text className="font-mont text-[10px]" style={{ color: "#F59E0B" }}>
                                   Expiring Soon
                                 </Text>
                               </View>
@@ -204,19 +204,19 @@ export default function PromoteBusinessScreen() {
                           {/* Analytics row */}
                           <View className="flex-row items-center mt-2" style={{ gap: 12 }}>
                             <View className="flex-row items-center" style={{ gap: 3 }}>
-                              <Ionicons name="eye-outline" size={12} color="#898989" />
+                              <Ionicons name="eye-outline" size={12} color="#5F6E63" />
                               <Text className="font-mont text-[10px] text-text-secondary">
                                 {impressions}
                               </Text>
                             </View>
                             <View className="flex-row items-center" style={{ gap: 3 }}>
-                              <Ionicons name="finger-print-outline" size={12} color="#898989" />
+                              <Ionicons name="finger-print-outline" size={12} color="#5F6E63" />
                               <Text className="font-mont text-[10px] text-text-secondary">
                                 {clicks}
                               </Text>
                             </View>
                             <View className="flex-row items-center" style={{ gap: 3 }}>
-                              <Ionicons name="analytics-outline" size={12} color="#898989" />
+                              <Ionicons name="analytics-outline" size={12} color="#5F6E63" />
                               <Text className="font-mont text-[10px] text-text-secondary">
                                 {ctr}% CTR
                               </Text>
@@ -236,7 +236,7 @@ export default function PromoteBusinessScreen() {
                           onPress={() => setDeleteTarget(promo._id)}
                           className="h-9 w-9 rounded-full bg-error/10 items-center justify-center"
                         >
-                          <Ionicons name="trash-outline" size={16} color="#EF4444" />
+                          <Ionicons name="trash-outline" size={16} color="#DC2626" />
                         </Pressable>
                       </View>
                     </View>
@@ -256,7 +256,7 @@ export default function PromoteBusinessScreen() {
                   <View className="p-3">
                     <View className="flex-row items-start justify-between">
                       <View className="flex-1 mr-3">
-                        <Text className="font-mont-semibold text-sm text-white">
+                        <Text className="font-mont-semibold text-sm text-text-primary">
                           {promo.title}
                         </Text>
                         {promo.description ? (
@@ -291,7 +291,7 @@ export default function PromoteBusinessScreen() {
                         onPress={() => setDeleteTarget(promo._id)}
                         className="h-9 w-9 rounded-full bg-error/10 items-center justify-center"
                       >
-                        <Ionicons name="trash-outline" size={16} color="#EF4444" />
+                        <Ionicons name="trash-outline" size={16} color="#DC2626" />
                       </Pressable>
                     </View>
                   </View>
@@ -303,7 +303,7 @@ export default function PromoteBusinessScreen() {
 
         {/* Subscription Plans */}
         <View className="mb-6">
-          <Text className="font-mont-bold text-base text-white text-center mb-1">
+          <Text className="font-mont-bold text-base text-text-primary text-center mb-1">
             Subscription Plans
           </Text>
           <Text className="font-mont text-xs text-text-secondary text-center mb-4">

@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { View, Text, ScrollView, Pressable, FlatList, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { api } from "../convex/_generated/api";
@@ -93,10 +93,10 @@ export default function CreatePostScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mb-4"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
 
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Promote a Product
           </Text>
           <Text className="font-mont text-sm text-text-secondary mt-0.5 mb-5">
@@ -106,19 +106,19 @@ export default function CreatePostScreen() {
           <View className="h-px bg-text-secondary/20 mb-5" />
 
           {/* Product picker */}
-          <Text className="font-mont-semibold text-sm text-white mb-3">
+          <Text className="font-mont-semibold text-sm text-text-primary mb-3">
             Select a Product
           </Text>
 
           {myProducts === undefined ? (
-            <ActivityIndicator color="#FFD400" />
+            <ActivityIndicator color="#1A4B5F" />
           ) : myProducts.length === 0 ? (
             <Pressable
               onPress={() => router.push("/create-product")}
               className="rounded-card border border-dashed border-text-secondary/30 py-8 items-center mb-5"
             >
-              <Ionicons name="bag-add-outline" size={32} color="#898989" />
-              <Text className="font-mont-medium text-sm text-white mt-2">
+              <Ionicons name="bag-add-outline" size={32} color="#5F6E63" />
+              <Text className="font-mont-medium text-sm text-text-primary mt-2">
                 Create Your First Product
               </Text>
               <Text className="font-mont text-xs text-text-secondary mt-1">
@@ -144,9 +144,9 @@ export default function CreatePostScreen() {
                       isPromoted ? "opacity-50" : ""
                     }`}
                     style={{
-                      backgroundColor: isSelected ? "rgba(255,212,0,0.1)" : "#0C0C0C",
+                      backgroundColor: isSelected ? "rgba(26,75,95,0.1)" : "#FFFFFF",
                       borderWidth: isSelected ? 1.5 : 1,
-                      borderColor: isSelected ? "#FFD400" : "#333",
+                      borderColor: isSelected ? "#1A4B5F" : "#E3DBCA",
                       borderRadius: 16,
                     }}
                   >
@@ -156,7 +156,7 @@ export default function CreatePostScreen() {
                     />
                     <View className="flex-1 px-3 py-2">
                       <Text
-                        className="font-mont-medium text-sm text-white"
+                        className="font-mont-medium text-sm text-text-primary"
                         numberOfLines={1}
                       >
                         {product.name}
@@ -171,7 +171,7 @@ export default function CreatePostScreen() {
                     {isPromoted ? (
                       <View
                         className="mr-3 rounded-full px-2"
-                        style={{ backgroundColor: "rgba(255,212,0,0.2)", paddingVertical: 3 }}
+                        style={{ backgroundColor: "rgba(26,75,95,0.2)", paddingVertical: 3 }}
                       >
                         <Text className="font-mont-semibold text-[10px] text-primary">
                           Active
@@ -179,11 +179,11 @@ export default function CreatePostScreen() {
                       </View>
                     ) : isSelected ? (
                       <View className="mr-3">
-                        <Ionicons name="checkmark-circle" size={24} color="#FFD400" />
+                        <Ionicons name="checkmark-circle" size={24} color="#1A4B5F" />
                       </View>
                     ) : (
                       <View className="mr-3">
-                        <Ionicons name="ellipse-outline" size={24} color="#555" />
+                        <Ionicons name="ellipse-outline" size={24} color="#5F6E63" />
                       </View>
                     )}
                   </Pressable>

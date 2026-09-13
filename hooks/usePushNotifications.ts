@@ -1,16 +1,17 @@
 import { useEffect, useRef, useCallback } from "react";
 import { Platform } from "react-native";
-import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import Constants from "expo-constants";
+import { getNotifications } from "@/lib/pushNotifications";
 import type { EventSubscription } from "expo-modules-core";
 import { useRouter } from "expo-router";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { useCurrentUser } from "./useCurrentUser";
 
-// Show notifications even when the app is in the foreground
-Notifications.setNotificationHandler({
+// Show notifications even when the app is in the foreground.
+// No-ops in Expo Go, where the native module is unavailable.
+getNotifications()?.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
@@ -22,11 +23,8 @@ Notifications.setNotificationHandler({
 
 async function registerForPushNotificationsAsync(): Promise<string | null> {
   // Push notifications only work on physical devices with dev builds (not Expo Go)
-  if (!Device.isDevice) {
-    return null;
-  }
-  const isExpoGo = Constants.appOwnership === "expo";
-  if (isExpoGo) {
+  const Notifications = getNotifications();
+  if (!Notifications || !Device.isDevice) {
     return null;
   }
 
@@ -36,7 +34,7 @@ async function registerForPushNotificationsAsync(): Promise<string | null> {
       name: "Default",
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#FFD400",
+      lightColor: "#1A4B5F",
     });
   }
 
@@ -87,6 +85,9 @@ export function usePushNotifications() {
 
   // Set up notification listeners
   useEffect(() => {
+    const Notifications = getNotifications();
+    if (!Notifications) return;
+
     // Notification received while app is open (foreground)
     notificationListener.current = Notifications.addNotificationReceivedListener(
       (_notification) => {
@@ -110,11 +111,11 @@ export function usePushNotifications() {
 
   // Sync badge count
   useEffect(() => {
-    Notifications.setBadgeCountAsync(unreadCount).catch(() => {});
+    getNotifications()?.setBadgeCountAsync(unreadCount).catch(() => {});
   }, [unreadCount]);
 
   const navigateToNotification = useCallback(
-    (data: Record<string, unknown>) => {
+    (data: Record<string, unknown> | undefined) => {
       const type = data?.type as string | undefined;
       const relatedId = data?.relatedId as string | undefined;
 
@@ -171,5 +172,11 @@ export function usePushNotifications() {
  * Call this once in the root layout.
  */
 export async function getInitialNotificationResponse() {
-  return await Notifications.getLastNotificationResponseAsync();
+  const Notifications = getNotifications();
+  if (!Notifications) return null;
+  try {
+    return await Notifications.getLastNotificationResponseAsync();
+  } catch {
+    return null;
+  }
 }

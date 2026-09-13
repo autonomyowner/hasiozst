@@ -10,7 +10,7 @@ interface LineChartProps {
 
 export function LineChart({
   values = [10, 30, 20, 50, 40, 60, 45],
-  color = "#FFD400",
+  color = "#1A4B5F",
   width = 60,
   height = 35,
 }: LineChartProps) {

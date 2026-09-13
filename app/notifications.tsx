@@ -32,7 +32,7 @@ function RightDeleteAction({
         onPress={onDelete}
         className="flex-1 items-center justify-center bg-error mr-4 rounded-card"
       >
-        <Ionicons name="trash-outline" size={22} color="#fff" />
+        <Ionicons name="trash-outline" size={22} color="#FFFFFF" />
         <Text className="font-mont-medium text-xs text-white mt-1">
           Delete
         </Text>
@@ -134,10 +134,10 @@ export default function NotificationsScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
         <View className="flex-1">
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Notifications
           </Text>
           {unreadCount > 0 && (
@@ -159,7 +159,7 @@ export default function NotificationsScreen() {
             onPress={() => setShowClearModal(true)}
             className="h-10 w-10 items-center justify-center rounded-full bg-card ml-2"
           >
-            <Ionicons name="trash-outline" size={18} color="#EF4444" />
+            <Ionicons name="trash-outline" size={18} color="#DC2626" />
           </Pressable>
         )}
       </View>
@@ -181,8 +181,8 @@ export default function NotificationsScreen() {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
-              tintColor="#FFD400"
-              colors={["#FFD400"]}
+              tintColor="#1A4B5F"
+              colors={["#1A4B5F"]}
             />
           }
           renderItem={({ item: notification }) => (
@@ -207,7 +207,7 @@ export default function NotificationsScreen() {
               >
                 <View className="flex-row items-start justify-between">
                   <View className="flex-1 mr-3">
-                    <Text className="font-mont-semibold text-sm text-white">
+                    <Text className="font-mont-semibold text-sm text-text-primary">
                       {notification.title}
                     </Text>
                     <Text className="font-mont text-sm text-text-secondary mt-1">

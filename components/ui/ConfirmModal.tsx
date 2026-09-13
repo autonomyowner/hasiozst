@@ -29,9 +29,9 @@ const VARIANT_CONFIG: Record<
   ConfirmVariant,
   { color: string; bg: string; icon: keyof typeof Ionicons.glyphMap }
 > = {
-  danger: { color: "#EF4444", bg: "rgba(239,68,68,0.10)", icon: "trash-outline" },
-  warning: { color: "#FFD400", bg: "rgba(255,212,0,0.08)", icon: "warning-outline" },
-  info: { color: "#3B82F6", bg: "rgba(59,130,246,0.10)", icon: "information-circle-outline" },
+  danger: { color: "#DC2626", bg: "rgba(220,38,38,0.10)", icon: "trash-outline" },
+  warning: { color: "#1A4B5F", bg: "rgba(26,75,95,0.08)", icon: "warning-outline" },
+  info: { color: "#1A4B5F", bg: "rgba(26,75,95,0.10)", icon: "information-circle-outline" },
 };
 
 export function ConfirmModal({
@@ -88,10 +88,10 @@ export function ConfirmModal({
             onPress={() => {}}
             style={{
               width: 270,
-              backgroundColor: "#111",
+              backgroundColor: "#F2EAD9",
               borderRadius: 18,
               borderWidth: 1,
-              borderColor: "rgba(255,255,255,0.06)",
+              borderColor: "rgba(26,75,95,0.06)",
               overflow: "hidden",
             }}
           >
@@ -116,7 +116,7 @@ export function ConfirmModal({
                 style={{
                   fontFamily: "Montserrat_700Bold",
                   fontSize: 15,
-                  color: "#fff",
+                  color: "#0D1A12",
                   textAlign: "center",
                   marginBottom: 4,
                 }}
@@ -129,7 +129,7 @@ export function ConfirmModal({
                 style={{
                   fontFamily: "Montserrat_400Regular",
                   fontSize: 12,
-                  color: "#777",
+                  color: "#5F6E63",
                   textAlign: "center",
                   lineHeight: 17,
                 }}
@@ -142,7 +142,7 @@ export function ConfirmModal({
                           <Text
                             style={{
                               fontFamily: "Montserrat_600SemiBold",
-                              color: "#fff",
+                              color: "#0D1A12",
                             }}
                           >
                             {highlight}
@@ -161,7 +161,7 @@ export function ConfirmModal({
               style={{
                 flexDirection: "row",
                 borderTopWidth: 1,
-                borderTopColor: "rgba(255,255,255,0.05)",
+                borderTopColor: "rgba(26,75,95,0.05)",
               }}
             >
               <Pressable
@@ -173,7 +173,7 @@ export function ConfirmModal({
                   justifyContent: "center",
                   paddingVertical: 11,
                   borderRightWidth: 1,
-                  borderRightColor: "rgba(255,255,255,0.05)",
+                  borderRightColor: "rgba(26,75,95,0.05)",
                   opacity: loading ? 0.4 : 1,
                 }}
               >
@@ -181,7 +181,7 @@ export function ConfirmModal({
                   style={{
                     fontFamily: "Montserrat_500Medium",
                     fontSize: 13,
-                    color: "#777",
+                    color: "#5F6E63",
                   }}
                 >
                   {cancelLabel}

@@ -16,7 +16,7 @@ export default function OrderConfirmationScreen() {
         <Text className="font-mont text-base text-text-secondary text-center mb-2">
           Your order has been successfully placed.
         </Text>
-        <Text className="font-mont-medium text-sm text-white mb-1">
+        <Text className="font-mont-medium text-sm text-text-primary mb-1">
           Order ID: {orderId}
         </Text>
         <Text className="font-mont text-sm text-text-secondary mb-8">

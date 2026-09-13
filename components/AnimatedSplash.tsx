@@ -101,8 +101,8 @@ export function AnimatedSplash({ onFinish }: AnimatedSplashProps) {
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "#000",
+    ...StyleSheet.absoluteFill,
+    backgroundColor: "#F8F4ED",
     alignItems: "center",
     justifyContent: "center",
     zIndex: 9999,
@@ -120,25 +120,25 @@ const styles = StyleSheet.create({
   brandAi: {
     fontFamily: "Montserrat_700Bold",
     fontSize: 30,
-    color: "#fff",
+    color: "#0D1A12",
     letterSpacing: 3,
   },
   brandTridi: {
     fontFamily: "Montserrat_700Bold",
     fontSize: 30,
-    color: "#FFD400",
+    color: "#1A4B5F",
     letterSpacing: 3,
   },
   accentLine: {
     height: 3,
     borderRadius: 2,
-    backgroundColor: "#FFD400",
+    backgroundColor: "#1A4B5F",
     marginTop: 10,
   },
   subtitle: {
     fontFamily: "Montserrat_400Regular",
     fontSize: 13,
-    color: "rgba(255,255,255,0.45)",
+    color: "rgba(13,26,18,0.55)",
     marginTop: 12,
     letterSpacing: 0.5,
   },

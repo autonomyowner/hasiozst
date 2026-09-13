@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ScrollView, View, Text, Pressable, FlatList, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { Ionicons } from "@expo/vector-icons";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
@@ -39,12 +39,12 @@ export default function MyAdsScreen() {
           <Pressable
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full mr-3"
-            style={{ backgroundColor: "rgba(169,169,169,0.15)" }}
+            style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
           <View>
-            <Text className="font-mont-bold text-xl text-white">
+            <Text className="font-mont-bold text-xl text-text-primary">
               My Ads
             </Text>
             <Text className="font-mont text-xs text-text-secondary mt-0.5">
@@ -61,9 +61,9 @@ export default function MyAdsScreen() {
           className="mx-4 mb-6 rounded-card border border-dashed border-text-secondary/30 py-8 items-center"
         >
           <View className="h-12 w-12 rounded-full bg-primary items-center justify-center mb-3">
-            <Ionicons name="add" size={28} color="#000" />
+            <Ionicons name="add" size={28} color="#FFFFFF" />
           </View>
-          <Text className="font-mont-bold text-base text-white">
+          <Text className="font-mont-bold text-base text-text-primary">
             Create New Post
           </Text>
           <Text className="font-mont text-xs text-text-secondary mt-1 text-center px-8">
@@ -73,12 +73,12 @@ export default function MyAdsScreen() {
 
         {/* My Promotions */}
         <View className="px-4 mb-6">
-          <Text className="font-mont-bold text-base text-white mb-3">
+          <Text className="font-mont-bold text-base text-text-primary mb-3">
             My Promotions
           </Text>
 
           {myPromotions === undefined ? (
-            <ActivityIndicator color="#FFD400" />
+            <ActivityIndicator color="#1A4B5F" />
           ) : myPromotions.length === 0 ? (
             <View className="bg-card rounded-card p-6 items-center">
               <Text className="font-mont text-sm text-text-secondary">
@@ -98,7 +98,7 @@ export default function MyAdsScreen() {
                   <View className="p-3">
                     <View className="flex-row items-start justify-between">
                       <View className="flex-1 mr-3">
-                        <Text className="font-mont-semibold text-sm text-white">
+                        <Text className="font-mont-semibold text-sm text-text-primary">
                           {promo.title}
                         </Text>
                         {promo.description ? (
@@ -128,7 +128,7 @@ export default function MyAdsScreen() {
                         onPress={() => setDeleteTarget(promo._id)}
                         className="h-9 w-9 rounded-full bg-error/10 items-center justify-center"
                       >
-                        <Ionicons name="trash-outline" size={16} color="#EF4444" />
+                        <Ionicons name="trash-outline" size={16} color="#DC2626" />
                       </Pressable>
                     </View>
                   </View>
@@ -140,7 +140,7 @@ export default function MyAdsScreen() {
 
         {/* Subscription Plans */}
         <View className="mb-6">
-          <Text className="font-mont-bold text-base text-white text-center mb-1">
+          <Text className="font-mont-bold text-base text-text-primary text-center mb-1">
             Subscription Plans
           </Text>
           <Text className="font-mont text-xs text-text-secondary text-center mb-4">

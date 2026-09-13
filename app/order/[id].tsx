@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { Button } from "@/components/ui/Button";
 import { AppImage } from "@/components/ui/AppImage";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { useOrder } from "@/hooks/useOrders";
@@ -40,7 +40,7 @@ export default function OrderDetailScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -72,9 +72,9 @@ export default function OrderDetailScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mb-2"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Order {order._id.slice(-6).toUpperCase()}
           </Text>
           <Text className="font-mont text-sm text-text-secondary">
@@ -84,7 +84,7 @@ export default function OrderDetailScreen() {
 
         {/* Status Timeline */}
         <View className="mx-4 rounded-card bg-card p-4">
-          <Text className="font-mont-semibold text-sm text-white mb-4">
+          <Text className="font-mont-semibold text-sm text-text-primary mb-4">
             Order Status
           </Text>
           <View className="flex-row items-center justify-between">
@@ -141,7 +141,7 @@ export default function OrderDetailScreen() {
 
         {/* Items */}
         <View className="mx-4 mt-3 rounded-card bg-card p-4">
-          <Text className="font-mont-semibold text-sm text-white mb-3">
+          <Text className="font-mont-semibold text-sm text-text-primary mb-3">
             Items
           </Text>
           {order.items.map((item, i) => (
@@ -156,14 +156,14 @@ export default function OrderDetailScreen() {
                 />
               </View>
               <View className="flex-1">
-                <Text className="font-mont-medium text-sm text-white">
+                <Text className="font-mont-medium text-sm text-text-primary">
                   {item.productName}
                 </Text>
                 <Text className="font-mont text-xs text-text-secondary">
                   Qty: {item.quantity}
                 </Text>
               </View>
-              <Text className="font-mont-semibold text-sm text-white">
+              <Text className="font-mont-semibold text-sm text-text-primary">
                 {formatPrice(item.price * item.quantity)}
               </Text>
             </View>
@@ -172,7 +172,7 @@ export default function OrderDetailScreen() {
 
         {/* Shipping Address */}
         <View className="mx-4 mt-3 rounded-card bg-card p-4">
-          <Text className="font-mont-semibold text-sm text-white mb-2">
+          <Text className="font-mont-semibold text-sm text-text-primary mb-2">
             Shipping Address
           </Text>
           <Text className="font-mont text-sm text-text-secondary">
@@ -192,7 +192,7 @@ export default function OrderDetailScreen() {
         {/* Total */}
         <View className="mx-4 mt-3 rounded-card bg-card p-4">
           <View className="flex-row items-center justify-between">
-            <Text className="font-mont-medium text-sm text-white">
+            <Text className="font-mont-medium text-sm text-text-primary">
               {order.buyerName} → {order.sellerName}
             </Text>
           </View>
@@ -200,12 +200,12 @@ export default function OrderDetailScreen() {
             <Text className="font-mont-medium text-sm text-text-secondary">
               Payment
             </Text>
-            <Text className="font-mont-medium text-sm text-white">
+            <Text className="font-mont-medium text-sm text-text-primary">
               Cash on Delivery
             </Text>
           </View>
           <View className="flex-row items-center justify-between mt-2">
-            <Text className="font-mont-bold text-base text-white">Total</Text>
+            <Text className="font-mont-bold text-base text-text-primary">Total</Text>
             <Text className="font-mont-bold text-xl text-primary">
               {formatPrice(order.total)}
             </Text>
@@ -240,9 +240,9 @@ export default function OrderDetailScreen() {
                 if (convId) router.push(`/conversation/${convId}`);
               }}
               className="flex-row items-center justify-center rounded-card py-3.5"
-              style={{ backgroundColor: "#0C0C0C", borderWidth: 1, borderColor: "#333", gap: 8 }}
+              style={{ backgroundColor: "#FFFFFF", borderWidth: 1, borderColor: "#E3DBCA", gap: 8 }}
             >
-              <Ionicons name="chatbubble-outline" size={18} color="#FFD400" />
+              <Ionicons name="chatbubble-outline" size={18} color="#1A4B5F" />
               <Text className="font-mont-semibold text-sm text-primary">
                 {isSeller ? "Contact Buyer" : "Contact Seller"}
               </Text>

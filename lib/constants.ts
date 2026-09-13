@@ -1,14 +1,20 @@
 export const Colors = {
-  primary: "#FFD400",
-  background: "#000000",
-  card: "#0C0C0C",
-  surface: "#111111",
-  textPrimary: "#FFFFFF",
-  textSecondary: "#898989",
-  success: "#22C55E",
-  error: "#EF4444",
-  border: "#333333",
-  badgeNew: "#2866ED",
+  // Palette sourced from mindshiftarabia.com
+  primary: "#1A4B5F",
+  primaryDark: "#123847",
+  background: "#F8F4ED",
+  card: "#FFFFFF",
+  surface: "#F2EAD9",
+  textPrimary: "#0D1A12",
+  textSecondary: "#5F6E63",
+  sage: "#8A9B7A",
+  sageSoft: "#B9C9A8",
+  gold: "#F5E6A3",
+  success: "#1F9D55",
+  error: "#DC2626",
+  border: "#E3DBCA",
+  badgeNew: "#8B5CF6",
+  onPrimary: "#FFFFFF",
 } as const;
 
 export const Spacing = {

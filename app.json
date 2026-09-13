@@ -5,16 +5,10 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
-    "newArchEnabled": true,
+    "userInterfaceStyle": "light",
     "scheme": "hasio",
     "runtimeVersion": {
       "policy": "appVersion"
-    },
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true,
@@ -23,9 +17,8 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#000000"
+        "backgroundColor": "#F8F4ED"
       },
-      "edgeToEdgeEnabled": true,
       "package": "com.hasio.app",
       "versionCode": 1
     },
@@ -42,16 +35,28 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Used to upload trip and profile images"
+          "photosPermission": "Used to upload property, service and profile images"
         }
       ],
       [
         "expo-notifications",
         {
-          "color": "#FFD400",
+          "color": "#1A4B5F",
           "defaultChannel": "default"
         }
-      ]
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#F8F4ED"
+        }
+      ],
+      "expo-image",
+      "expo-status-bar",
+      "expo-video",
+      "expo-web-browser"
     ]
   }
 }

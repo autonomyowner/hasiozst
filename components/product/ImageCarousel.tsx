@@ -63,7 +63,7 @@ function VideoSlide({
         style={{ width: "100%", height: "100%" }}
         contentFit="contain"
         nativeControls={started}
-        allowsFullscreen={false}
+        fullscreenOptions={{ enable: false }}
       />
       {/* Initial play button — once tapped, native controls take over */}
       {!started && (
@@ -128,7 +128,7 @@ export function ImageCarousel({
         width: CARD_WIDTH,
         height: CARD_HEIGHT,
         marginHorizontal: CARD_HORIZONTAL_MARGIN,
-        backgroundColor: "#0C0C0C",
+        backgroundColor: "#141A16",
       }}
     >
       <FlatList
@@ -148,7 +148,7 @@ export function ImageCarousel({
               style={{
                 width: CARD_WIDTH,
                 height: CARD_HEIGHT,
-                backgroundColor: "#0C0C0C",
+                backgroundColor: "#141A16",
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -224,7 +224,7 @@ export function ImageCarousel({
             <View key={i} className="relative">
               <View
                 className={`h-1.5 rounded-full ${
-                  i === current ? "w-4 bg-primary" : "w-1.5 bg-white/50"
+                  i === current ? "w-4 bg-gold" : "w-1.5 bg-white/50"
                 }`}
               />
               {item.type === "video" && (

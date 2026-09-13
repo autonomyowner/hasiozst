@@ -20,9 +20,9 @@ interface ToastProps {
 }
 
 const VARIANT_COLORS: Record<ToastVariant, string> = {
-  success: "#22C55E",
-  error: "#EF4444",
-  info: "#898989",
+  success: "#1F9D55",
+  error: "#DC2626",
+  info: "#5F6E63",
 };
 
 export function Toast({

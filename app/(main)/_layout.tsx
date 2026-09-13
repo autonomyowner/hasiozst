@@ -1,74 +1,75 @@
 import { View, Text, Pressable, Platform, Dimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Redirect } from "expo-router";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useGuest } from "@/providers/GuestProvider";
-import { MaterialTopTabs } from "@/components/layout/MaterialTopTabs";
+import { MaterialTopTabs, type TopTabBarProps } from "@/components/layout/MaterialTopTabs";
 import {
   HomeIcon,
   ReelsIcon,
-  CartIcon,
-  DashboardIcon,
+  ServicesIcon,
+  HotelsIcon,
   ProfileIcon,
 } from "@/components/TabIcons";
-import type { MaterialTopTabBarProps } from "@react-navigation/material-top-tabs";
+
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const TAB_ICONS: Record<string, React.FC<{ color: string; size: number }>> = {
   home: HomeIcon,
   reels: ReelsIcon,
-  cart: CartIcon,
-  dashboard: DashboardIcon,
+  services: ServicesIcon,
+  hotels: HotelsIcon,
   profile: ProfileIcon,
 };
 
 const TAB_LABELS: Record<string, string> = {
   home: "Home",
   reels: "Reels",
-  cart: "Cart",
-  dashboard: "Dashboard",
+  services: "Services",
+  hotels: "Hotels",
   profile: "Profile",
 };
 
-function CustomTabBar({ state, descriptors, navigation }: MaterialTopTabBarProps) {
+// Screens that stay registered for navigation but never appear in the tab bar
+const TAB_BAR_ROUTES = ["home", "reels", "services", "hotels", "profile"];
+
+function CustomTabBar({ state, descriptors, navigation }: TopTabBarProps) {
   const insets = useSafeAreaInsets();
   const bottomPadding = Platform.OS === "android" ? Math.max(insets.bottom, 8) : 8;
   const { isGuest } = useGuest();
-  const { effectiveRole } = useUserRole();
-  const cartCount = useQuery(api.cart.getItemCount, isGuest ? "skip" : undefined) ?? 0;
   const unreadCount = useQuery(api.notifications.getUnreadCount, isGuest ? "skip" : undefined) ?? 0;
 
-  // Determine which tabs to show — guests see all 5 tabs (content gated on the screens themselves)
-  const hiddenTabs = new Set<string>();
-  if (!isGuest && effectiveRole !== "customer" && effectiveRole !== "freelancer") {
-    hiddenTabs.add("cart");
-    hiddenTabs.add("dashboard");
-  }
-
-  const visibleRoutes = state.routes.filter((r) => !hiddenTabs.has(r.name));
+  // Home, Reels, Services, Hotels and Profile are the only tabs — cart and
+  // dashboard stay registered as swipeable screens but are reached from the
+  // home header / profile menu instead.
+  const visibleRoutes = TAB_BAR_ROUTES.map((name) =>
+    state.routes.find((r) => r.name === name)
+  ).filter((r): r is (typeof state.routes)[number] => r !== undefined);
 
   return (
     <View
       style={{
         flexDirection: "row",
-        backgroundColor: "#000000",
+        backgroundColor: "#F8F4ED",
         height: 80 + insets.bottom,
         paddingBottom: bottomPadding,
         paddingTop: 10,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: -8 },
-        shadowOpacity: 0.6,
-        shadowRadius: 12,
+        shadowColor: "#1A4B5F",
+        shadowOffset: { width: 0, height: -4 },
+        shadowOpacity: 0.08,
+        shadowRadius: 10,
         elevation: 0,
+        borderTopWidth: 1,
+        borderTopColor: "#E3DBCA",
       }}
     >
       {visibleRoutes.map((route) => {
         const index = state.routes.indexOf(route);
         const isFocused = state.index === index;
-        const color = isFocused ? "#FFD400" : "#898989";
+        const color = isFocused ? "#1A4B5F" : "#5F6E63";
         const IconComponent = TAB_ICONS[route.name];
         const label = TAB_LABELS[route.name] ?? route.name;
 
@@ -88,39 +89,13 @@ function CustomTabBar({ state, descriptors, navigation }: MaterialTopTabBarProps
           >
             <View style={{ position: "relative" }}>
               {IconComponent && <IconComponent color={color} size={22} />}
-              {route.name === "cart" && cartCount > 0 && (
-                <View
-                  style={{
-                    position: "absolute",
-                    top: -5,
-                    right: -10,
-                    backgroundColor: "#FFD400",
-                    borderRadius: 10,
-                    minWidth: 18,
-                    height: 18,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    paddingHorizontal: 4,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "#000",
-                      fontFamily: "Montserrat_700Bold",
-                      fontSize: 9,
-                    }}
-                  >
-                    {cartCount > 99 ? "99+" : cartCount}
-                  </Text>
-                </View>
-              )}
               {route.name === "profile" && unreadCount > 0 && (
                 <View
                   style={{
                     position: "absolute",
                     top: -5,
                     right: -10,
-                    backgroundColor: "#EF4444",
+                    backgroundColor: "#DC2626",
                     borderRadius: 10,
                     minWidth: 18,
                     height: 18,
@@ -131,7 +106,7 @@ function CustomTabBar({ state, descriptors, navigation }: MaterialTopTabBarProps
                 >
                   <Text
                     style={{
-                      color: "#fff",
+                      color: "#FFFFFF",
                       fontFamily: "Montserrat_700Bold",
                       fontSize: 9,
                     }}
@@ -172,31 +147,31 @@ export default function MainLayout() {
     return <Redirect href="/(grociste)/home" />;
   }
 
-  const showCart = !isGuest && (effectiveRole === "customer" || effectiveRole === "freelancer");
-  const showDashboard = !isGuest && (effectiveRole === "customer" || effectiveRole === "freelancer");
-
   return (
     <MaterialTopTabs
       tabBarPosition="bottom"
-      tabBar={(props) => <CustomTabBar {...props} />}
+      tabBar={(props: TopTabBarProps) => <CustomTabBar {...props} />}
       initialLayout={{ width: SCREEN_WIDTH }}
       overdrag={true}
       overScrollMode="never"
       offscreenPageLimit={1}
-      pagerStyle={{ backgroundColor: "#000" }}
+      pagerStyle={{ backgroundColor: "#F8F4ED" }}
       screenOptions={{
         swipeEnabled: true,
         animationEnabled: true,
         lazy: true,
         lazyPreloadDistance: 1,
-        sceneStyle: { backgroundColor: "#000" },
+        sceneStyle: { backgroundColor: "#F8F4ED" },
       }}
     >
       <MaterialTopTabs.Screen name="home" options={{ title: "Home" }} />
       <MaterialTopTabs.Screen name="reels" options={{ title: "Reels" }} />
+      <MaterialTopTabs.Screen name="services" options={{ title: "Services" }} />
+      <MaterialTopTabs.Screen name="hotels" options={{ title: "Hotels" }} />
+      <MaterialTopTabs.Screen name="profile" options={{ title: "Profile" }} />
+      {/* Registered for navigation only — not shown in the tab bar */}
       <MaterialTopTabs.Screen name="cart" options={{ title: "Cart" }} />
       <MaterialTopTabs.Screen name="dashboard" options={{ title: "Dashboard" }} />
-      <MaterialTopTabs.Screen name="profile" options={{ title: "Profile" }} />
     </MaterialTopTabs>
   );
 }

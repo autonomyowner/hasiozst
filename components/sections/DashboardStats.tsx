@@ -17,8 +17,8 @@ interface DashboardStatsProps {
 }
 
 const statCardStyle = {
-  backgroundColor: "rgba(169,169,169,0.18)",
-  borderColor: "#666",
+  backgroundColor: "rgba(26,75,95,0.14)",
+  borderColor: "#5F6E63",
   borderWidth: 1,
   borderRadius: 16,
 };
@@ -27,7 +27,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
   return (
     <View className="mx-4 mt-3">
       {/* Statistics header */}
-      <Text className="font-mont-bold text-xl text-white mb-3">
+      <Text className="font-mont-bold text-xl text-text-primary mb-3">
         Statistics
       </Text>
 
@@ -39,16 +39,16 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
             <Text className="font-mont-bold text-lg text-primary">
               {formatPrice(stats.totalRevenue)}
             </Text>
-            <Ionicons name="wallet-outline" size={18} color="#FFD400" />
+            <Ionicons name="wallet-outline" size={18} color="#1A4B5F" />
           </View>
-          <Text className="font-mont-semibold text-xs text-white mt-1">
+          <Text className="font-mont-semibold text-xs text-text-primary mt-1">
             Total Revenue Earned
           </Text>
           <Text className="font-mont text-[10px] text-success mt-1.5">
             +{formatPrice(stats.revenueThisMonth)} This Month
           </Text>
           <View className="flex-row items-center mt-0.5">
-            <Ionicons name="time-outline" size={10} color="#898989" />
+            <Ionicons name="time-outline" size={10} color="#5F6E63" />
             <Text className="font-mont text-[9px] text-text-secondary ml-1">
               {stats.pendingRequests} Pending Request{stats.pendingRequests !== 1 ? "s" : ""}
             </Text>
@@ -58,19 +58,19 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
         {/* Completed Projects */}
         <View className="flex-1 p-4" style={statCardStyle}>
           <View className="flex-row items-center justify-between">
-            <Text className="font-mont-bold text-lg text-white">
+            <Text className="font-mont-bold text-lg text-text-primary">
               {stats.completedProjects}
             </Text>
-            <Ionicons name="checkmark-circle-outline" size={18} color="#FFD400" />
+            <Ionicons name="checkmark-circle-outline" size={18} color="#1A4B5F" />
           </View>
-          <Text className="font-mont-semibold text-xs text-white mt-1">
+          <Text className="font-mont-semibold text-xs text-text-primary mt-1">
             Completed Projects
           </Text>
           <Text className="font-mont text-[10px] text-success mt-1.5">
             +{stats.completedThisMonth} This Month
           </Text>
           <View className="flex-row items-center mt-0.5">
-            <Ionicons name="checkmark" size={10} color="#22C55E" />
+            <Ionicons name="checkmark" size={10} color="#1F9D55" />
             <Text className="font-mont text-[9px] text-text-secondary ml-1">
               From client requests
             </Text>
@@ -82,19 +82,19 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
         {/* Ongoing Client Projects */}
         <View className="flex-1 p-4" style={statCardStyle}>
           <View className="flex-row items-center justify-between">
-            <Text className="font-mont-bold text-lg text-white">
+            <Text className="font-mont-bold text-lg text-text-primary">
               {stats.ongoingProjects}
             </Text>
-            <Ionicons name="happy-outline" size={18} color="#22C55E" />
+            <Ionicons name="happy-outline" size={18} color="#1F9D55" />
           </View>
-          <Text className="font-mont-semibold text-xs text-white mt-1">
+          <Text className="font-mont-semibold text-xs text-text-primary mt-1">
             Ongoing Projects
           </Text>
           <Text className="font-mont text-[10px] text-text-secondary mt-1.5">
             Currently in progress
           </Text>
           <View className="flex-row items-center mt-0.5">
-            <Ionicons name="flame-outline" size={10} color="#FFD400" />
+            <Ionicons name="flame-outline" size={10} color="#1A4B5F" />
             <Text className="font-mont text-[9px] text-text-secondary ml-1">
               {stats.pendingRequests} New Request{stats.pendingRequests !== 1 ? "s" : ""}
             </Text>
@@ -104,19 +104,19 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
         {/* Active Services */}
         <View className="flex-1 p-4" style={statCardStyle}>
           <View className="flex-row items-center justify-between">
-            <Text className="font-mont-bold text-lg text-white">
+            <Text className="font-mont-bold text-lg text-text-primary">
               {stats.activeServices}
             </Text>
-            <Ionicons name="apps-outline" size={18} color="#FFD400" />
+            <Ionicons name="apps-outline" size={18} color="#1A4B5F" />
           </View>
-          <Text className="font-mont-semibold text-xs text-white mt-1">
+          <Text className="font-mont-semibold text-xs text-text-primary mt-1">
             Active Services
           </Text>
           <Text className="font-mont text-[10px] text-success mt-1.5">
             +{stats.servicesThisMonth} Added This Month
           </Text>
           <View className="flex-row items-center mt-0.5">
-            <Ionicons name="briefcase-outline" size={10} color="#898989" />
+            <Ionicons name="briefcase-outline" size={10} color="#5F6E63" />
             <Text className="font-mont text-[9px] text-text-secondary ml-1">
               In your portfolio
             </Text>

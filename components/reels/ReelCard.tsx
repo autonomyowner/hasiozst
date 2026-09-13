@@ -245,7 +245,7 @@ export function ReelCard({ reel, isActive, height }: ReelCardProps) {
               borderRadius: 16,
               backgroundColor: "rgba(17,17,17,0.85)",
               borderWidth: 1,
-              borderColor: "rgba(255,212,0,0.15)",
+              borderColor: "rgba(245,230,163,0.15)",
             },
             nudgeStyle,
           ]}
@@ -264,7 +264,7 @@ export function ReelCard({ reel, isActive, height }: ReelCardProps) {
           <Pressable
             onPress={handleSignIn}
             style={{
-              backgroundColor: "#FFD400",
+              backgroundColor: "#F5E6A3",
               paddingHorizontal: 16,
               paddingVertical: 8,
               borderRadius: 20,

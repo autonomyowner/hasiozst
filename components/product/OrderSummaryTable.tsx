@@ -21,7 +21,7 @@ export function OrderSummaryTable({
           Product
         </Text>
         <Text
-          className="font-mont-semibold text-sm text-white flex-1 text-right"
+          className="font-mont-semibold text-sm text-text-primary flex-1 text-right"
           numberOfLines={1}
         >
           {productName}
@@ -31,7 +31,7 @@ export function OrderSummaryTable({
         <Text className="font-mont-medium text-sm text-text-secondary">
           Quantity
         </Text>
-        <Text className="font-mont-semibold text-sm text-white">
+        <Text className="font-mont-semibold text-sm text-text-primary">
           {quantity}
         </Text>
       </View>

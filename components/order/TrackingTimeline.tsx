@@ -64,10 +64,10 @@ export default function TrackingTimeline({
   };
 
   const formatPrice = (price: number) =>
-    new Intl.NumberFormat("fr-DZ").format(price) + " DA";
+    "SAR " + new Intl.NumberFormat("en-US").format(price);
 
   return (
-    <View className="bg-card rounded-card p-4 border border-[#333]">
+    <View className="bg-card rounded-card p-4 border border-border">
       {/* Tracking Number Row */}
       <View className="flex-row items-center justify-between mb-3">
         <View className="flex-1 mr-3">
@@ -75,7 +75,7 @@ export default function TrackingTimeline({
             رقم التتبع
           </Text>
           <Text
-            className="font-mont-bold text-sm text-white"
+            className="font-mont-bold text-sm text-text-primary"
             selectable
             numberOfLines={1}
           >
@@ -86,13 +86,13 @@ export default function TrackingTimeline({
           onPress={handleCopy}
           className={`px-3 py-1.5 rounded-[10px] border ${
             copied
-              ? "border-[#22C55E] bg-[#22C55E]/10"
-              : "border-[#333] bg-black/50"
+              ? "border-success bg-success/10"
+              : "border-border bg-background/50"
           }`}
         >
           <Text
             className={`font-mont-medium text-xs ${
-              copied ? "text-[#22C55E]" : "text-text-secondary"
+              copied ? "text-success" : "text-text-secondary"
             }`}
           >
             {copied ? "تم" : "مشاركة"}
@@ -110,7 +110,7 @@ export default function TrackingTimeline({
         </View>
 
         {/* Delivery type pill */}
-        <View className="bg-black/50 rounded-full px-3 py-1 border border-[#333]">
+        <View className="bg-background/50 rounded-full px-3 py-1 border border-border">
           <Text className="font-mont text-xs text-text-secondary">
             {isStopDesk ? "مكتب التوقف" : "توصيل للمنزل"}
           </Text>
@@ -118,8 +118,8 @@ export default function TrackingTimeline({
 
         {/* Fee pill */}
         {deliveryFee !== undefined && deliveryFee > 0 && (
-          <View className="bg-black/50 rounded-full px-3 py-1 border border-[#333]">
-            <Text className="font-mont-medium text-xs text-white">
+          <View className="bg-background/50 rounded-full px-3 py-1 border border-border">
+            <Text className="font-mont-medium text-xs text-text-primary">
               {formatPrice(deliveryFee)}
             </Text>
           </View>
@@ -127,10 +127,10 @@ export default function TrackingTimeline({
       </View>
 
       {/* Provider Status */}
-      <View className="bg-black/40 rounded-[10px] px-3 py-2 mb-4 border border-[#222]">
+      <View className="bg-background/40 rounded-[10px] px-3 py-2 mb-4 border border-border">
         <Text className="font-mont text-xs text-text-secondary">
           حالة الناقل:{" "}
-          <Text className="font-mont-semibold text-white">
+          <Text className="font-mont-semibold text-text-primary">
             {providerStatus}
           </Text>
         </Text>
@@ -150,12 +150,12 @@ export default function TrackingTimeline({
                 {/* Circle */}
                 <View
                   className={`w-6 h-6 rounded-full items-center justify-center ${
-                    isCompleted ? "bg-primary" : "bg-[#222] border border-[#444]"
+                    isCompleted ? "bg-primary" : "bg-surface border border-border"
                   }`}
                   style={
                     isActive
                       ? {
-                          shadowColor: "#FFD400",
+                          shadowColor: "#1A4B5F",
                           shadowOffset: { width: 0, height: 0 },
                           shadowOpacity: 0.6,
                           shadowRadius: 8,
@@ -165,12 +165,12 @@ export default function TrackingTimeline({
                   }
                 >
                   {isCompleted && (
-                    <Text className="font-mont-bold text-[10px] text-black">
+                    <Text className="font-mont-bold text-[10px] text-white">
                       {index < activeIndex ? "\u2713" : index + 1}
                     </Text>
                   )}
                   {!isCompleted && (
-                    <Text className="font-mont text-[10px] text-[#555]">
+                    <Text className="font-mont text-[10px] text-text-secondary">
                       {index + 1}
                     </Text>
                   )}
@@ -180,7 +180,7 @@ export default function TrackingTimeline({
                 {!isLast && (
                   <View
                     className={`w-0.5 flex-1 my-0.5 ${
-                      index < activeIndex ? "bg-primary" : "bg-[#333]"
+                      index < activeIndex ? "bg-primary" : "bg-surface"
                     }`}
                     style={{ minHeight: 28 }}
                   />
@@ -197,8 +197,8 @@ export default function TrackingTimeline({
                     isActive
                       ? "text-primary"
                       : isCompleted
-                        ? "text-white"
-                        : "text-[#555]"
+                        ? "text-text-primary"
+                        : "text-text-secondary"
                   }`}
                 >
                   {step.label}
@@ -216,8 +216,8 @@ export default function TrackingTimeline({
 
       {/* History Events */}
       {history && history.length > 0 && (
-        <View className="mt-5 pt-4 border-t border-[#222]">
-          <Text className="font-mont-semibold text-sm text-white mb-3">
+        <View className="mt-5 pt-4 border-t border-border">
+          <Text className="font-mont-semibold text-sm text-text-primary mb-3">
             سجل التتبع
           </Text>
           {history.map((entry, idx) => (
@@ -228,11 +228,11 @@ export default function TrackingTimeline({
               }`}
             >
               {/* Dot */}
-              <View className="w-2 h-2 rounded-full bg-[#444] mt-1.5 mr-3" />
+              <View className="w-2 h-2 rounded-full bg-border mt-1.5 mr-3" />
 
               {/* Content */}
               <View className="flex-1">
-                <Text className="font-mont-medium text-sm text-white">
+                <Text className="font-mont-medium text-sm text-text-primary">
                   {entry.status}
                 </Text>
                 <View className="flex-row items-center mt-0.5 gap-2">

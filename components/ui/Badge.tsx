@@ -14,11 +14,11 @@ const variantStyles: Record<string, string> = {
 };
 
 const textStyles: Record<string, string> = {
-  primary: "text-black",
-  success: "text-white",
-  error: "text-white",
-  neutral: "text-white",
-  new: "text-white",
+  primary: "text-white",
+  success: "text-text-primary",
+  error: "text-text-primary",
+  neutral: "text-text-primary",
+  new: "text-text-primary",
 };
 
 export function Badge({ label, variant = "primary" }: BadgeProps) {

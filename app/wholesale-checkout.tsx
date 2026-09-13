@@ -3,7 +3,7 @@ import { ScrollView, View, Text, Pressable, ActivityIndicator } from "react-nati
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { TextInput } from "@/components/ui/TextInput";
 import { Dropdown } from "@/components/ui/Dropdown";
@@ -13,7 +13,7 @@ import { AppImage } from "@/components/ui/AppImage";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { formatPrice } from "@/lib/formatters";
 import { isValidPhone, formatPhoneHint } from "@/lib/validation";
-import { getWilayaOptions, getCommuneOptions } from "@/lib/algeriaData";
+import { getRegionOptions, getCityOptions } from "@/lib/saudiData";
 import { useToast } from "@/providers/ToastProvider";
 
 const deliveryMethods = [
@@ -45,8 +45,8 @@ export default function WholesaleCheckoutScreen() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
 
-  const wilayaOptions = getWilayaOptions();
-  const communeOptions = getCommuneOptions(wilaya);
+  const wilayaOptions = getRegionOptions();
+  const communeOptions = getCityOptions(wilaya);
 
   // Group items by supplier
   const supplierGroups = useMemo(() => {
@@ -82,7 +82,7 @@ export default function WholesaleCheckoutScreen() {
       newErrors.phone = formatPhoneHint();
     }
     if (!address.trim()) newErrors.address = "Address is required";
-    if (!wilaya) newErrors.wilaya = "Wilaya is required";
+    if (!wilaya) newErrors.wilaya = "Region is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -93,7 +93,7 @@ export default function WholesaleCheckoutScreen() {
     setLoading(true);
 
     try {
-      const selectedWilaya = wilayaOptions.find((w) => w.value === wilaya);
+      const selectedWilaya = wilayaOptions.find((w: { value: string }) => w.value === wilaya);
       const orderId = await createWholesaleOrder({
         shippingAddress: {
           fullName: fullName.trim(),
@@ -115,7 +115,7 @@ export default function WholesaleCheckoutScreen() {
   if (cartSummary === undefined) {
     return (
       <SafeAreaView edges={["top"]} className="flex-1 bg-background items-center justify-center">
-        <ActivityIndicator size="large" color="#FFD400" />
+        <ActivityIndicator size="large" color="#1A4B5F" />
       </SafeAreaView>
     );
   }
@@ -123,7 +123,7 @@ export default function WholesaleCheckoutScreen() {
   if (!cartSummary || cartSummary.items.length === 0) {
     return (
       <SafeAreaView edges={["top"]} className="flex-1 bg-background items-center justify-center px-4">
-        <Text className="font-mont-bold text-lg text-white mb-2">
+        <Text className="font-mont-bold text-lg text-text-primary mb-2">
           Your wholesale cart is empty
         </Text>
         <Button
@@ -148,13 +148,13 @@ export default function WholesaleCheckoutScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
         </View>
 
         {/* Title */}
         <View className="px-4 mb-4">
-          <Text className="font-mont-bold text-2xl text-white">
+          <Text className="font-mont-bold text-2xl text-text-primary">
             <Text className="font-mont-bold">WHOLESALE </Text>
             <Text className="font-mont text-lg text-text-secondary">
               Checkout
@@ -165,7 +165,7 @@ export default function WholesaleCheckoutScreen() {
         {/* Items grouped by supplier */}
         {supplierGroups.map((group) => (
           <View key={group.supplierName} className="mx-4 mb-4 rounded-card bg-card p-3">
-            <Text className="font-mont-semibold text-sm text-white mb-2">
+            <Text className="font-mont-semibold text-sm text-text-primary mb-2">
               {group.supplierName}
             </Text>
             {group.items.map((item) => (
@@ -180,7 +180,7 @@ export default function WholesaleCheckoutScreen() {
                 />
                 <View className="flex-1">
                   <Text
-                    className="font-mont-medium text-sm text-white"
+                    className="font-mont-medium text-sm text-text-primary"
                     numberOfLines={1}
                   >
                     {item.product.name}
@@ -194,7 +194,7 @@ export default function WholesaleCheckoutScreen() {
                 </Text>
               </View>
             ))}
-            <View className="border-t border-[#333] mt-2 pt-2 flex-row justify-between">
+            <View className="border-t border-border mt-2 pt-2 flex-row justify-between">
               <Text className="font-mont-medium text-xs text-text-secondary">
                 Subtotal
               </Text>
@@ -207,7 +207,7 @@ export default function WholesaleCheckoutScreen() {
 
         {/* Total */}
         <View className="mx-4 mb-4 rounded-card bg-card p-4 flex-row justify-between items-center">
-          <Text className="font-mont-bold text-base text-white">Total</Text>
+          <Text className="font-mont-bold text-base text-text-primary">Total</Text>
           <Text className="font-mont-bold text-xl text-primary">
             {formatPrice(cartSummary.total)}
           </Text>
@@ -215,7 +215,7 @@ export default function WholesaleCheckoutScreen() {
 
         {/* Contact Information */}
         <View className="px-4">
-          <Text className="font-mont-bold text-base text-white mb-3">
+          <Text className="font-mont-bold text-base text-text-primary mb-3">
             Contact Information
           </Text>
 
@@ -245,29 +245,29 @@ export default function WholesaleCheckoutScreen() {
           />
 
           <Dropdown
-            label="Wilaya *"
+            label="Region *"
             options={wilayaOptions}
             value={wilaya}
             onSelect={(val) => {
               setWilaya(val);
               setCommune("");
             }}
-            placeholder="Select your wilaya"
+            placeholder="Select your region"
             error={errors.wilaya}
           />
 
           <Dropdown
-            label="Commune"
+            label="City"
             options={communeOptions}
             value={commune}
             onSelect={setCommune}
-            placeholder="Enter your commune"
+            placeholder="Select your city"
           />
         </View>
 
         {/* Delivery Method */}
         <View className="px-4 mt-4">
-          <Text className="font-mont-bold text-base text-white mb-3">
+          <Text className="font-mont-bold text-base text-text-primary mb-3">
             Choose Delivery Method
           </Text>
           <RadioButton
@@ -278,10 +278,10 @@ export default function WholesaleCheckoutScreen() {
         </View>
 
         {/* Payment info */}
-        <View className="mx-4 mt-4 rounded-card p-4" style={{ backgroundColor: "rgba(169,169,169,0.12)" }}>
+        <View className="mx-4 mt-4 rounded-card p-4" style={{ backgroundColor: "rgba(26,75,95,0.10)" }}>
           <View className="flex-row items-center" style={{ gap: 8 }}>
-            <Ionicons name="cash-outline" size={20} color="#FFD400" />
-            <Text className="font-mont-semibold text-sm text-white">
+            <Ionicons name="cash-outline" size={20} color="#1A4B5F" />
+            <Text className="font-mont-semibold text-sm text-text-primary">
               Cash on Delivery (COD)
             </Text>
           </View>
@@ -293,7 +293,7 @@ export default function WholesaleCheckoutScreen() {
         {/* Buttons */}
         <View className="flex-row items-center px-4 mt-6" style={{ gap: 12 }}>
           <Pressable onPress={() => router.back()} className="py-3">
-            <Text className="font-mont-medium text-sm text-white">Cancel</Text>
+            <Text className="font-mont-medium text-sm text-text-primary">Cancel</Text>
           </Pressable>
           <View className="flex-1">
             <Button

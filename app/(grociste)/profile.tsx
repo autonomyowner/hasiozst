@@ -10,7 +10,7 @@ import { DevRolePanel } from "@/components/dev/DevRolePanel";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useSellerStats } from "@/hooks/useSellerStats";
 import { authClient } from "@/lib/auth-client";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { DeleteAccountButton } from "@/components/profile/DeleteAccountButton";
 
@@ -24,7 +24,7 @@ export default function GrocisteProfileScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -101,14 +101,14 @@ export default function GrocisteProfileScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
         </View>
 
         {/* Cover banner */}
         <View className="mx-4 mt-3 rounded-card overflow-hidden" style={{ height: 107 }}>
           <Image
-            source={require("@/assets/images/profile-cover-gold.jpg")}
+            source={require("@/assets/media/photos/mountains.webp")}
             style={{ width: "100%", height: "100%" }}
             resizeMode="cover"
           />
@@ -119,7 +119,7 @@ export default function GrocisteProfileScreen() {
           {user?.avatar ? (
             <View
               className="rounded-full items-center justify-center"
-              style={{ width: 70, height: 70, borderWidth: 3, borderColor: "#000" }}
+              style={{ width: 70, height: 70, borderWidth: 3, borderColor: "#F8F4ED" }}
             >
               <AppImage
                 source={user.avatar}
@@ -129,7 +129,7 @@ export default function GrocisteProfileScreen() {
           ) : (
             <View
               className="h-[70px] w-[70px] rounded-full bg-surface items-center justify-center"
-              style={{ borderWidth: 3, borderColor: "#000" }}
+              style={{ borderWidth: 3, borderColor: "#F8F4ED" }}
             >
               <Text className="font-mont-bold text-2xl text-primary">
                 {user?.name?.charAt(0) ?? "S"}
@@ -137,18 +137,18 @@ export default function GrocisteProfileScreen() {
             </View>
           )}
           <View className="flex-row items-center mt-3">
-            <Text className="font-mont-bold text-lg text-white">
+            <Text className="font-mont-bold text-lg text-text-primary">
               {user?.name ?? "Seller"}
             </Text>
             {user?.plan === "pro" && (
               <View
                 className="ml-2 flex-row items-center rounded-pill px-2.5 py-0.5"
-                style={{ backgroundColor: "#423B19" }}
+                style={{ backgroundColor: "#EDE3C2" }}
               >
                 <Text className="font-mont-semibold text-[10px] text-primary">
                   Pro Seller
                 </Text>
-                <Ionicons name="star" size={10} color="#FFD400" style={{ marginLeft: 3 }} />
+                <Ionicons name="star" size={10} color="#1A4B5F" style={{ marginLeft: 3 }} />
               </View>
             )}
           </View>
@@ -166,8 +166,8 @@ export default function GrocisteProfileScreen() {
             {/* Completion Rate */}
             <View className="flex-1 rounded-card bg-card p-3">
               <View className="flex-row items-center mb-2">
-                <Ionicons name="flame-outline" size={14} color="#EF4444" />
-                <Text className="font-mont-medium text-xs text-white ml-1">
+                <Ionicons name="flame-outline" size={14} color="#DC2626" />
+                <Text className="font-mont-medium text-xs text-text-primary ml-1">
                   Completion Rate
                 </Text>
               </View>
@@ -182,7 +182,7 @@ export default function GrocisteProfileScreen() {
                 </View>
                 <DonutChart
                   percentage={stats.completionRate}
-                  color="#EF4444"
+                  color="#DC2626"
                   size={44}
                 />
               </View>
@@ -191,8 +191,8 @@ export default function GrocisteProfileScreen() {
             {/* Orders */}
             <View className="flex-1 rounded-card bg-card p-3">
               <View className="flex-row items-center mb-2">
-                <Ionicons name="cube-outline" size={14} color="#3B82F6" />
-                <Text className="font-mont-medium text-xs text-white ml-1">
+                <Ionicons name="cube-outline" size={14} color="#1A4B5F" />
+                <Text className="font-mont-medium text-xs text-text-primary ml-1">
                   Orders
                 </Text>
                 <Text className="font-mont text-[9px] text-text-secondary ml-0.5">
@@ -210,7 +210,7 @@ export default function GrocisteProfileScreen() {
                 </View>
                 <DonutChart
                   percentage={Math.min(100, (stats.ordersLast30Days / 150) * 100)}
-                  color="#3B82F6"
+                  color="#1A4B5F"
                   size={44}
                 />
               </View>
@@ -222,8 +222,8 @@ export default function GrocisteProfileScreen() {
             {/* Response Time */}
             <View className="flex-1 rounded-card bg-card p-3">
               <View className="flex-row items-center mb-2">
-                <Ionicons name="time-outline" size={14} color="#FFD400" />
-                <Text className="font-mont-medium text-xs text-white ml-1">
+                <Ionicons name="time-outline" size={14} color="#1A4B5F" />
+                <Text className="font-mont-medium text-xs text-text-primary ml-1">
                   Response Time
                 </Text>
               </View>
@@ -240,7 +240,7 @@ export default function GrocisteProfileScreen() {
                 </View>
                 <BarChart
                   values={stats.ordersLast30Days > 0 ? [3, 5, 4, 6, 5] : [0, 0, 0, 0, 0]}
-                  color="#FFD400"
+                  color="#1A4B5F"
                   height={35}
                 />
               </View>
@@ -249,8 +249,8 @@ export default function GrocisteProfileScreen() {
             {/* Revenue */}
             <View className="flex-1 rounded-card bg-card p-3">
               <View className="flex-row items-center mb-2">
-                <Ionicons name="cash-outline" size={14} color="#22C55E" />
-                <Text className="font-mont-medium text-xs text-white ml-1">
+                <Ionicons name="cash-outline" size={14} color="#1F9D55" />
+                <Text className="font-mont-medium text-xs text-text-primary ml-1">
                   Revenue
                 </Text>
                 <Text className="font-mont text-[9px] text-text-secondary ml-0.5">
@@ -260,15 +260,15 @@ export default function GrocisteProfileScreen() {
               <View className="flex-row items-center justify-between">
                 <View>
                   <Text className="font-mont-bold text-base text-primary">
-                    {stats.revenueThisMonth.toLocaleString("fr-DZ")}
+                    {stats.revenueThisMonth.toLocaleString("en-US")}
                   </Text>
                   <Text className="font-mont text-[10px] text-text-secondary">
-                    DA
+                    SAR
                   </Text>
                 </View>
                 <LineChart
                   values={stats.revenueThisMonth > 0 ? [10, 30, 20, 50, 40, 60, 45] : [0, 0, 0, 0, 0, 0, 0]}
-                  color="#22C55E"
+                  color="#1F9D55"
                   width={55}
                   height={30}
                 />
@@ -287,12 +287,12 @@ export default function GrocisteProfileScreen() {
               key={item.label}
               onPress={item.onPress}
               className="flex-row items-center justify-between rounded-card px-4 py-4"
-              style={{ backgroundColor: "rgba(169,169,169,0.08)" }}
+              style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
             >
               <View className="flex-row items-center flex-1">
-                <Ionicons name={item.icon} size={20} color="#898989" />
+                <Ionicons name={item.icon} size={20} color="#5F6E63" />
                 <View className="ml-3">
-                  <Text className="font-mont-medium text-sm text-white">
+                  <Text className="font-mont-medium text-sm text-text-primary">
                     {item.label}
                   </Text>
                   <Text
@@ -304,7 +304,7 @@ export default function GrocisteProfileScreen() {
                   </Text>
                 </View>
               </View>
-              <Ionicons name="arrow-forward" size={18} color="#898989" />
+              <Ionicons name="arrow-forward" size={18} color="#5F6E63" />
             </Pressable>
           ))}
         </View>

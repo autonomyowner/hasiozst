@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { Ionicons } from "@expo/vector-icons";
 import { api } from "../convex/_generated/api";
 import { Id } from "../convex/_generated/dataModel";
@@ -236,7 +236,7 @@ export default function EditWholesaleProductScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#FFD400" />
+          <ActivityIndicator color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -250,9 +250,9 @@ export default function EditWholesaleProductScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Edit Wholesale Product
           </Text>
         </View>
@@ -277,16 +277,16 @@ export default function EditWholesaleProductScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Edit Wholesale Product
           </Text>
         </View>
 
         <View className="px-4">
           {/* Image gallery */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Images{" "}
             <Text className="text-text-secondary">
               ({totalImages}/{MAX_IMAGES})
@@ -307,11 +307,11 @@ export default function EditWholesaleProductScreen() {
                   onPress={() => removeExistingImage(index)}
                   className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 items-center justify-center"
                 >
-                  <Ionicons name="close" size={12} color="#fff" />
+                  <Ionicons name="close" size={12} color="#FFFFFF" />
                 </Pressable>
                 {index === 0 && newImageUris.length === 0 && (
                   <View className="absolute bottom-0 left-0 right-0 bg-primary/80 rounded-b-xl py-0.5">
-                    <Text className="font-mont text-[9px] text-black text-center">
+                    <Text className="font-mont text-[9px] text-white text-center">
                       Main
                     </Text>
                   </View>
@@ -328,10 +328,10 @@ export default function EditWholesaleProductScreen() {
                   onPress={() => removeNewImage(index)}
                   className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 items-center justify-center"
                 >
-                  <Ionicons name="close" size={12} color="#fff" />
+                  <Ionicons name="close" size={12} color="#FFFFFF" />
                 </Pressable>
                 <View className="absolute bottom-0 left-0 right-0 bg-blue-500/80 rounded-b-xl py-0.5">
-                  <Text className="font-mont text-[9px] text-white text-center">
+                  <Text className="font-mont text-[9px] text-text-primary text-center">
                     New
                   </Text>
                 </View>
@@ -342,7 +342,7 @@ export default function EditWholesaleProductScreen() {
                 onPress={pickImage}
                 className="w-20 h-20 rounded-card bg-card items-center justify-center border border-dashed border-text-secondary/30"
               >
-                <Ionicons name="add" size={28} color="#898989" />
+                <Ionicons name="add" size={28} color="#5F6E63" />
               </Pressable>
             )}
           </ScrollView>
@@ -354,7 +354,7 @@ export default function EditWholesaleProductScreen() {
           <View className="mb-2" />
 
           {/* Video */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Video <Text className="text-text-secondary">(optional, max 60s)</Text>
           </Text>
           <Pressable
@@ -363,7 +363,7 @@ export default function EditWholesaleProductScreen() {
           >
             {videoUri || existingVideoUrl ? (
               <View className="flex-row items-center">
-                <Ionicons name="videocam" size={18} color="#FFD400" />
+                <Ionicons name="videocam" size={18} color="#1A4B5F" />
                 <Text className="font-mont-medium text-sm text-primary ml-2">
                   {videoUri ? "New video selected" : "Video attached"}
                 </Text>
@@ -374,7 +374,7 @@ export default function EditWholesaleProductScreen() {
                   }}
                   className="ml-3"
                 >
-                  <Ionicons name="close-circle" size={18} color="#898989" />
+                  <Ionicons name="close-circle" size={18} color="#5F6E63" />
                 </Pressable>
               </View>
             ) : (
@@ -393,7 +393,7 @@ export default function EditWholesaleProductScreen() {
             error={errors.name}
           />
           <TextInput
-            label="Price per Unit (DA) *"
+            label="Price per Unit (SAR) *"
             value={pricePerUnit}
             onChangeText={setPricePerUnit}
             placeholder="e.g. 1200"
@@ -409,7 +409,7 @@ export default function EditWholesaleProductScreen() {
           />
 
           {/* Product type */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Product Type
           </Text>
           <View className="mb-3">
@@ -457,7 +457,7 @@ export default function EditWholesaleProductScreen() {
           <View className="mt-2 mb-24">
             {uploading ? (
               <View className="items-center py-4 gap-3">
-                <ActivityIndicator color="#FFD400" />
+                <ActivityIndicator color="#1A4B5F" />
                 <Text className="font-mont text-sm text-text-secondary">
                   {uploadStep}
                 </Text>

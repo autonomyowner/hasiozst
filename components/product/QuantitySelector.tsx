@@ -18,7 +18,7 @@ export function QuantitySelector({
 }: QuantitySelectorProps) {
   return (
     <View className="flex-row items-center" style={{ gap: 12 }}>
-      <Text className="font-mont-semibold text-sm text-white">
+      <Text className="font-mont-semibold text-sm text-text-primary">
         Select Quantity
       </Text>
       <View className="flex-row items-center" style={{ gap: 8 }}>
@@ -32,10 +32,10 @@ export function QuantitySelector({
           <Ionicons
             name="remove"
             size={18}
-            color={quantity <= min ? "#898989" : "#000"}
+            color={quantity <= min ? "#5F6E63" : "#FFFFFF"}
           />
         </Pressable>
-        <Text className="font-mont-bold text-lg text-white w-8 text-center">
+        <Text className="font-mont-bold text-lg text-text-primary w-8 text-center">
           {quantity}
         </Text>
         <Pressable
@@ -48,7 +48,7 @@ export function QuantitySelector({
           <Ionicons
             name="add"
             size={18}
-            color={quantity >= max ? "#898989" : "#000"}
+            color={quantity >= max ? "#5F6E63" : "#FFFFFF"}
           />
         </Pressable>
       </View>

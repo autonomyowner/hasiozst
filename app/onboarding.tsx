@@ -11,37 +11,38 @@ import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BackgroundImage } from "@/components/layout/BackgroundImage";
 import { Button } from "@/components/ui/Button";
+import { demoPhotos } from "@/lib/demoContent";
 
 const { width } = Dimensions.get("window");
 
 const ONBOARDING_KEY = "hasSeenOnboarding";
 
-const WAREHOUSE_BG = "https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80";
+
 
 const slides = [
   {
     id: "1",
-    backgroundUri: WAREHOUSE_BG,
-    title: "Discover Trusted\nSuppliers",
-    subtitle: "M a r k e t p l a c e",
+    backgroundUri: demoPhotos.habitasPool,
+    title: "Stay Somewhere\nUnforgettable",
+    subtitle: "S t a y s",
     description:
-      "Connect with verified suppliers across Algeria. Browse products, compare prices, and build lasting business relationships.",
+      "Desert villas in AlUla, cliff suites on the Red Sea, quiet rooms in the highlands. Browse real photos and video from the people who run them.",
   },
   {
     id: "2",
-    backgroundUri: WAREHOUSE_BG,
-    title: "Buy Smart.\nSell Faster.",
-    subtitle: "S m a r t  T r a d i n g",
+    backgroundUri: demoPhotos.culture,
+    title: "Book Experiences,\nNot Just Rooms",
+    subtitle: "E x p e r i e n c e s",
     description:
-      "Access real-time pricing, bulk deals, and smart recommendations. Whether you buy or sell, do it faster with HASIO.",
+      "Island day trips, heritage walks, sunrise caravans. Everything Saudi has to offer, bookable in a few taps.",
   },
   {
     id: "3",
-    backgroundUri: WAREHOUSE_BG,
-    title: "Grow Your\nBusiness Today",
-    subtitle: "S c a l e  U p",
+    backgroundUri: demoPhotos.nature,
+    title: "Hosts Share\nTheir Own Story",
+    subtitle: "R e e l s",
     description:
-      "From local to national. Manage orders, track shipments, and grow your customer base — all in one platform.",
+      "Hotels and guides post short videos straight from the property, so you see the place as it really is before you book.",
   },
 ];
 
@@ -99,7 +100,7 @@ export default function OnboardingScreen() {
               <Text className="font-mont text-[10px] text-primary tracking-[4px] mb-2">
                 {item.subtitle}
               </Text>
-              <Text className="font-mont-bold text-3xl text-white leading-[38px] mb-3">
+              <Text className="font-mont-bold text-3xl text-text-primary leading-[38px] mb-3">
                 {item.title}
               </Text>
               <Text className="font-mont text-sm text-text-secondary leading-5">
@@ -144,9 +145,9 @@ export default function OnboardingScreen() {
             <Pressable
               onPress={completeOnboarding}
               className="rounded-card px-6 py-3"
-              style={{ backgroundColor: "rgba(169,169,169,0.15)" }}
+              style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
             >
-              <Text className="font-mont-semibold text-sm text-white">
+              <Text className="font-mont-semibold text-sm text-text-primary">
                 Skip
               </Text>
             </Pressable>

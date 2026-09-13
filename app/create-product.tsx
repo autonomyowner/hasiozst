@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { Ionicons } from "@expo/vector-icons";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
@@ -262,16 +262,16 @@ export default function CreateProductScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             {isGrossiste ? "Add Wholesale Product" : "Add Product"}
           </Text>
         </View>
 
         <View className="px-4">
           {/* Image gallery */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Images <Text className="text-text-secondary">({imageUris.length}/{MAX_IMAGES})</Text>
           </Text>
           <ScrollView
@@ -289,11 +289,11 @@ export default function CreateProductScreen() {
                   onPress={() => removeImage(index)}
                   className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 items-center justify-center"
                 >
-                  <Ionicons name="close" size={12} color="#fff" />
+                  <Ionicons name="close" size={12} color="#FFFFFF" />
                 </Pressable>
                 {index === 0 && (
                   <View className="absolute bottom-0 left-0 right-0 bg-primary/80 rounded-b-xl py-0.5">
-                    <Text className="font-mont text-[9px] text-black text-center">
+                    <Text className="font-mont text-[9px] text-white text-center">
                       Main
                     </Text>
                   </View>
@@ -305,7 +305,7 @@ export default function CreateProductScreen() {
                 onPress={pickImage}
                 className="w-20 h-20 rounded-card bg-card items-center justify-center border border-dashed border-text-secondary/30"
               >
-                <Ionicons name="add" size={28} color="#898989" />
+                <Ionicons name="add" size={28} color="#5F6E63" />
               </Pressable>
             )}
           </ScrollView>
@@ -317,7 +317,7 @@ export default function CreateProductScreen() {
           <View className="mb-2" />
 
           {/* Video */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Video <Text className="text-text-secondary">(optional, max 60s)</Text>
           </Text>
           <Pressable
@@ -326,7 +326,7 @@ export default function CreateProductScreen() {
           >
             {videoUri ? (
               <View className="flex-row items-center">
-                <Ionicons name="videocam" size={18} color="#FFD400" />
+                <Ionicons name="videocam" size={18} color="#1A4B5F" />
                 <Text className="font-mont-medium text-sm text-primary ml-2">
                   Video selected
                 </Text>
@@ -334,7 +334,7 @@ export default function CreateProductScreen() {
                   onPress={() => setVideoUri(null)}
                   className="ml-3"
                 >
-                  <Ionicons name="close-circle" size={18} color="#898989" />
+                  <Ionicons name="close-circle" size={18} color="#5F6E63" />
                 </Pressable>
               </View>
             ) : (
@@ -361,7 +361,7 @@ export default function CreateProductScreen() {
           />
 
           <TextInput
-            label="Price (DA) *"
+            label="Price (SAR) *"
             value={price}
             onChangeText={setPrice}
             placeholder="6000"
@@ -389,7 +389,7 @@ export default function CreateProductScreen() {
           )}
 
           {/* Product type */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Product Type
           </Text>
           <View className="mb-3">
@@ -523,7 +523,7 @@ export default function CreateProductScreen() {
           <View className="mt-2 mb-8">
             {uploading ? (
               <View className="items-center py-4 gap-3">
-                <ActivityIndicator color="#FFD400" />
+                <ActivityIndicator color="#1A4B5F" />
                 <Text className="font-mont text-sm text-text-secondary">
                   {uploadStep}
                 </Text>

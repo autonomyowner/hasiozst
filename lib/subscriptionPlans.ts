@@ -23,7 +23,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
     id: "pro",
     name: "Pro Seller",
     price: 12000,
-    period: "DA / year",
+    period: "SAR / year",
     features: [
       "5 Store Profiles",
       "200 Products",
@@ -33,7 +33,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
     benefits: [
       "Priority Support",
       "Boosted visibility in search",
-      "Save 6 000 DA compared to monthly",
+      "Save SAR 6,000 compared to monthly",
     ],
     ctaText: "Subscribe Now",
     popular: true,
@@ -42,7 +42,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
     id: "agency",
     name: "Agency",
     price: 35000,
-    period: "DA / month",
+    period: "SAR / month",
     features: [
       "Unlimited Store Profiles",
       "Unlimited Products",

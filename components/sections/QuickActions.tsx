@@ -15,7 +15,7 @@ interface QuickActionsProps {
 export function QuickActions({ actions }: QuickActionsProps) {
   return (
     <View className="mx-4 mt-4">
-      <Text className="font-mont-bold text-lg text-white mb-3">
+      <Text className="font-mont-bold text-lg text-text-primary mb-3">
         Quick Actions
       </Text>
       <View className="flex-row flex-wrap" style={{ gap: 10 }}>
@@ -26,7 +26,7 @@ export function QuickActions({ actions }: QuickActionsProps) {
             className="items-center p-3 rounded-card"
             style={{
               width: "31%",
-              backgroundColor: "rgba(169,169,169,0.12)",
+              backgroundColor: "rgba(26,75,95,0.10)",
             }}
           >
             {action.icon && (
@@ -35,13 +35,13 @@ export function QuickActions({ actions }: QuickActionsProps) {
                 style={{
                   width: 40,
                   height: 40,
-                  backgroundColor: "rgba(255,212,0,0.15)",
+                  backgroundColor: "rgba(26,75,95,0.15)",
                 }}
               >
-                <Ionicons name={action.icon} size={18} color="#FFD400" />
+                <Ionicons name={action.icon} size={18} color="#1A4B5F" />
               </View>
             )}
-            <Text className="font-mont-semibold text-xs text-white text-center">
+            <Text className="font-mont-semibold text-xs text-text-primary text-center">
               {action.label}
             </Text>
             <Text

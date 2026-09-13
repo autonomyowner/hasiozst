@@ -2,7 +2,7 @@ import { ScrollView, View, Text, Pressable, ActivityIndicator } from "react-nati
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { SearchBar } from "@/components/ui/SearchBar";
@@ -41,12 +41,12 @@ export default function WholesaleBrowseScreen() {
           <Pressable
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full mr-3"
-            style={{ backgroundColor: "rgba(169,169,169,0.15)" }}
+            style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 20, color: "#fff" }}>
-            Wholesale <Text style={{ color: "#FFD400" }}>Products</Text>
+          <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 20, color: "#0D1A12" }}>
+            Wholesale <Text style={{ color: "#1A4B5F" }}>Products</Text>
           </Text>
         </View>
 
@@ -94,13 +94,13 @@ export default function WholesaleBrowseScreen() {
               style={{
                 backgroundColor:
                   selectedFilter === pill
-                    ? "#FFD400"
-                    : "rgba(169,169,169,0.15)",
+                    ? "#1A4B5F"
+                    : "rgba(26,75,95,0.10)",
               }}
             >
               <Text
                 className={`font-mont-medium text-xs ${
-                  selectedFilter === pill ? "text-black" : "text-white"
+                  selectedFilter === pill ? "text-white" : "text-text-primary"
                 }`}
               >
                 {pill}
@@ -109,7 +109,7 @@ export default function WholesaleBrowseScreen() {
                 <Ionicons
                   name="chevron-down"
                   size={12}
-                  color={selectedFilter === pill ? "#000" : "#fff"}
+                  color={selectedFilter === pill ? "#FFFFFF" : "#0D1A12"}
                   style={{ marginLeft: 4 }}
                 />
               )}
@@ -120,7 +120,7 @@ export default function WholesaleBrowseScreen() {
         {/* Product list */}
         {wholesaleProducts === undefined ? (
           <View className="py-10 items-center">
-            <ActivityIndicator size="large" color="#FFD400" />
+            <ActivityIndicator size="large" color="#1A4B5F" />
           </View>
         ) : filteredProducts.length === 0 ? (
           <EmptyState

@@ -28,12 +28,12 @@ export function SearchBar({
         className="mx-4 flex-row items-center rounded-card bg-card px-4 py-3"
         style={{ gap: 10 }}
       >
-        <Ionicons name="search-outline" size={18} color="#FFD400" />
+        <Ionicons name="search-outline" size={18} color="#1A4B5F" />
         <Text className="flex-1 font-mont text-sm text-text-secondary">
           {placeholder}
         </Text>
         {showFilterIcon && (
-          <Ionicons name="funnel" size={16} color="#FFD400" />
+          <Ionicons name="funnel" size={16} color="#1A4B5F" />
         )}
       </Pressable>
     );
@@ -44,7 +44,7 @@ export function SearchBar({
       className="mx-4 flex-row items-center rounded-card bg-card px-4 py-3"
       style={{ gap: 10 }}
     >
-      <Ionicons name="search-outline" size={18} color="#FFD400" />
+      <Ionicons name="search-outline" size={18} color="#1A4B5F" />
       <TextInput
         value={value}
         onChangeText={(text) => {
@@ -52,13 +52,13 @@ export function SearchBar({
           onChangeText?.(text);
         }}
         placeholder={placeholder}
-        placeholderTextColor="#898989"
-        className="flex-1 font-mont text-sm text-white"
+        placeholderTextColor="#5F6E63"
+        className="flex-1 font-mont text-sm text-text-primary"
         autoCapitalize="none"
       />
       {showFilterIcon && (
         <Pressable onPress={onFilterPress} hitSlop={8}>
-          <Ionicons name="funnel" size={16} color="#FFD400" />
+          <Ionicons name="funnel" size={16} color="#1A4B5F" />
         </Pressable>
       )}
     </View>

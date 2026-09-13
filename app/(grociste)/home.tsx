@@ -2,7 +2,7 @@ import { ScrollView, FlatList, View, Text, Pressable, ActivityIndicator, Modal }
 import { useState, useMemo } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { SearchBar } from "@/components/ui/SearchBar";
@@ -25,9 +25,9 @@ type PriceRange = "under10k" | "10k-50k" | "over50k";
 type QuantityRange = "under10" | "10-50" | "over50";
 
 const priceOptions: { key: PriceRange; label: string }[] = [
-  { key: "under10k", label: "Under 10,000 DA" },
-  { key: "10k-50k", label: "10,000 – 50,000 DA" },
-  { key: "over50k", label: "Over 50,000 DA" },
+  { key: "under10k", label: "Under SAR 500" },
+  { key: "10k-50k", label: "SAR 500 – 2,000" },
+  { key: "over50k", label: "Over SAR 2,000" },
 ];
 
 const quantityOptions: { key: QuantityRange; label: string }[] = [
@@ -42,20 +42,20 @@ function ViewModeTogglePill({ label, onPress, variant }: { label: string; onPres
       onPress={onPress}
       className="rounded-pill px-3.5 py-1 active:opacity-70"
       style={variant === "filled" ? {
-        backgroundColor: "#FFD400",
-        shadowColor: "#FFD400",
+        backgroundColor: "#1A4B5F",
+        shadowColor: "#1A4B5F",
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.3,
         shadowRadius: 8,
         elevation: 4,
       } : {
         borderWidth: 1.5,
-        borderColor: "#FFD400",
+        borderColor: "#1A4B5F",
       }}
     >
       <Text
         className="font-mont-semibold text-[12px]"
-        style={{ color: variant === "filled" ? "#000" : "#FFD400" }}
+        style={{ color: variant === "filled" ? "#FFFFFF" : "#1A4B5F" }}
       >
         {label}
       </Text>
@@ -70,14 +70,14 @@ function B2BHeaderChatIcon() {
     <Pressable
       onPress={() => router.push("/conversations")}
       className="h-10 w-10 items-center justify-center rounded-full active:opacity-70"
-      style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+      style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
     >
-      <Ionicons name="chatbubble-ellipses-outline" size={18} color="#fff" />
+      <Ionicons name="chatbubble-ellipses-outline" size={18} color="#0D1A12" />
       {unreadTotal > 0 && (
         <View
           className="absolute -top-1 -right-1 h-[16px] min-w-[16px] items-center justify-center rounded-full bg-error px-0.5"
         >
-          <Text className="font-mont-bold text-[8px] text-white">
+          <Text className="font-mont-bold text-[8px] text-text-primary">
             {unreadTotal > 99 ? "99+" : unreadTotal}
           </Text>
         </View>
@@ -150,8 +150,8 @@ export default function GrocisteHomeScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="px-4 pt-2 pb-1 flex-row items-center justify-between">
-          <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 20, color: "#fff" }}>
-            HASIO <Text style={{ color: "#FFD400" }}>B2B</Text>
+          <Text style={{ fontFamily: "Montserrat_700Bold", fontSize: 20, color: "#0D1A12" }}>
+            HASIO <Text style={{ color: "#1A4B5F" }}>B2B</Text>
           </Text>
           <View className="flex-row items-center" style={{ gap: 10 }}>
             <B2BHeaderChatIcon />
@@ -202,14 +202,14 @@ export default function GrocisteHomeScreen() {
             style={{
               borderRadius: 999,
               borderWidth: 1.5,
-              borderColor: "#FFD400",
-              backgroundColor: priceRange ? "rgba(255,212,0,0.15)" : "transparent",
+              borderColor: "#1A4B5F",
+              backgroundColor: priceRange ? "rgba(26,75,95,0.15)" : "transparent",
             }}
           >
-            <Text className="font-mont-semibold text-[12px]" style={{ color: "#FFD400" }}>
+            <Text className="font-mont-semibold text-[12px]" style={{ color: "#1A4B5F" }}>
               {priceLabel}
             </Text>
-            <Ionicons name="chevron-down" size={12} color="#FFD400" style={{ marginLeft: 5 }} />
+            <Ionicons name="chevron-down" size={12} color="#1A4B5F" style={{ marginLeft: 5 }} />
           </Pressable>
 
           <Pressable
@@ -218,14 +218,14 @@ export default function GrocisteHomeScreen() {
             style={{
               borderRadius: 999,
               borderWidth: 1.5,
-              borderColor: "#FFD400",
-              backgroundColor: quantityRange ? "rgba(255,212,0,0.15)" : "transparent",
+              borderColor: "#1A4B5F",
+              backgroundColor: quantityRange ? "rgba(26,75,95,0.15)" : "transparent",
             }}
           >
-            <Text className="font-mont-semibold text-[12px]" style={{ color: "#FFD400" }}>
+            <Text className="font-mont-semibold text-[12px]" style={{ color: "#1A4B5F" }}>
               {quantityLabel}
             </Text>
-            <Ionicons name="chevron-down" size={12} color="#FFD400" style={{ marginLeft: 5 }} />
+            <Ionicons name="chevron-down" size={12} color="#1A4B5F" style={{ marginLeft: 5 }} />
           </Pressable>
 
           {(priceRange || quantityRange) && (
@@ -238,14 +238,14 @@ export default function GrocisteHomeScreen() {
               style={{
                 borderRadius: 999,
                 borderWidth: 1.5,
-                borderColor: "#898989",
+                borderColor: "#5F6E63",
                 backgroundColor: "transparent",
               }}
             >
-              <Text className="font-mont-semibold text-[12px]" style={{ color: "#898989" }}>
+              <Text className="font-mont-semibold text-[12px]" style={{ color: "#5F6E63" }}>
                 Clear
               </Text>
-              <Ionicons name="close" size={12} color="#898989" style={{ marginLeft: 5 }} />
+              <Ionicons name="close" size={12} color="#5F6E63" style={{ marginLeft: 5 }} />
             </Pressable>
           )}
         </ScrollView>
@@ -269,15 +269,15 @@ export default function GrocisteHomeScreen() {
             <Pressable
               onPress={(e) => e.stopPropagation()}
               style={{
-                backgroundColor: "#0C0C0C",
+                backgroundColor: "#FFFFFF",
                 borderRadius: 20,
                 borderWidth: 1,
-                borderColor: "#333333",
+                borderColor: "#E3DBCA",
                 padding: 20,
               }}
             >
               <Text
-                className="font-mont-bold text-white"
+                className="font-mont-bold text-text-primary"
                 style={{ fontSize: 16, marginBottom: 14 }}
               >
                 {openDropdown === "price" ? "Price range" : "Quantity range"}
@@ -307,24 +307,24 @@ export default function GrocisteHomeScreen() {
                       paddingHorizontal: 16,
                       borderRadius: 14,
                       backgroundColor: isSelected
-                        ? "rgba(255,212,0,0.12)"
-                        : "rgba(255,255,255,0.04)",
+                        ? "rgba(26,75,95,0.12)"
+                        : "rgba(26,75,95,0.04)",
                       borderWidth: 1,
-                      borderColor: isSelected ? "#FFD400" : "transparent",
+                      borderColor: isSelected ? "#1A4B5F" : "transparent",
                       marginBottom: 8,
                     }}
                   >
                     <Text
                       className="font-mont-semibold"
                       style={{
-                        color: isSelected ? "#FFD400" : "#fff",
+                        color: isSelected ? "#1A4B5F" : "#0D1A12",
                         fontSize: 14,
                       }}
                     >
                       {opt.label}
                     </Text>
                     {isSelected && (
-                      <Ionicons name="checkmark-circle" size={20} color="#FFD400" />
+                      <Ionicons name="checkmark-circle" size={20} color="#1A4B5F" />
                     )}
                   </Pressable>
                 );
@@ -349,7 +349,7 @@ export default function GrocisteHomeScreen() {
                 >
                   <Text
                     className="font-mont-semibold"
-                    style={{ color: "#898989", fontSize: 13 }}
+                    style={{ color: "#5F6E63", fontSize: 13 }}
                   >
                     Clear selection
                   </Text>
@@ -362,7 +362,7 @@ export default function GrocisteHomeScreen() {
         {/* Product list */}
         {wholesaleProducts === undefined ? (
           <View className="py-10 items-center">
-            <ActivityIndicator size="large" color="#FFD400" />
+            <ActivityIndicator size="large" color="#1A4B5F" />
           </View>
         ) : filteredProducts.length === 0 ? (
           <EmptyState

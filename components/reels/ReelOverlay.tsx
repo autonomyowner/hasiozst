@@ -13,8 +13,9 @@ interface ReelOverlayProps {
 export function ReelOverlay({ reel, bottomOffset }: ReelOverlayProps) {
   const router = useRouter();
 
-  const priceText = formatPrice(reel.price);
-  const priceNumber = priceText.replace(/\s*DA\s*$/, "").trim();
+  // The overlay renders the amount and the "SAR" label separately, so strip the
+  // currency that formatPrice() prefixes rather than re-formatting by hand.
+  const priceNumber = formatPrice(reel.price).replace(/^SAR\s*/, "").trim();
 
   return (
     <View
@@ -32,7 +33,7 @@ export function ReelOverlay({ reel, bottomOffset }: ReelOverlayProps) {
               height: 40,
               borderRadius: 20,
               borderWidth: 1.5,
-              borderColor: "#333",
+              borderColor: "#2C352E",
             }}
           />
         ) : (
@@ -45,7 +46,7 @@ export function ReelOverlay({ reel, bottomOffset }: ReelOverlayProps) {
               alignItems: "center",
               justifyContent: "center",
               borderWidth: 1.5,
-              borderColor: "#333",
+              borderColor: "#2C352E",
             }}
           >
             <Ionicons name="person" size={20} color="#fff" />
@@ -76,16 +77,16 @@ export function ReelOverlay({ reel, bottomOffset }: ReelOverlayProps) {
         {/* Price */}
         <View className="flex-row items-baseline mr-2">
           <Text
-            className="font-mont-semibold text-primary"
+            className="font-mont-semibold text-gold"
             style={{ fontSize: 20 }}
           >
             {priceNumber}
           </Text>
           <Text
-            className="font-mont-semibold text-primary ml-1"
+            className="font-mont-semibold text-gold ml-1"
             style={{ fontSize: 10 }}
           >
-            DA
+            SAR
           </Text>
         </View>
 
@@ -98,10 +99,10 @@ export function ReelOverlay({ reel, bottomOffset }: ReelOverlayProps) {
             width: 31,
             height: 31,
             borderRadius: 16,
-            backgroundColor: "#FFD400",
+            backgroundColor: "#F5E6A3",
             alignItems: "center",
             justifyContent: "center",
-            shadowColor: "#FFD400",
+            shadowColor: "#F5E6A3",
             shadowOffset: { width: 0, height: 0 },
             shadowOpacity: 0.4,
             shadowRadius: 8,

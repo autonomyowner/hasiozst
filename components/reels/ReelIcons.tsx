@@ -53,7 +53,7 @@ export function PauseIcon({ color = "white", size = 48 }: IconProps) {
   );
 }
 
-export function BackArrowIcon({ color = "#FFD400", size = 23 }: IconProps) {
+export function BackArrowIcon({ color = "#F5E6A3", size = 23 }: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 23 23" fill="none">
       <Path

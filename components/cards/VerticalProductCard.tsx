@@ -25,7 +25,7 @@ export const VerticalProductCard = memo(function VerticalProductCard({
       onPress={() => router.push(`/product/${product._id}`)}
       className="mb-3 mx-4"
     >
-      <View className="flex-row overflow-hidden rounded-card bg-card">
+      <View className="flex-row overflow-hidden rounded-card bg-[#141A16]">
         <View className="relative">
           <AppImage
             source={product.imageUrl}
@@ -39,7 +39,7 @@ export const VerticalProductCard = memo(function VerticalProductCard({
           {product.isPromoted && (
             <View
               className="absolute right-2 top-2 rounded-full px-2"
-              style={{ backgroundColor: "#FFD400", paddingVertical: 2 }}
+              style={{ backgroundColor: "#F5E6A3", paddingVertical: 2 }}
             >
               <Text className="font-mont-semibold text-[8px] text-black">
                 Sponsored
@@ -67,20 +67,20 @@ export const VerticalProductCard = memo(function VerticalProductCard({
             </Text>
             {product.seller && (
               <Text
-                className="font-mont text-xs text-text-secondary"
+                className="font-mont text-xs text-[#B9C9A8]"
                 numberOfLines={1}
               >
                 {product.seller}
               </Text>
             )}
             {product.rating && (
-              <Text className="font-mont text-xs text-text-secondary">
+              <Text className="font-mont text-xs text-[#B9C9A8]">
                 {product.rating} rating
               </Text>
             )}
           </View>
           <View className="flex-row items-center justify-between">
-            <Text className="font-mont-bold text-sm text-primary">
+            <Text className="font-mont-bold text-sm text-gold">
               {formatPrice(product.price)}
             </Text>
             {onToggleFavorite && (
@@ -89,7 +89,7 @@ export const VerticalProductCard = memo(function VerticalProductCard({
                   e.stopPropagation?.();
                   onToggleFavorite();
                 }}
-                className="rounded-pill bg-surface px-3 py-1"
+                className="rounded-pill bg-[#1E2620] px-3 py-1"
               >
                 <Text className="font-mont-medium text-xs text-white">
                   {isFavorite ? "Saved" : "Save"}

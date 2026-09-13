@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { useAction } from "convex/react";
+import { useAction } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { useToast } from "@/providers/ToastProvider";
 
@@ -153,11 +153,11 @@ export function ShipOrderSheet({
   };
 
   const formatPrice = (price: number) =>
-    new Intl.NumberFormat("fr-DZ").format(price) + " DA";
+    "SAR " + new Intl.NumberFormat("en-US").format(price);
 
   return (
     <Modal visible={visible} transparent animationType="slide">
-      <Pressable className="flex-1 bg-black/70" onPress={onClose} />
+      <Pressable className="flex-1 bg-background/70" onPress={onClose} />
 
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -165,15 +165,15 @@ export function ShipOrderSheet({
       >
         {/* Drag Handle */}
         <View className="items-center pt-3 pb-1">
-          <View className="w-10 h-1 rounded-full bg-[#444]" />
+          <View className="w-10 h-1 rounded-full bg-border" />
         </View>
 
         {/* Header */}
-        <View className="flex-row items-center justify-between px-5 pb-3 border-b border-[#333]">
-          <Text className="font-mont-bold text-lg text-white">شحن الطلب</Text>
+        <View className="flex-row items-center justify-between px-5 pb-3 border-b border-border">
+          <Text className="font-mont-bold text-lg text-text-primary">شحن الطلب</Text>
           <Pressable
             onPress={onClose}
-            className="w-8 h-8 rounded-full bg-black/50 items-center justify-center"
+            className="w-8 h-8 rounded-full bg-background/50 items-center justify-center"
           >
             <Text className="font-mont-bold text-base text-text-secondary">
               x
@@ -188,7 +188,7 @@ export function ShipOrderSheet({
           keyboardShouldPersistTaps="handled"
         >
           {/* Customer Info */}
-          <View className="mt-4 bg-card rounded-card p-4 border border-[#333]">
+          <View className="mt-4 bg-card rounded-card p-4 border border-border">
             <Text className="font-mont-semibold text-sm text-primary mb-2">
               معلومات العميل
             </Text>
@@ -211,14 +211,14 @@ export function ShipOrderSheet({
           </View>
 
           {/* Items Summary */}
-          <View className="mt-3 bg-card rounded-card p-4 border border-[#333]">
+          <View className="mt-3 bg-card rounded-card p-4 border border-border">
             <Text className="font-mont-semibold text-sm text-primary mb-2">
               المنتجات ({order.items.length})
             </Text>
             {order.items.map((item, idx) => (
               <View key={idx} className="flex-row justify-between mb-1.5">
                 <Text
-                  className="font-mont text-sm text-white flex-1 mr-2"
+                  className="font-mont text-sm text-text-primary flex-1 mr-2"
                   numberOfLines={1}
                 >
                   {item.productName}
@@ -232,11 +232,11 @@ export function ShipOrderSheet({
 
           {/* Provider Selection */}
           <View className="mt-4">
-            <Text className="font-mont-semibold text-sm text-white mb-2">
+            <Text className="font-mont-semibold text-sm text-text-primary mb-2">
               شركة التوصيل
             </Text>
             {deliverySettings.length === 0 ? (
-              <View className="bg-card rounded-card p-4 border border-[#333]">
+              <View className="bg-card rounded-card p-4 border border-border">
                 <Text className="font-mont text-sm text-text-secondary text-center">
                   لا توجد شركات توصيل مُعدّة
                 </Text>
@@ -252,13 +252,13 @@ export function ShipOrderSheet({
                       className={`flex-row items-center p-3.5 rounded-[14px] border ${
                         isSelected
                           ? "border-primary bg-primary/10"
-                          : "border-[#333] bg-card"
+                          : "border-border bg-card"
                       }`}
                     >
                       {/* Radio circle */}
                       <View
                         className={`w-5 h-5 rounded-full border-2 items-center justify-center mr-3 ${
-                          isSelected ? "border-primary" : "border-[#555]"
+                          isSelected ? "border-primary" : "border-border"
                         }`}
                       >
                         {isSelected && (
@@ -267,7 +267,7 @@ export function ShipOrderSheet({
                       </View>
                       <Text
                         className={`font-mont-semibold text-sm capitalize ${
-                          isSelected ? "text-primary" : "text-white"
+                          isSelected ? "text-primary" : "text-text-primary"
                         }`}
                       >
                         {setting.provider}
@@ -281,10 +281,10 @@ export function ShipOrderSheet({
 
           {/* Delivery Type Toggle */}
           <View className="mt-4">
-            <Text className="font-mont-semibold text-sm text-white mb-2">
+            <Text className="font-mont-semibold text-sm text-text-primary mb-2">
               نوع التوصيل
             </Text>
-            <View className="flex-row bg-card rounded-[14px] border border-[#333] overflow-hidden">
+            <View className="flex-row bg-card rounded-[14px] border border-border overflow-hidden">
               <DeliveryTypeButton
                 label="توصيل للمنزل"
                 active={deliveryType === "home"}
@@ -300,7 +300,7 @@ export function ShipOrderSheet({
 
           {/* Weight Input */}
           <View className="mt-4">
-            <Text className="font-mont-semibold text-sm text-white mb-2">
+            <Text className="font-mont-semibold text-sm text-text-primary mb-2">
               الوزن (كغ)
             </Text>
             <TextInput
@@ -312,19 +312,19 @@ export function ShipOrderSheet({
               }}
               keyboardType="decimal-pad"
               placeholder="1"
-              placeholderTextColor="#666"
-              className="bg-card rounded-[14px] border border-[#333] px-4 py-3 text-white font-mont text-sm"
+              placeholderTextColor="#5F6E63"
+              className="bg-card rounded-[14px] border border-border px-4 py-3 text-text-primary font-mont text-sm"
             />
           </View>
 
           {/* Fee Estimate */}
-          <View className="mt-4 bg-card rounded-card p-4 border border-[#333]">
-            <Text className="font-mont-semibold text-sm text-white mb-2">
+          <View className="mt-4 bg-card rounded-card p-4 border border-border">
+            <Text className="font-mont-semibold text-sm text-text-primary mb-2">
               تكلفة التوصيل
             </Text>
             {loadingFee ? (
               <View className="flex-row items-center gap-2">
-                <ActivityIndicator size="small" color="#FFD400" />
+                <ActivityIndicator size="small" color="#1A4B5F" />
                 <Text className="font-mont text-sm text-text-secondary">
                   جاري الحساب...
                 </Text>
@@ -362,7 +362,7 @@ export function ShipOrderSheet({
                   selectedProvider && !submitting && deliverySettings.length > 0
                     ? 1
                     : 0.5,
-                shadowColor: "#FFD400",
+                shadowColor: "#1A4B5F",
                 shadowOffset: { width: 0, height: 0 },
                 shadowOpacity: 0.3,
                 shadowRadius: 12,
@@ -370,9 +370,9 @@ export function ShipOrderSheet({
               }}
             >
               {submitting ? (
-                <ActivityIndicator size="small" color="#000" />
+                <ActivityIndicator size="small" color="#FFFFFF" />
               ) : (
-                <Text className="font-mont-bold text-base text-black">
+                <Text className="font-mont-bold text-base text-white">
                   تأكيد الشحن
                 </Text>
               )}
@@ -381,7 +381,7 @@ export function ShipOrderSheet({
             <Pressable
               onPress={onClose}
               disabled={submitting}
-              className="bg-card rounded-[14px] py-3.5 items-center border border-[#333]"
+              className="bg-card rounded-[14px] py-3.5 items-center border border-border"
             >
               <Text className="font-mont-semibold text-sm text-text-secondary">
                 إلغاء
@@ -410,7 +410,7 @@ function InfoRow({
       <Text className="font-mont text-xs text-text-secondary">{label}</Text>
       <Text
         className={`font-mont-medium text-sm ${
-          highlight ? "text-primary" : "text-white"
+          highlight ? "text-primary" : "text-text-primary"
         }`}
         numberOfLines={1}
         style={{ maxWidth: "65%" }}
@@ -440,7 +440,7 @@ function DeliveryTypeButton({
         active
           ? {
               borderBottomWidth: 2,
-              borderBottomColor: "#FFD400",
+              borderBottomColor: "#1A4B5F",
             }
           : undefined
       }

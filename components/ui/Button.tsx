@@ -18,8 +18,8 @@ const variantStyles = {
 };
 
 const variantTextStyles = {
-  primary: "text-black font-mont-bold",
-  secondary: "text-white font-mont-semibold",
+  primary: "text-white font-mont-bold",
+  secondary: "text-text-primary font-mont-semibold",
   outline: "text-primary font-mont-semibold",
   ghost: "text-primary font-mont-medium",
 };
@@ -53,7 +53,7 @@ export function Button({
     >
       {loading ? (
         <ActivityIndicator
-          color={variant === "primary" ? "#000000" : "#FFD400"}
+          color={variant === "primary" ? "#FFFFFF" : "#1A4B5F"}
           size="small"
         />
       ) : (

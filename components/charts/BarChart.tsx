@@ -8,7 +8,7 @@ interface BarChartProps {
 
 export function BarChart({
   values = [3, 5, 4, 6, 5],
-  color = "#FFD400",
+  color = "#1A4B5F",
   height = 40,
 }: BarChartProps) {
   const max = Math.max(...values, 1);

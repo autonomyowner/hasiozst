@@ -13,20 +13,20 @@ export function CartEmptyState() {
         style={{
           width: 69,
           height: 69,
-          backgroundColor: "rgba(169,169,169,0.2)",
+          backgroundColor: "rgba(26,75,95,0.14)",
         }}
       >
-        <Ionicons name="cart-outline" size={32} color="#898989" />
+        <Ionicons name="cart-outline" size={32} color="#5F6E63" />
       </View>
 
       {/* Title */}
-      <Text className="mt-5 font-mont-bold text-[22px] text-white">
+      <Text className="mt-5 font-mont-bold text-[22px] text-text-primary">
         Cart
       </Text>
 
       {/* Empty message with letter spacing */}
       <Text
-        className="mt-2 font-mont text-xs text-white text-center"
+        className="mt-2 font-mont text-xs text-text-primary text-center"
         style={{ letterSpacing: 3.48 }}
       >
         Your cart is empty
@@ -38,7 +38,7 @@ export function CartEmptyState() {
         style={{
           width: 38,
           height: 1,
-          backgroundColor: "rgba(169,169,169,0.4)",
+          backgroundColor: "rgba(26,75,95,0.14)",
         }}
       />
 
@@ -47,7 +47,7 @@ export function CartEmptyState() {
         onPress={() => router.replace("/(main)/home")}
         className="mt-5 flex-row items-center"
         style={{
-          backgroundColor: "rgba(169,169,169,0.18)",
+          backgroundColor: "rgba(26,75,95,0.14)",
           borderRadius: 35,
           paddingLeft: 20,
           paddingRight: 6,
@@ -55,7 +55,7 @@ export function CartEmptyState() {
           gap: 10,
         }}
       >
-        <Text className="font-mont-medium text-xs text-white">
+        <Text className="font-mont-medium text-xs text-text-primary">
           Start shopping now
         </Text>
         <View
@@ -63,10 +63,10 @@ export function CartEmptyState() {
           style={{
             width: 26,
             height: 26,
-            backgroundColor: "rgba(169,169,169,0.25)",
+            backgroundColor: "rgba(26,75,95,0.14)",
           }}
         >
-          <Ionicons name="arrow-forward" size={14} color="#fff" />
+          <Ionicons name="arrow-forward" size={14} color="#0D1A12" />
         </View>
       </Pressable>
     </View>

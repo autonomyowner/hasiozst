@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { View, Text, Pressable, FlatList, ActivityIndicator, Share } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { Badge } from "@/components/ui/Badge";
@@ -53,9 +53,9 @@ export default function MyShipmentsScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
-        <Text className="font-mont-bold text-xl text-white">شحناتي</Text>
+        <Text className="font-mont-bold text-xl text-text-primary">شحناتي</Text>
       </View>
 
       {/* Filter tabs */}
@@ -73,14 +73,14 @@ export default function MyShipmentsScreen() {
               style={{
                 backgroundColor:
                   activeFilter === item.key
-                    ? "#FFD400"
-                    : "rgba(169,169,169,0.15)",
+                    ? "#1A4B5F"
+                    : "rgba(26,75,95,0.10)",
               }}
             >
               <Text
                 className="font-mont-semibold text-xs"
                 style={{
-                  color: activeFilter === item.key ? "#000" : "#898989",
+                  color: activeFilter === item.key ? "#FFFFFF" : "#5F6E63",
                 }}
               >
                 {item.label}
@@ -93,12 +93,12 @@ export default function MyShipmentsScreen() {
       {/* Content */}
       {shipments === undefined ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       ) : filtered.length === 0 ? (
         <View className="flex-1 items-center justify-center px-6">
-          <Ionicons name="cube-outline" size={48} color="#898989" />
-          <Text className="font-mont-semibold text-base text-white mt-4">
+          <Ionicons name="cube-outline" size={48} color="#5F6E63" />
+          <Text className="font-mont-semibold text-base text-text-primary mt-4">
             لا توجد شحنات بعد
           </Text>
           <Text className="font-mont text-sm text-text-secondary mt-1 text-center">
@@ -122,7 +122,7 @@ export default function MyShipmentsScreen() {
             <Pressable
               onPress={() => router.push(`/order/${item.orderId}`)}
               className="mb-3 rounded-card bg-card p-4 active:opacity-80"
-              style={{ borderWidth: 1, borderColor: "#333" }}
+              style={{ borderWidth: 1, borderColor: "#E3DBCA" }}
             >
               {/* Tracking number + provider */}
               <View className="flex-row items-center justify-between mb-2">
@@ -132,9 +132,9 @@ export default function MyShipmentsScreen() {
                   }
                   className="flex-row items-center flex-1 mr-2"
                 >
-                  <Ionicons name="locate-outline" size={14} color="#fff" />
+                  <Ionicons name="locate-outline" size={14} color="#0D1A12" />
                   <Text
-                    className="font-mont-bold text-sm text-white ml-1.5"
+                    className="font-mont-bold text-sm text-text-primary ml-1.5"
                     selectable
                   >
                     {item.trackingNumber}
@@ -142,7 +142,7 @@ export default function MyShipmentsScreen() {
                 </Pressable>
                 <View
                   className="rounded-pill px-2.5 py-1"
-                  style={{ backgroundColor: "rgba(255,212,0,0.15)" }}
+                  style={{ backgroundColor: "rgba(26,75,95,0.15)" }}
                 >
                   <Text className="font-mont-semibold text-[10px] text-primary">
                     {providerLabel[item.provider] ?? item.provider}
@@ -168,21 +168,21 @@ export default function MyShipmentsScreen() {
                 {item.isStopDesk !== undefined && (
                   <View
                     className="rounded-pill px-2 py-0.5"
-                    style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+                    style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
                   >
                     <Text className="font-mont text-[10px] text-text-secondary">
                       {item.isStopDesk ? "Stop Desk" : "Home"}
                     </Text>
                   </View>
                 )}
-                {item.deliveryFee !== undefined && item.deliveryFee > 0 && (
+                SAR {item.deliveryFee !== undefined && item.deliveryFee > 0 && (
                   <Text className="font-mont text-[10px] text-text-secondary">
-                    {item.deliveryFee.toLocaleString("fr-DZ")} DA
+                    {item.deliveryFee.toLocaleString("en-US")}
                   </Text>
                 )}
                 <View className="flex-1" />
                 <Text className="font-mont text-[10px] text-text-secondary">
-                  {new Date(item.lastCheckedAt).toLocaleDateString("fr-DZ")}
+                  {new Date(item.lastCheckedAt).toLocaleDateString("en-GB")}
                 </Text>
               </View>
             </Pressable>

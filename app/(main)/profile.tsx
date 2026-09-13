@@ -2,7 +2,7 @@ import { ScrollView, View, Text, Pressable, Image, ActivityIndicator } from "rea
 import { useMemo } from "react";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
@@ -45,11 +45,11 @@ export default function ProfileScreen() {
         <View className="flex-1 items-center justify-center px-6">
           <View
             className="items-center justify-center rounded-full mb-4"
-            style={{ width: 80, height: 80, backgroundColor: "rgba(169,169,169,0.15)" }}
+            style={{ width: 80, height: 80, backgroundColor: "rgba(26,75,95,0.10)" }}
           >
-            <Ionicons name="person-outline" size={36} color="#898989" />
+            <Ionicons name="person-outline" size={36} color="#5F6E63" />
           </View>
-          <Text className="font-mont-bold text-xl text-white mb-2">
+          <Text className="font-mont-bold text-xl text-text-primary mb-2">
             Sign in to your account
           </Text>
           <Text className="font-mont text-sm text-text-secondary text-center mb-6">
@@ -84,7 +84,7 @@ export default function ProfileScreen() {
     <ScreenContainer>
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       ) : (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -93,11 +93,11 @@ export default function ProfileScreen() {
           <Pressable
             onPress={() => router.back()}
             className="h-[42px] w-[42px] items-center justify-center rounded-full"
-            style={{ borderWidth: 1, borderColor: "rgba(169,169,169,0.3)" }}
+            style={{ borderWidth: 1, borderColor: "rgba(26,75,95,0.14)" }}
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-semibold text-[15px] text-white">
+          <Text className="font-mont-semibold text-[15px] text-text-primary">
             Profile
           </Text>
           <View style={{ width: 42 }} />
@@ -121,9 +121,9 @@ export default function ProfileScreen() {
               style={{
                 width: 120,
                 height: 130,
-                backgroundColor: "rgba(169,169,169,0.12)",
+                backgroundColor: "rgba(26,75,95,0.10)",
                 borderWidth: 1,
-                borderColor: "rgba(169,169,169,0.2)",
+                borderColor: "rgba(26,75,95,0.14)",
                 borderStyle: "dashed",
               }}
             >
@@ -132,12 +132,12 @@ export default function ProfileScreen() {
                 style={{
                   width: 36,
                   height: 36,
-                  backgroundColor: "rgba(169,169,169,0.2)",
+                  backgroundColor: "rgba(26,75,95,0.14)",
                 }}
               >
-                <Ionicons name="add" size={20} color="#898989" />
+                <Ionicons name="add" size={20} color="#5F6E63" />
               </View>
-              <Text className="font-mont-semibold text-xs text-white">
+              <Text className="font-mont-semibold text-xs text-text-primary">
                 New video
               </Text>
               <Text
@@ -164,7 +164,7 @@ export default function ProfileScreen() {
         <DevRolePanel />
 
         {/* Divider */}
-        <View className="mx-4 mb-3 h-px" style={{ backgroundColor: "rgba(255,255,255,0.06)" }} />
+        <View className="mx-4 mb-3 h-px" style={{ backgroundColor: "rgba(26,75,95,0.06)" }} />
 
         {/* Menu items */}
         <View className="mx-4 mb-3" style={{ gap: 8 }}>
@@ -172,26 +172,41 @@ export default function ProfileScreen() {
           <Pressable
             onPress={() => router.push("/notifications")}
             className="flex-row items-center justify-between rounded-card px-4 py-4 active:opacity-80"
-            style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+            style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
           >
             <View className="flex-row items-center">
-              <Ionicons name="notifications-outline" size={18} color="#898989" />
-              <Text className="font-mont-semibold text-sm text-white ml-3">
+              <Ionicons name="notifications-outline" size={18} color="#5F6E63" />
+              <Text className="font-mont-semibold text-sm text-text-primary ml-3">
                 Notifications
               </Text>
             </View>
-            <Ionicons name="chevron-forward" size={16} color="#898989" />
+            <Ionicons name="chevron-forward" size={16} color="#5F6E63" />
+          </Pressable>
+
+          {/* Dashboard */}
+          <Pressable
+            onPress={() => router.push("/(main)/dashboard")}
+            className="flex-row items-center justify-between rounded-card px-4 py-4 active:opacity-80"
+            style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
+          >
+            <View className="flex-row items-center">
+              <Ionicons name="grid-outline" size={18} color="#5F6E63" />
+              <Text className="font-mont-semibold text-sm text-text-primary ml-3">
+                Dashboard
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={16} color="#5F6E63" />
           </Pressable>
 
           {/* My Orders */}
           <Pressable
             onPress={() => router.push("/my-orders")}
             className="flex-row items-center justify-between rounded-card px-4 py-4 active:opacity-80"
-            style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+            style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
           >
             <View className="flex-row items-center">
-              <Ionicons name="receipt-outline" size={18} color="#898989" />
-              <Text className="font-mont-semibold text-sm text-white ml-3">
+              <Ionicons name="receipt-outline" size={18} color="#5F6E63" />
+              <Text className="font-mont-semibold text-sm text-text-primary ml-3">
                 My Orders
               </Text>
             </View>
@@ -202,15 +217,15 @@ export default function ProfileScreen() {
                   style={{
                     width: 24,
                     height: 24,
-                    backgroundColor: "#FFD400",
+                    backgroundColor: "#1A4B5F",
                   }}
                 >
-                  <Text className="font-mont-bold text-xs text-black">
+                  <Text className="font-mont-bold text-xs text-white">
                     {buyerOrders.length}
                   </Text>
                 </View>
               )}
-              <Ionicons name="chevron-forward" size={16} color="#898989" />
+              <Ionicons name="chevron-forward" size={16} color="#5F6E63" />
             </View>
           </Pressable>
 
@@ -218,15 +233,15 @@ export default function ProfileScreen() {
           <Pressable
             onPress={() => router.push("/favorites")}
             className="flex-row items-center justify-between rounded-card px-4 py-4 active:opacity-80"
-            style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+            style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
           >
             <View className="flex-row items-center">
-              <Ionicons name="heart-outline" size={18} color="#898989" />
-              <Text className="font-mont-semibold text-sm text-white ml-3">
+              <Ionicons name="heart-outline" size={18} color="#5F6E63" />
+              <Text className="font-mont-semibold text-sm text-text-primary ml-3">
                 Favorites
               </Text>
             </View>
-            <Ionicons name="chevron-forward" size={16} color="#898989" />
+            <Ionicons name="chevron-forward" size={16} color="#5F6E63" />
           </Pressable>
 
           {/* Delivery Settings - sellers only */}
@@ -235,28 +250,28 @@ export default function ProfileScreen() {
               <Pressable
                 onPress={() => router.push("/delivery-settings")}
                 className="flex-row items-center justify-between rounded-card px-4 py-4 active:opacity-80"
-                style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+                style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
               >
                 <View className="flex-row items-center">
-                  <Ionicons name="car-outline" size={18} color="#898989" />
-                  <Text className="font-mont-semibold text-sm text-white ml-3">
+                  <Ionicons name="car-outline" size={18} color="#5F6E63" />
+                  <Text className="font-mont-semibold text-sm text-text-primary ml-3">
                     إعدادات التوصيل
                   </Text>
                 </View>
-                <Ionicons name="chevron-forward" size={16} color="#898989" />
+                <Ionicons name="chevron-forward" size={16} color="#5F6E63" />
               </Pressable>
               <Pressable
                 onPress={() => router.push("/my-shipments")}
                 className="flex-row items-center justify-between rounded-card px-4 py-4 active:opacity-80"
-                style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+                style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
               >
                 <View className="flex-row items-center">
-                  <Ionicons name="cube-outline" size={18} color="#898989" />
-                  <Text className="font-mont-semibold text-sm text-white ml-3">
+                  <Ionicons name="cube-outline" size={18} color="#5F6E63" />
+                  <Text className="font-mont-semibold text-sm text-text-primary ml-3">
                     شحناتي
                   </Text>
                 </View>
-                <Ionicons name="chevron-forward" size={16} color="#898989" />
+                <Ionicons name="chevron-forward" size={16} color="#5F6E63" />
               </Pressable>
             </>
           )}
@@ -283,7 +298,7 @@ export default function ProfileScreen() {
         >
           <Text
             className="font-mont-medium text-sm"
-            style={{ color: "#898989" }}
+            style={{ color: "#5F6E63" }}
           >
             Sign Out
           </Text>
@@ -310,8 +325,8 @@ function VideoReelCard({ image, views }: { image: string; views: string }) {
       />
       {/* Play + views at bottom */}
       <View className="absolute bottom-2 left-2 flex-row items-center">
-        <Ionicons name="play" size={12} color="#fff" />
-        <Text className="font-mont-medium text-[10px] text-white ml-1">
+        <Ionicons name="play" size={12} color="#0D1A12" />
+        <Text className="font-mont-medium text-[10px] text-text-primary ml-1">
           {views}
         </Text>
       </View>

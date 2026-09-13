@@ -19,7 +19,7 @@ export function SubscriptionPlanCard({
       <View className="rounded-card overflow-hidden" style={{ height: 280 }}>
         {isPro ? (
           <LinearGradient
-            colors={["#3D3500", "#1A1600", "#0C0C0C"]}
+            colors={["#F5E6A3", "#F2EAD9", "#FFFFFF"]}
             style={{ flex: 1, padding: 16 }}
           >
             <CardContent plan={plan} isPro />
@@ -51,7 +51,7 @@ function CardContent({
         </View>
       )}
       <Text
-        className={`font-mont-bold text-base ${isPro ? "text-white" : "text-white"}`}
+        className={`font-mont-bold text-base ${isPro ? "text-text-primary" : "text-text-primary"}`}
       >
         {plan.name}
       </Text>
@@ -64,9 +64,9 @@ function CardContent({
       {/* Price */}
       <View className="flex-row items-baseline mt-3">
         <Text
-          className={`font-mont-bold text-2xl ${isPro ? "text-white" : "text-white"}`}
+          className={`font-mont-bold text-2xl ${isPro ? "text-text-primary" : "text-text-primary"}`}
         >
-          {plan.price === 0 ? "0" : plan.price.toLocaleString("fr-DZ")}
+          {plan.price === 0 ? "0" : plan.price.toLocaleString("en-US")}
         </Text>
         <Text className="font-mont-medium text-sm text-text-secondary ml-1.5">
           {plan.period}
@@ -75,7 +75,7 @@ function CardContent({
 
       {plan.popular && (
         <Text className="font-mont-semibold text-xs text-success mt-1">
-          Save 6 000 DA
+          Save SAR 6,000
         </Text>
       )}
 
@@ -86,7 +86,7 @@ function CardContent({
             <Ionicons
               name="checkmark"
               size={14}
-              color={isPro ? "#FFD400" : "#898989"}
+              color={isPro ? "#1A4B5F" : "#5F6E63"}
             />
             <Text className="font-mont text-xs text-text-secondary ml-1.5">
               {feature}

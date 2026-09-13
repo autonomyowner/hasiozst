@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ScrollView, View, Text, Pressable } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { TextInput } from "@/components/ui/TextInput";
@@ -79,9 +79,9 @@ export default function CreateOfferScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mb-2"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Create Offer
           </Text>
         </View>
@@ -134,7 +134,7 @@ export default function CreateOfferScreen() {
           </View>
 
           {/* Type Selector */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Offer Type
           </Text>
           <View className="flex-row rounded-card bg-surface p-1 mb-3">
@@ -158,7 +158,7 @@ export default function CreateOfferScreen() {
           </View>
 
           {/* Category Selector */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Category
           </Text>
           <ScrollView
@@ -175,12 +175,12 @@ export default function CreateOfferScreen() {
                   onPress={() => setSelectedCategory(isActive ? "" : cat.slug)}
                   className={`rounded-pill px-4 py-2 ${isActive ? "" : ""}`}
                   style={{
-                    backgroundColor: isActive ? "#FFD400" : "rgba(169,169,169,0.12)",
+                    backgroundColor: isActive ? "#1A4B5F" : "rgba(26,75,95,0.10)",
                   }}
                 >
                   <Text
                     className={`font-mont-semibold text-[13px] ${
-                      isActive ? "text-black" : "text-text-secondary"
+                      isActive ? "text-white" : "text-text-secondary"
                     }`}
                   >
                     {cat.label}
@@ -191,7 +191,7 @@ export default function CreateOfferScreen() {
           </ScrollView>
 
           <TextInput
-            label="Minimum Price (DA)"
+            label="Minimum Price (SAR)"
             value={minPrice}
             onChangeText={setMinPrice}
             placeholder="350000"

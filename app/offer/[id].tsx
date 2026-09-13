@@ -15,6 +15,7 @@ import { useUserRole } from "@/hooks/useUserRole";
 import { useConversations } from "@/hooks/useConversations";
 import { formatPrice, formatDate } from "@/lib/formatters";
 import type { BidStatus } from "@/lib/types";
+import { PHONE_REGEX } from "@/lib/validation";
 
 const bidStatusVariant: Record<BidStatus, "primary" | "success" | "error" | "neutral"> = {
   pending: "primary",
@@ -50,7 +51,7 @@ export default function OfferDetailScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -76,7 +77,7 @@ export default function OfferDetailScreen() {
     const errors: Record<string, string> = {};
     if (!bidAmount.trim() || isNaN(Number(bidAmount)))
       errors.amount = "Valid amount required";
-    if (bidPhone.trim() && !/^0[5-7][0-9]{8}$/.test(bidPhone.trim()))
+    if (bidPhone.trim() && !PHONE_REGEX.test(bidPhone.trim()))
       errors.phone = "Invalid phone (e.g. 05XXXXXXXX)";
     setBidErrors(errors);
     if (Object.keys(errors).length > 0) return;
@@ -112,7 +113,7 @@ export default function OfferDetailScreen() {
               onPress={() => router.back()}
               className="h-10 w-10 items-center justify-center rounded-full bg-card"
             >
-              <Ionicons name="arrow-back" size={20} color="#fff" />
+              <Ionicons name="arrow-back" size={20} color="#0D1A12" />
             </Pressable>
             <ContentMenu
               targetType="offer"
@@ -121,7 +122,7 @@ export default function OfferDetailScreen() {
               ownerName={offer.creatorName}
             />
           </View>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             {offer.title}
           </Text>
           <Text className="font-mont text-sm text-text-secondary mt-0.5">
@@ -157,7 +158,7 @@ export default function OfferDetailScreen() {
               <Text className="font-mont text-xs text-text-secondary">
                 Product
               </Text>
-              <Text className="font-mont-medium text-sm text-white">
+              <Text className="font-mont-medium text-sm text-text-primary">
                 {offer.productName}
               </Text>
             </View>
@@ -165,7 +166,7 @@ export default function OfferDetailScreen() {
               <Text className="font-mont text-xs text-text-secondary">
                 Quantity
               </Text>
-              <Text className="font-mont-medium text-sm text-white">
+              <Text className="font-mont-medium text-sm text-text-primary">
                 {offer.quantity} {offer.unit}
               </Text>
             </View>
@@ -184,7 +185,7 @@ export default function OfferDetailScreen() {
               <Text className="font-mont text-xs text-text-secondary">
                 Deadline
               </Text>
-              <Text className="font-mont-medium text-sm text-white">
+              <Text className="font-mont-medium text-sm text-text-primary">
                 {formatDate(offer.deadline)}
               </Text>
             </View>
@@ -193,7 +194,7 @@ export default function OfferDetailScreen() {
 
         {/* Bids */}
         <View className="mx-4 mt-4">
-          <Text className="font-mont-bold text-lg text-white mb-3">
+          <Text className="font-mont-bold text-lg text-text-primary mb-3">
             Bids ({bids.length})
           </Text>
 
@@ -208,7 +209,7 @@ export default function OfferDetailScreen() {
               <View key={bid._id} className="rounded-card bg-card p-4 mb-2">
                 <View className="flex-row items-start justify-between">
                   <View className="flex-1 mr-3">
-                    <Text className="font-mont-semibold text-sm text-white">
+                    <Text className="font-mont-semibold text-sm text-text-primary">
                       {bid.bidderName}
                     </Text>
                     <Text className="font-mont-bold text-base text-primary mt-0.5">
@@ -262,11 +263,11 @@ export default function OfferDetailScreen() {
         {/* Bid form */}
         {canBid && (
           <View className="mx-4 mt-4">
-            <Text className="font-mont-bold text-lg text-white mb-3">
+            <Text className="font-mont-bold text-lg text-text-primary mb-3">
               Place a Bid
             </Text>
             <TextInput
-              label="Amount (DA)"
+              label="Amount (SAR)"
               value={bidAmount}
               onChangeText={setBidAmount}
               placeholder="Enter your bid amount"
@@ -308,9 +309,9 @@ export default function OfferDetailScreen() {
                 if (convId) router.push(`/conversation/${convId}`);
               }}
               className="flex-row items-center justify-center rounded-card py-3.5"
-              style={{ backgroundColor: "#0C0C0C", borderWidth: 1, borderColor: "#333", gap: 8 }}
+              style={{ backgroundColor: "#FFFFFF", borderWidth: 1, borderColor: "#E3DBCA", gap: 8 }}
             >
-              <Ionicons name="chatbubble-outline" size={18} color="#FFD400" />
+              <Ionicons name="chatbubble-outline" size={18} color="#1A4B5F" />
               <Text className="font-mont-semibold text-sm text-primary">
                 Message Creator
               </Text>

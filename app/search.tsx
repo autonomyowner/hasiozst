@@ -1,7 +1,7 @@
 import { View, Text, FlatList, Pressable, useWindowDimensions } from "react-native";
 import { useState, useMemo } from "react";
 import { useRouter } from "expo-router";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SearchBar } from "@/components/ui/SearchBar";
@@ -9,6 +9,8 @@ import { ProductCard } from "@/components/cards/ProductCard";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useCart } from "@/hooks/useCart";
 import type { Id } from "../convex/_generated/dataModel";
+import { useDemo } from "@/lib/useDemo";
+import { demoStays } from "@/lib/demoContent";
 
 export default function SearchScreen() {
   const [query, setQuery] = useState("");
@@ -18,10 +20,23 @@ export default function SearchScreen() {
   const { toggleFavorite, isFavorite } = useFavorites();
   const { addItem } = useCart();
 
-  const results = useQuery(
+  const liveResults = useQuery(
     api.products.search,
     query.trim() ? { query: query.trim() } : "skip"
-  ) ?? [];
+  );
+  // Without a backend, search the bundled demo set locally so the screen works.
+  const demoResults = useMemo(() => {
+    const term = query.trim().toLowerCase();
+    if (!term) return [];
+    return demoStays.filter(
+      (p) =>
+        p.name.toLowerCase().includes(term) ||
+        p.category.toLowerCase().includes(term) ||
+        (p.supplierLocation ?? "").toLowerCase().includes(term) ||
+        (p.tagline ?? "").toLowerCase().includes(term)
+    );
+  }, [query]);
+  const results = useDemo(liveResults, demoResults) ?? [];
 
   const promotedProducts = useQuery(api.promotions.listActiveWithProducts) ?? [];
 
@@ -77,7 +92,7 @@ export default function SearchScreen() {
         </View>
       ) : mergedResults.length === 0 ? (
         <View className="flex-1 items-center justify-center px-8">
-          <Text className="font-mont-medium text-base text-white">
+          <Text className="font-mont-medium text-base text-text-primary">
             No results found
           </Text>
           <Text className="mt-1 font-mont text-sm text-text-secondary text-center">

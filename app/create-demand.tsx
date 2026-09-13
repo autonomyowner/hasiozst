@@ -2,12 +2,13 @@ import { useState } from "react";
 import { ScrollView, View, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { TextInput } from "@/components/ui/TextInput";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/providers/ToastProvider";
+import { PHONE_REGEX } from "@/lib/validation";
 
 export default function CreateDemandScreen() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function CreateDemandScreen() {
     if (!budget.trim() || isNaN(Number(budget)) || Number(budget) <= 0)
       newErrors.budget = "Valid budget is required";
     if (!deadline.trim()) newErrors.deadline = "Deadline is required";
-    if (phone.trim() && !/^0[5-7][0-9]{8}$/.test(phone.trim()))
+    if (phone.trim() && !PHONE_REGEX.test(phone.trim()))
       newErrors.phone = "Invalid phone (e.g. 05XXXXXXXX)";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -67,9 +68,9 @@ export default function CreateDemandScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mb-2"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Post a Demand
           </Text>
         </View>
@@ -95,7 +96,7 @@ export default function CreateDemandScreen() {
           />
 
           <TextInput
-            label="Budget (DA)"
+            label="Budget (SAR)"
             value={budget}
             onChangeText={setBudget}
             placeholder="250000"
@@ -121,7 +122,7 @@ export default function CreateDemandScreen() {
           />
 
           {/* Category selector (optional) */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Category (optional)
           </Text>
           <ScrollView
@@ -139,7 +140,7 @@ export default function CreateDemandScreen() {
               >
                 <Text
                   className={`font-mont-medium text-sm ${
-                    category === cat.slug ? "text-black" : "text-text-secondary"
+                    category === cat.slug ? "text-white" : "text-text-secondary"
                   }`}
                 >
                   {cat.label}

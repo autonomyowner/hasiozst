@@ -6,7 +6,7 @@ import {
   Pressable,
   ActivityIndicator,
 } from "react-native";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { api } from "../convex/_generated/api";
@@ -60,10 +60,10 @@ export default function MyWholesaleProductsScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
         <View className="flex-1">
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             My Wholesale Products
           </Text>
           <Text className="font-mont-medium text-sm text-text-secondary">
@@ -74,13 +74,13 @@ export default function MyWholesaleProductsScreen() {
           onPress={() => router.push("/create-product")}
           className="h-10 w-10 items-center justify-center rounded-full bg-card"
         >
-          <Ionicons name="add" size={22} color="#FFD400" />
+          <Ionicons name="add" size={22} color="#1A4B5F" />
         </Pressable>
       </View>
 
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       ) : items.length === 0 ? (
         <View className="flex-1 items-center justify-center px-8">
@@ -115,7 +115,7 @@ export default function MyWholesaleProductsScreen() {
                 />
                 <View className="flex-1 p-3 justify-center">
                   <Text
-                    className="font-mont-medium text-sm text-white"
+                    className="font-mont-medium text-sm text-text-primary"
                     numberOfLines={1}
                   >
                     {item.name}
@@ -138,7 +138,7 @@ export default function MyWholesaleProductsScreen() {
                   }
                   className="h-8 w-8 rounded-full bg-surface items-center justify-center"
                 >
-                  <Ionicons name="pencil-outline" size={14} color="#898989" />
+                  <Ionicons name="pencil-outline" size={14} color="#5F6E63" />
                 </Pressable>
                 <Pressable
                   onPress={() =>
@@ -146,7 +146,7 @@ export default function MyWholesaleProductsScreen() {
                   }
                   className="h-8 w-8 rounded-full bg-surface items-center justify-center"
                 >
-                  <Ionicons name="trash-outline" size={14} color="#898989" />
+                  <Ionicons name="trash-outline" size={14} color="#5F6E63" />
                 </Pressable>
               </View>
             </View>

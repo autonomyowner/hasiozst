@@ -10,7 +10,7 @@ import {
   Platform,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -50,7 +50,7 @@ export default function ServiceDetailScreen() {
   if (service === undefined) {
     return (
       <SafeAreaView edges={["top"]} className="flex-1 bg-background items-center justify-center">
-        <ActivityIndicator size="large" color="#FFD400" />
+        <ActivityIndicator size="large" color="#1A4B5F" />
       </SafeAreaView>
     );
   }
@@ -58,7 +58,7 @@ export default function ServiceDetailScreen() {
   if (service === null) {
     return (
       <SafeAreaView edges={["top"]} className="flex-1 bg-background items-center justify-center px-4">
-        <Text className="font-mont-bold text-lg text-white mb-2">
+        <Text className="font-mont-bold text-lg text-text-primary mb-2">
           Service not found
         </Text>
         <Button title="Go Back" onPress={() => router.back()} variant="outline" />
@@ -120,7 +120,7 @@ export default function ServiceDetailScreen() {
 
         {/* Service info */}
         <View className="px-4 pt-4">
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             {service.title}
           </Text>
           <Text className="font-mont text-xs text-text-secondary mt-1">
@@ -136,13 +136,13 @@ export default function ServiceDetailScreen() {
               />
             ) : (
               <View
-                style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: "#1a1a1a", alignItems: "center", justifyContent: "center" }}
+                style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: "#F2EAD9", alignItems: "center", justifyContent: "center" }}
               >
-                <Ionicons name="person" size={20} color="#555" />
+                <Ionicons name="person" size={20} color="#5F6E63" />
               </View>
             )}
             <View className="flex-1">
-              <Text className="font-mont-semibold text-sm text-white">
+              <Text className="font-mont-semibold text-sm text-text-primary">
                 {service.freelancerName}
               </Text>
               <Text className="font-mont text-xs text-text-secondary">
@@ -168,7 +168,7 @@ export default function ServiceDetailScreen() {
           </View>
 
           {/* Description */}
-          <Text className="font-mont-bold text-base text-white mb-2">
+          <Text className="font-mont-bold text-base text-text-primary mb-2">
             Description
           </Text>
           <Text className="font-mont text-sm text-text-secondary leading-5 mb-6">
@@ -191,9 +191,9 @@ export default function ServiceDetailScreen() {
               if (convId) router.push(`/conversation/${convId}`);
             }}
             className="flex-row items-center justify-center rounded-card py-3.5"
-            style={{ backgroundColor: "#0C0C0C", borderWidth: 1, borderColor: "#333", gap: 8 }}
+            style={{ backgroundColor: "#FFFFFF", borderWidth: 1, borderColor: "#E3DBCA", gap: 8 }}
           >
-            <Ionicons name="chatbubble-outline" size={18} color="#FFD400" />
+            <Ionicons name="chatbubble-outline" size={18} color="#1A4B5F" />
             <Text className="font-mont-semibold text-sm text-primary">
               Message Freelancer
             </Text>
@@ -230,11 +230,11 @@ export default function ServiceDetailScreen() {
               showsVerticalScrollIndicator={false}
             >
               <View className="flex-row items-center justify-between mb-4">
-                <Text className="font-mont-bold text-lg text-white">
+                <Text className="font-mont-bold text-lg text-text-primary">
                   Request Service
                 </Text>
                 <Pressable onPress={() => setShowRequestModal(false)}>
-                  <Ionicons name="close" size={24} color="#898989" />
+                  <Ionicons name="close" size={24} color="#5F6E63" />
                 </Pressable>
               </View>
 
@@ -250,7 +250,7 @@ export default function ServiceDetailScreen() {
               />
 
               <TextInput
-                label="Budget (DA)"
+                label="Budget (SAR)"
                 value={budget}
                 onChangeText={setBudget}
                 placeholder="15000"

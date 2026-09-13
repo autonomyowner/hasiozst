@@ -17,23 +17,23 @@ const statusConfig: Record<
 > = {
   new: {
     label: "New",
-    color: "#22C55E",
-    bg: "rgba(34,197,94,0.15)",
+    color: "#1F9D55",
+    bg: "rgba(31,157,85,0.15)",
   },
   in_progress: {
     label: "In Progress",
-    color: "#2866ED",
-    bg: "rgba(40,102,237,0.18)",
+    color: "#8B5CF6",
+    bg: "rgba(139,92,246,0.18)",
   },
   completed: {
     label: "Completed",
-    color: "#EF4444",
-    bg: "rgba(239,68,68,0.18)",
+    color: "#DC2626",
+    bg: "rgba(220,38,38,0.18)",
   },
   declined: {
     label: "Declined",
-    color: "#898989",
-    bg: "rgba(137,137,137,0.18)",
+    color: "#5F6E63",
+    bg: "rgba(95,110,99,0.18)",
   },
 };
 
@@ -61,7 +61,7 @@ function InfoChip({ icon, iconColor, iconBg, label, value }: InfoChipProps) {
         <Text className="font-mont text-[9px] text-text-secondary">
           {label}
         </Text>
-        <Text className="font-mont-semibold text-xs text-white">{value}</Text>
+        <Text className="font-mont-semibold text-xs text-text-primary">{value}</Text>
       </View>
     </View>
   );
@@ -81,7 +81,7 @@ export function ClientRequestCard({
   return (
     <View
       className="mx-4 mb-3 rounded-card bg-card p-4"
-      style={{ borderWidth: 1, borderColor: "#1F1F1F" }}
+      style={{ borderWidth: 1, borderColor: "#E3DBCA" }}
     >
       {/* Header: avatar + name + status */}
       <View className="flex-row items-center justify-between mb-2">
@@ -94,7 +94,7 @@ export function ClientRequestCard({
             <Text className="font-mont text-[10px] text-text-secondary">
               Client Name
             </Text>
-            <Text className="font-mont-semibold text-sm text-white">
+            <Text className="font-mont-semibold text-sm text-text-primary">
               {request.clientName}
             </Text>
           </View>
@@ -113,12 +113,12 @@ export function ClientRequestCard({
       </View>
 
       {/* Title + yellow underline */}
-      <Text className="font-mont-bold text-base text-white mt-1">
+      <Text className="font-mont-bold text-base text-text-primary mt-1">
         {request.title}
       </Text>
       <View
         className="mt-1.5 mb-2"
-        style={{ height: 2, width: 32, backgroundColor: "#FFD400", borderRadius: 1 }}
+        style={{ height: 2, width: 32, backgroundColor: "#1A4B5F", borderRadius: 1 }}
       />
 
       {/* Description */}
@@ -135,15 +135,15 @@ export function ClientRequestCard({
           <>
             <InfoChip
               icon="cash-outline"
-              iconColor="#22C55E"
-              iconBg="rgba(34,197,94,0.18)"
+              iconColor="#1F9D55"
+              iconBg="rgba(31,157,85,0.18)"
               label="Final Amount"
               value={formatPrice(request.finalAmount ?? request.budget)}
             />
             <InfoChip
               icon="checkmark-circle-outline"
-              iconColor="#FFD400"
-              iconBg="rgba(255,212,0,0.18)"
+              iconColor="#1A4B5F"
+              iconBg="rgba(26,75,95,0.18)"
               label="Completed On"
               value={
                 request.completedAt ? formatDate(request.completedAt) : "N/A"
@@ -154,15 +154,15 @@ export function ClientRequestCard({
           <>
             <InfoChip
               icon="cash-outline"
-              iconColor="#22C55E"
-              iconBg="rgba(34,197,94,0.18)"
+              iconColor="#1F9D55"
+              iconBg="rgba(31,157,85,0.18)"
               label="Budget"
               value={formatPrice(request.budget)}
             />
             <InfoChip
               icon="time-outline"
-              iconColor="#FFD400"
-              iconBg="rgba(255,212,0,0.18)"
+              iconColor="#1A4B5F"
+              iconBg="rgba(26,75,95,0.18)"
               label="Delivery Time Requested"
               value={request.deliveryTime}
             />
@@ -172,8 +172,8 @@ export function ClientRequestCard({
               >
                 <InfoChip
                   icon="call-outline"
-                  iconColor="#22C55E"
-                  iconBg="rgba(34,197,94,0.18)"
+                  iconColor="#1F9D55"
+                  iconBg="rgba(31,157,85,0.18)"
                   label="Phone"
                   value={request.phone}
                 />
@@ -190,9 +190,9 @@ export function ClientRequestCard({
             <Pressable
               onPress={onAccept}
               className="flex-1 items-center justify-center rounded-pill py-3"
-              style={{ backgroundColor: "#22C55E" }}
+              style={{ backgroundColor: "#1F9D55" }}
             >
-              <Text className="font-mont-semibold text-xs text-white">
+              <Text className="font-mont-semibold text-xs text-text-primary">
                 Accept
               </Text>
             </Pressable>
@@ -203,12 +203,12 @@ export function ClientRequestCard({
               className="flex-1 items-center justify-center rounded-pill py-3"
               style={{
                 borderWidth: 1.5,
-                borderColor: "#EF4444",
+                borderColor: "#DC2626",
               }}
             >
               <Text
                 className="font-mont-semibold text-xs"
-                style={{ color: "#EF4444" }}
+                style={{ color: "#DC2626" }}
               >
                 Decline
               </Text>
@@ -224,8 +224,8 @@ export function ClientRequestCard({
           className="flex-row items-center justify-center rounded-pill bg-primary mt-4 py-3"
           style={{ gap: 6 }}
         >
-          <Ionicons name="checkmark-circle-outline" size={16} color="#000" />
-          <Text className="font-mont-semibold text-xs text-black">
+          <Ionicons name="checkmark-circle-outline" size={16} color="#FFFFFF" />
+          <Text className="font-mont-semibold text-xs text-white">
             Mark as Completed
           </Text>
         </Pressable>

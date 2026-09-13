@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ScrollView, View, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { QuickActions } from "@/components/sections/QuickActions";
@@ -20,8 +20,8 @@ interface SellerDashboardContentProps {
 }
 
 const statCardStyle = {
-  backgroundColor: "rgba(169,169,169,0.18)",
-  borderColor: "#666",
+  backgroundColor: "rgba(26,75,95,0.14)",
+  borderColor: "#5F6E63",
   borderWidth: 1,
   borderRadius: 16,
 };
@@ -88,7 +88,7 @@ export function SellerDashboardContent({
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header with yellow underline */}
         <View className="px-4 pt-2 pb-1">
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             My Dashboard
           </Text>
           <View className="mt-1 h-0.5 w-10 bg-primary rounded-full" />
@@ -117,7 +117,7 @@ export function SellerDashboardContent({
               <Text className="font-mont text-xs text-text-secondary">
                 Total Orders
               </Text>
-              <Text className="mt-1 font-mont-bold text-xl text-white">
+              <Text className="mt-1 font-mont-bold text-xl text-text-primary">
                 {stats.totalOrders}
               </Text>
             </View>
@@ -125,7 +125,7 @@ export function SellerDashboardContent({
               <Text className="font-mont text-xs text-text-secondary">
                 Active Products
               </Text>
-              <Text className="mt-1 font-mont-bold text-xl text-white">
+              <Text className="mt-1 font-mont-bold text-xl text-text-primary">
                 {stats.activeProducts}
               </Text>
             </View>
@@ -145,15 +145,15 @@ export function SellerDashboardContent({
           onPress={() => router.push("/wholesale-browse")}
           className="mx-4 mt-4 rounded-card overflow-hidden active:opacity-80"
           style={{
-            backgroundColor: "rgba(255,212,0,0.08)",
+            backgroundColor: "rgba(26,75,95,0.08)",
             borderWidth: 1,
-            borderColor: "rgba(255,212,0,0.2)",
+            borderColor: "rgba(26,75,95,0.2)",
             borderRadius: 16,
           }}
         >
           <View className="p-4 flex-row items-center justify-between">
             <View className="flex-1 mr-3">
-              <Text className="font-mont-bold text-base text-white">
+              <Text className="font-mont-bold text-base text-text-primary">
                 Browse Wholesale
               </Text>
               <Text className="font-mont text-xs text-text-secondary mt-1">
@@ -162,9 +162,9 @@ export function SellerDashboardContent({
             </View>
             <View
               className="h-10 w-10 rounded-full items-center justify-center"
-              style={{ backgroundColor: "rgba(255,212,0,0.15)" }}
+              style={{ backgroundColor: "rgba(26,75,95,0.15)" }}
             >
-              <Ionicons name="storefront-outline" size={20} color="#FFD400" />
+              <Ionicons name="storefront-outline" size={20} color="#1A4B5F" />
             </View>
           </View>
         </Pressable>
@@ -175,7 +175,7 @@ export function SellerDashboardContent({
         {/* Recent Orders with Ship Button */}
         {sellerOrders.length > 0 && (
           <View className="mx-4 mt-4">
-            <Text className="font-mont-bold text-lg text-white mb-3">
+            <Text className="font-mont-bold text-lg text-text-primary mb-3">
               My Orders
             </Text>
             {sellerOrders.map((order) => (
@@ -186,7 +186,7 @@ export function SellerDashboardContent({
               >
                 <View className="flex-row items-center justify-between">
                   <View className="flex-1">
-                    <Text className="font-mont-medium text-sm text-white">
+                    <Text className="font-mont-medium text-sm text-text-primary">
                       {order._id.slice(-6).toUpperCase()}
                     </Text>
                     <Text className="font-mont text-xs text-text-secondary mt-0.5">
@@ -212,7 +212,7 @@ export function SellerDashboardContent({
                     }}
                     className="mt-2 flex-row items-center justify-center rounded-[12px] bg-primary/15 border border-primary/30 py-2.5"
                   >
-                    <Ionicons name="car-outline" size={16} color="#FFD400" />
+                    <Ionicons name="car-outline" size={16} color="#1A4B5F" />
                     <Text className="font-mont-semibold text-sm text-primary ml-2">
                       شحن مع شركة توصيل
                     </Text>
@@ -220,9 +220,9 @@ export function SellerDashboardContent({
                 )}
                 {/* Show tracking number if shipped */}
                 {order.trackingNumber && (
-                  <View className="mt-2 flex-row items-center bg-[#22C55E]/10 rounded-[10px] px-3 py-1.5">
-                    <Ionicons name="locate-outline" size={14} color="#22C55E" />
-                    <Text className="font-mont-medium text-xs text-[#22C55E] ml-1.5">
+                  <View className="mt-2 flex-row items-center bg-success/10 rounded-[10px] px-3 py-1.5">
+                    <Ionicons name="locate-outline" size={14} color="#1F9D55" />
+                    <Text className="font-mont-medium text-xs text-success ml-1.5">
                       {order.trackingNumber}
                     </Text>
                   </View>

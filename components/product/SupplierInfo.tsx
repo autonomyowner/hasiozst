@@ -37,12 +37,12 @@ export function SupplierInfo({
             </Text>
           </View>
         )}
-        <Text className="font-mont-semibold text-sm text-white ml-2">
+        <Text className="font-mont-semibold text-sm text-text-primary ml-2">
           {name}
         </Text>
         {verified && (
           <View className="ml-1.5">
-            <Ionicons name="checkmark-circle" size={16} color="#22C55E" />
+            <Ionicons name="checkmark-circle" size={16} color="#1F9D55" />
           </View>
         )}
       </View>
@@ -50,7 +50,7 @@ export function SupplierInfo({
       {/* Location */}
       {location && (
         <View className="flex-row items-center mt-1 ml-11">
-          <Ionicons name="location-outline" size={12} color="#898989" />
+          <Ionicons name="location-outline" size={12} color="#5F6E63" />
           <Text className="font-mont text-xs text-text-secondary ml-1">
             {location}
           </Text>
@@ -62,8 +62,8 @@ export function SupplierInfo({
         <View className="flex-row items-center mt-2" style={{ gap: 10 }}>
           {rating && (
             <View className="flex-row items-center rounded-pill bg-card px-2.5 py-1">
-              <Ionicons name="star" size={12} color="#FFD400" />
-              <Text className="font-mont-semibold text-xs text-white ml-1">
+              <Ionicons name="star" size={12} color="#1A4B5F" />
+              <Text className="font-mont-semibold text-xs text-text-primary ml-1">
                 {rating}
               </Text>
               {reviewCount && (

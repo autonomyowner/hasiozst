@@ -29,7 +29,7 @@ export const ProductCard = memo(function ProductCard({
       className={fullWidth ? "" : "mr-3"}
       style={fullWidth ? { width: "100%" } : { width: 141 }}
     >
-      <View className="overflow-hidden rounded-card bg-card" style={{ height: 196 }}>
+      <View className="overflow-hidden rounded-card bg-[#141A16]" style={{ height: 196 }}>
         {/* Full-bleed image with inner rounded rect (matches Figma) */}
         <View
           className="relative flex-1 overflow-hidden"
@@ -111,7 +111,7 @@ export const ProductCard = memo(function ProductCard({
             {product.isPromoted && (
               <View
                 className="mt-1 self-start rounded-full px-1.5"
-                style={{ backgroundColor: "#FFD400", paddingVertical: 1 }}
+                style={{ backgroundColor: "#F5E6A3", paddingVertical: 1 }}
               >
                 <Text className="font-mont-semibold text-[5px] text-black">
                   Sponsored
@@ -125,17 +125,17 @@ export const ProductCard = memo(function ProductCard({
                 className="font-mont-semibold text-[7px] text-[#828282] mt-1"
                 style={{ textDecorationLine: "line-through" }}
               >
-                {product.oldPrice.toLocaleString("fr-DZ")} DA
+                SAR {product.oldPrice.toLocaleString("en-US")}
               </Text>
             )}
 
-            {/* Current price with DA */}
+            {/* Current price with currency */}
             <View className="flex-row items-baseline mt-0.5">
-              <Text className="font-mont-semibold text-[13px] text-primary">
-                {product.price.toLocaleString("fr-DZ")}
+              <Text className="font-mont-semibold text-[13px] text-gold">
+                {product.price.toLocaleString("en-US")}
               </Text>
-              <Text className="font-mont-semibold text-[7px] text-primary ml-0.5">
-                DA
+              <Text className="font-mont-semibold text-[7px] text-gold ml-0.5">
+                SAR
               </Text>
             </View>
           </View>

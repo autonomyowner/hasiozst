@@ -59,10 +59,10 @@ export default function SubscriptionPaymentScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mb-4"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
 
-        <Text className="font-mont-bold text-xl text-white">
+        <Text className="font-mont-bold text-xl text-text-primary">
           Complete Your Payment
         </Text>
         <Text className="font-mont text-sm text-text-secondary mt-0.5 mb-5">
@@ -71,33 +71,33 @@ export default function SubscriptionPaymentScreen() {
 
         {/* Plan summary card */}
         <LinearGradient
-          colors={["#3D3500", "#1A1600", "#0C0C0C"]}
+          colors={["#F5E6A3", "#F2EAD9", "#FFFFFF"]}
           className="rounded-card p-4 mb-4"
         >
           <View className="flex-row justify-between">
             <View>
-              <Text className="font-mont-bold text-base text-white">
+              <Text className="font-mont-bold text-base text-text-primary">
                 {plan.name}
               </Text>
               <Text className="font-mont text-xs text-text-secondary">
                 Grow faster & get more visibility
               </Text>
               <View className="flex-row items-baseline mt-2">
-                <Text className="font-mont-bold text-2xl text-white">
-                  {plan.price.toLocaleString("fr-DZ")}
+                <Text className="font-mont-bold text-2xl text-text-primary">
+                  {plan.price.toLocaleString("en-US")}
                 </Text>
                 <Text className="font-mont text-sm text-text-secondary ml-1">
                   {plan.period}
                 </Text>
               </View>
               <Text className="font-mont-semibold text-xs text-success mt-1">
-                Save 6 000 DA
+                Save SAR 6,000
               </Text>
             </View>
             <View style={{ gap: 4 }}>
               {plan.features.map((f, i) => (
                 <View key={i} className="flex-row items-center">
-                  <Ionicons name="checkmark" size={12} color="#FFD400" />
+                  <Ionicons name="checkmark" size={12} color="#1A4B5F" />
                   <Text className="font-mont text-[10px] text-text-secondary ml-1">
                     {f}
                   </Text>
@@ -112,7 +112,7 @@ export default function SubscriptionPaymentScreen() {
         </Text>
 
         {/* Payment Method */}
-        <Text className="font-mont-bold text-base text-white mb-3">
+        <Text className="font-mont-bold text-base text-text-primary mb-3">
           Select Payment Method
         </Text>
         <RadioButton
@@ -161,7 +161,7 @@ export default function SubscriptionPaymentScreen() {
         )}
 
         {/* Billing Details */}
-        <Text className="font-mont-bold text-base text-white mt-5 mb-3">
+        <Text className="font-mont-bold text-base text-text-primary mt-5 mb-3">
           Billing Details
         </Text>
         <TextInput
@@ -190,7 +190,7 @@ export default function SubscriptionPaymentScreen() {
         <View className="rounded-card bg-card p-4 mt-4" style={{ gap: 8 }}>
           <View className="flex-row justify-between">
             <Text className="font-mont text-sm text-text-secondary">Plan</Text>
-            <Text className="font-mont-semibold text-sm text-white">
+            <Text className="font-mont-semibold text-sm text-text-primary">
               {plan.name}
             </Text>
           </View>
@@ -198,19 +198,19 @@ export default function SubscriptionPaymentScreen() {
             <Text className="font-mont text-sm text-text-secondary">
               Subtotal
             </Text>
-            <Text className="font-mont-semibold text-sm text-white">
+            <Text className="font-mont-semibold text-sm text-text-primary">
               {formatPrice(plan.price)}
             </Text>
           </View>
           <View className="flex-row justify-between">
             <Text className="font-mont text-sm text-text-secondary">Tax</Text>
-            <Text className="font-mont-semibold text-sm text-white">
+            <Text className="font-mont-semibold text-sm text-text-primary">
               {formatPrice(0)}
             </Text>
           </View>
           <View className="h-px bg-surface" />
           <View className="flex-row justify-between">
-            <Text className="font-mont-bold text-sm text-white">Total</Text>
+            <Text className="font-mont-bold text-sm text-text-primary">Total</Text>
             <Text className="font-mont-bold text-sm text-primary">
               {formatPrice(plan.price)}
             </Text>
@@ -228,7 +228,7 @@ export default function SubscriptionPaymentScreen() {
         </View>
 
         <View className="flex-row items-center justify-center mt-4 mb-8">
-          <Ionicons name="lock-closed" size={14} color="#898989" />
+          <Ionicons name="lock-closed" size={14} color="#5F6E63" />
           <Text className="font-mont text-xs text-text-secondary ml-1.5">
             Your payment is encrypted and secure.
           </Text>

@@ -17,9 +17,9 @@ export const CartItem = memo(function CartItem({ item, onUpdateQuantity, onRemov
       className="mx-4 mb-4 overflow-hidden"
       style={{
         borderRadius: 20,
-        backgroundColor: "rgba(17,17,17,0.8)",
+        backgroundColor: "rgba(242,234,217,0.8)",
         borderWidth: 1,
-        borderColor: "rgba(51,51,51,0.6)",
+        borderColor: "rgba(227,219,202,0.6)",
       }}
     >
       <View className="flex-row items-center" style={{ padding: 10 }}>
@@ -45,14 +45,14 @@ export const CartItem = memo(function CartItem({ item, onUpdateQuantity, onRemov
                         width: 20,
                         height: 20,
                         borderRadius: 10,
-                        backgroundColor: "#EF4444",
+                        backgroundColor: "#DC2626",
                       }}
                     >
-                      <Text className="font-mont-bold text-white" style={{ fontSize: 9 }}>
+                      <Text className="font-mont-bold text-text-primary" style={{ fontSize: 9 }}>
                         {item.product.sellerName.charAt(0).toUpperCase()}
                       </Text>
                     </View>
-                    <Text className="font-mont-medium text-white" style={{ fontSize: 11 }} numberOfLines={1}>
+                    <Text className="font-mont-medium text-text-primary" style={{ fontSize: 11 }} numberOfLines={1}>
                       {item.product.sellerName}
                     </Text>
                     <View
@@ -60,13 +60,13 @@ export const CartItem = memo(function CartItem({ item, onUpdateQuantity, onRemov
                         width: 6,
                         height: 6,
                         borderRadius: 3,
-                        backgroundColor: "#22C55E",
+                        backgroundColor: "#1F9D55",
                       }}
                     />
                   </View>
                   {item.product.sellerCity ? (
                     <View className="flex-row items-center mt-0.5" style={{ gap: 2, marginLeft: 25 }}>
-                      <Ionicons name="location-outline" size={10} color="#898989" />
+                      <Ionicons name="location-outline" size={10} color="#5F6E63" />
                       <Text className="font-mont text-text-secondary" style={{ fontSize: 9 }}>
                         {item.product.sellerCity}
                       </Text>
@@ -83,16 +83,16 @@ export const CartItem = memo(function CartItem({ item, onUpdateQuantity, onRemov
                   width: 24,
                   height: 24,
                   borderRadius: 12,
-                  backgroundColor: "rgba(239,68,68,0.15)",
+                  backgroundColor: "rgba(220,38,38,0.15)",
                 }}
               >
-                <Ionicons name="close" size={15} color="#EF4444" />
+                <Ionicons name="close" size={15} color="#DC2626" />
               </Pressable>
             </View>
 
             {/* Product name — bigger, prominent */}
             <Text
-              className="font-mont-semibold text-white"
+              className="font-mont-semibold text-text-primary"
               style={{ fontSize: 15, lineHeight: 20, marginTop: 8 }}
               numberOfLines={2}
             >
@@ -115,7 +115,7 @@ export const CartItem = memo(function CartItem({ item, onUpdateQuantity, onRemov
             <View
               className="flex-row items-center"
               style={{
-                backgroundColor: "rgba(51,51,51,0.5)",
+                backgroundColor: "rgba(227,219,202,0.5)",
                 borderRadius: 10,
                 paddingHorizontal: 4,
                 paddingVertical: 3,
@@ -128,12 +128,12 @@ export const CartItem = memo(function CartItem({ item, onUpdateQuantity, onRemov
                   width: 28,
                   height: 28,
                   borderRadius: 8,
-                  backgroundColor: "#333",
+                  backgroundColor: "#E3DBCA",
                 }}
               >
-                <Text className="font-mont-bold text-white" style={{ fontSize: 15 }}>-</Text>
+                <Text className="font-mont-bold text-text-primary" style={{ fontSize: 15 }}>-</Text>
               </Pressable>
-              <Text className="font-mont-bold text-white" style={{ fontSize: 15, minWidth: 28, textAlign: "center" }}>
+              <Text className="font-mont-bold text-text-primary" style={{ fontSize: 15, minWidth: 28, textAlign: "center" }}>
                 {item.quantity}
               </Text>
               <Pressable
@@ -143,10 +143,10 @@ export const CartItem = memo(function CartItem({ item, onUpdateQuantity, onRemov
                   width: 28,
                   height: 28,
                   borderRadius: 8,
-                  backgroundColor: "#FFD400",
+                  backgroundColor: "#1A4B5F",
                 }}
               >
-                <Text className="font-mont-bold text-black" style={{ fontSize: 15 }}>+</Text>
+                <Text className="font-mont-bold text-white" style={{ fontSize: 15 }}>+</Text>
               </Pressable>
             </View>
           </View>

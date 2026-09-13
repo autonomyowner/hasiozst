@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Pressable, Text } from "react-native";
 import { useRouter } from "expo-router";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { authClient } from "@/lib/auth-client";
 import { useToast } from "@/providers/ToastProvider";
@@ -44,7 +44,7 @@ export function DeleteAccountButton() {
       >
         <Text
           className="font-mont-medium text-sm"
-          style={{ color: "#EF4444" }}
+          style={{ color: "#DC2626" }}
         >
           Delete Account
         </Text>

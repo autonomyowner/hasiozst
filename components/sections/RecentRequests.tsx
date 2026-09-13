@@ -22,7 +22,7 @@ const statusLabel = {
 export function RecentRequests({ requests }: RecentRequestsProps) {
   return (
     <View className="mx-4 mt-4 mb-6">
-      <Text className="font-mont-bold text-lg text-white mb-3">
+      <Text className="font-mont-bold text-lg text-text-primary mb-3">
         Recent Requests
       </Text>
       {requests.map((req) => (
@@ -31,7 +31,7 @@ export function RecentRequests({ requests }: RecentRequestsProps) {
           className="mb-2 rounded-card bg-card p-3 flex-row items-center justify-between"
         >
           <View className="flex-1 mr-3">
-            <Text className="font-mont-medium text-sm text-white" numberOfLines={1}>
+            <Text className="font-mont-medium text-sm text-text-primary" numberOfLines={1}>
               {req.title}
             </Text>
             <Text className="font-mont text-xs text-text-secondary mt-0.5">

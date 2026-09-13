@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { Share } from "react-native";
 import type { Id } from "../convex/_generated/dataModel";

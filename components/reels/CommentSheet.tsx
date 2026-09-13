@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { TextInput } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { usePaginatedQuery, type PaginatedQueryReference } from "convex/react";
+import { usePaginatedQuery, type PaginatedQueryReference } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { useReelActions } from "@/hooks/useReels";
 import { useToast } from "@/providers/ToastProvider";
@@ -108,7 +108,7 @@ export function CommentSheet({
         >
           {/* Header */}
           <View className="flex-row items-center justify-between px-4 py-3 border-b border-card">
-            <Text className="font-mont-bold text-base text-white">
+            <Text className="font-mont-bold text-base text-text-primary">
               Comments ({commentCount})
             </Text>
             <Pressable onPress={onClose} hitSlop={12}>
@@ -133,7 +133,7 @@ export function CommentSheet({
             ListEmptyComponent={
               isLoading ? (
                 <ActivityIndicator
-                  color="#FFD400"
+                  color="#1A4B5F"
                   style={{ paddingVertical: 32 }}
                 />
               ) : (
@@ -145,7 +145,7 @@ export function CommentSheet({
             ListFooterComponent={
               isLoadingMore ? (
                 <ActivityIndicator
-                  color="#FFD400"
+                  color="#1A4B5F"
                   style={{ paddingVertical: 16 }}
                 />
               ) : null
@@ -154,7 +154,7 @@ export function CommentSheet({
               <View className="mb-4 flex-row items-start">
                 <View style={{ flex: 1 }}>
                   <View className="flex-row items-center mb-1">
-                    <Text className="font-mont-semibold text-sm text-white">
+                    <Text className="font-mont-semibold text-sm text-text-primary">
                       {item.userName}
                     </Text>
                     <Text className="font-mont text-xs text-text-secondary ml-2">
@@ -190,7 +190,7 @@ export function CommentSheet({
               onChangeText={setText}
               placeholder="Add a comment..."
               placeholderTextColor="#666"
-              className="flex-1 bg-card rounded-card px-4 py-2.5 text-white font-mont text-sm mr-3"
+              className="flex-1 bg-card rounded-card px-4 py-2.5 text-text-primary font-mont text-sm mr-3"
               multiline
               maxLength={500}
               returnKeyType="send"
@@ -203,7 +203,7 @@ export function CommentSheet({
               className="bg-primary rounded-card px-4 py-2.5"
               style={{ opacity: text.trim() && !posting ? 1 : 0.5 }}
             >
-              <Text className="font-mont-bold text-sm text-black">Post</Text>
+              <Text className="font-mont-bold text-sm text-white">Post</Text>
             </Pressable>
           </View>
         </View>

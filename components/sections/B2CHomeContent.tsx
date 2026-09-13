@@ -10,7 +10,7 @@ import {
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useQuery, useMutation, usePaginatedQuery } from "convex/react";
+import { useQuery, useMutation, usePaginatedQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { BannerCarousel } from "@/components/sections/BannerCarousel";
@@ -23,6 +23,8 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useCart } from "@/hooks/useCart";
 import { useTracking } from "@/hooks/useTracking";
+import { useDemo } from "@/lib/useDemo";
+import { demoStays, demoCategories, demoBanners } from "@/lib/demoContent";
 import { useConversations } from "@/hooks/useConversations";
 import { EmptyState } from "@/components/ui/EmptyState";
 import type { Product } from "@/lib/types";
@@ -37,21 +39,21 @@ function HeaderIcons({ router }: { router: ReturnType<typeof useRouter> }) {
       <Pressable
         onPress={() => router.push("/search")}
         className="h-10 w-10 items-center justify-center rounded-full active:opacity-70"
-        style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+        style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
       >
-        <Ionicons name="search-outline" size={18} color="#FFD400" />
+        <Ionicons name="search-outline" size={18} color="#1A4B5F" />
       </Pressable>
       <Pressable
         onPress={() => router.push("/conversations")}
         className="h-10 w-10 items-center justify-center rounded-full active:opacity-70"
-        style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+        style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
       >
-        <Ionicons name="chatbubble-ellipses-outline" size={18} color="#FFD400" />
+        <Ionicons name="chatbubble-ellipses-outline" size={18} color="#1A4B5F" />
         {unreadTotal > 0 && (
           <View
             className="absolute -top-1 -right-1 h-[16px] min-w-[16px] items-center justify-center rounded-full bg-error px-0.5"
           >
-            <Text className="font-mont-bold text-[8px] text-white">
+            <Text className="font-mont-bold text-[8px] text-text-primary">
               {unreadTotal > 99 ? "99+" : unreadTotal}
             </Text>
           </View>
@@ -60,9 +62,9 @@ function HeaderIcons({ router }: { router: ReturnType<typeof useRouter> }) {
       <Pressable
         onPress={() => router.push("/cart")}
         className="h-10 w-10 items-center justify-center rounded-full active:opacity-70"
-        style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+        style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
       >
-        <Ionicons name="cart-outline" size={18} color="#FFD400" />
+        <Ionicons name="cart-outline" size={18} color="#1A4B5F" />
       </Pressable>
     </View>
   );
@@ -84,12 +86,18 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
   }, []);
   const { isLoading } = useCurrentUser();
   const supplierSpecials = useSupplierSpecials();
-  const forYouProducts = useQuery(api.recommendations.forYouProducts, { limit: 10 });
-  const trendingProducts = useQuery(api.recommendations.trendingProducts, { limit: 10 });
-  const allProducts = useQuery(api.products.list, { limit: 50 }) ?? [];
+  const forYouProducts = useDemo(
+    useQuery(api.recommendations.forYouProducts, { limit: 10 }),
+    demoStays
+  );
+  const trendingProducts = useDemo(
+    useQuery(api.recommendations.trendingProducts, { limit: 10 }),
+    [...demoStays].reverse()
+  );
+  const allProducts = useDemo(useQuery(api.products.list, { limit: 50 }), demoStays) ?? [];
   const promotedProducts = useQuery(api.promotions.listActiveWithProducts) ?? [];
-  const categories = useQuery(api.categories.list) ?? [];
-  const banners = useQuery(api.banners.list) ?? [];
+  const categories = useDemo(useQuery(api.categories.list), demoCategories) ?? [];
+  const banners = useDemo(useQuery(api.banners.list), demoBanners) ?? [];
   const router = useRouter();
   const { trackEvent } = useTracking();
   const { toggleFavorite, isFavorite } = useFavorites();
@@ -97,14 +105,18 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
 
   // Infinite scroll products (always load all — category filtering is client-side)
   const {
-    results: paginatedProducts,
-    status: paginationStatus,
+    results: livePaginatedProducts,
+    status: livePaginationStatus,
     loadMore,
   } = usePaginatedQuery(
     api.products.listPaginated,
     {},
     { initialNumItems: 10 }
   );
+  // Without a backend the paginated query never yields; show the demo set as a
+  // single complete page so the list renders instead of spinning forever.
+  const paginatedProducts = useDemo(livePaginatedProducts, demoStays) ?? [];
+  const paginationStatus = useDemo(livePaginationStatus, "Exhausted" as const) ?? "LoadingFirstPage";
 
   // Products filtered by selected category
   const categoryProducts = useMemo(() => {
@@ -191,7 +203,7 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -205,8 +217,8 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            tintColor="#FFD400"
-            colors={["#FFD400"]}
+            tintColor="#1A4B5F"
+            colors={["#1A4B5F"]}
           />
         }
         onScroll={({ nativeEvent }) => {
@@ -242,22 +254,22 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
 
         {/* Categories label + Freelance button */}
         <View className="flex-row items-center justify-between px-4 pt-3">
-          <Text className="font-mont-semibold text-[15px] text-white">
+          <Text className="font-mont-semibold text-[15px] text-text-primary">
             Categories
           </Text>
           <Pressable
             onPress={() => router.push("/services")}
             className="rounded-pill px-4 py-1.5 active:opacity-70"
             style={{
-              backgroundColor: "#FFD400",
-              shadowColor: "#FFD400",
+              backgroundColor: "#1A4B5F",
+              shadowColor: "#1A4B5F",
               shadowOffset: { width: 0, height: 0 },
               shadowOpacity: 0.3,
               shadowRadius: 8,
               elevation: 4,
             }}
           >
-            <Text className="font-mont-semibold text-[13px] text-black">
+            <Text className="font-mont-semibold text-[13px] text-white">
               Freelance
             </Text>
           </Pressable>
@@ -280,7 +292,7 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         {!hasContent && (
           <EmptyState
             icon="storefront-outline"
-            title="No products yet"
+            title="Nothing here yet"
             message="Check back soon for new arrivals!"
           />
         )}
@@ -288,8 +300,8 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         {/* Promotions */}
         {promotionProducts.length > 0 && (
           <ProductRow
-            title="Promotions"
-            subtitle="Special deals & offers"
+            title="Deals"
+            subtitle="Limited-time rates"
             products={promotionProducts}
             actionLabel="View All"
             onAction={() => router.push("/all-products")}
@@ -300,7 +312,7 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         {forYouProducts && forYouProducts.length > 0 && (
           <ProductRow
             title="Recommended for You"
-            subtitle="Based on your interests"
+            subtitle="Places we think you will like"
             products={forYouProducts}
             actionLabel="View All"
             onAction={() => router.push("/all-products")}
@@ -310,8 +322,8 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         {/* New Arrivals */}
         {newArrivals.length > 0 && (
           <ProductRow
-            title="New Arrivals"
-            subtitle="Just added to the store"
+            title="Newly Listed"
+            subtitle="Just added by hosts"
             products={newArrivals}
             actionLabel="View All"
             onAction={() => router.push("/all-products")}
@@ -322,7 +334,7 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         {trendingProducts && trendingProducts.length > 0 && (
           <ProductRow
             title="Trending Now"
-            subtitle="Most popular products"
+            subtitle="Most booked this week"
             products={trendingProducts}
             actionLabel="View All"
             onAction={() => router.push("/all-products")}
@@ -332,8 +344,8 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         {/* Supplier Specials */}
         {supplierSpecials.length > 0 && (
           <ProductRow
-            title="Supplier Specials"
-            subtitle="Top rated from our suppliers"
+            title="Host Specials"
+            subtitle="Top rated hosts"
             products={supplierSpecials}
             actionLabel="View All"
             onAction={() => router.push("/all-products")}
@@ -343,8 +355,8 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         {/* Best Sellers */}
         {bestSellers.length > 0 && (
           <ProductRow
-            title="Best Sellers"
-            subtitle="Highest rated products"
+            title="Best Rated"
+            subtitle="Highest rated stays & experiences"
             products={bestSellers}
             actionLabel="View All"
             onAction={() => router.push("/all-products")}
@@ -352,7 +364,7 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         )}
 
         {/* Vertical infinite scroll grid */}
-        <SectionHeader title="All Products" subtitle="Browse everything" />
+        <SectionHeader title="All Stays & Experiences" subtitle="Browse everything" />
         <View
           style={{
             paddingHorizontal: GRID_PADDING,
@@ -385,7 +397,7 @@ export function B2CHomeContent({ headerRight }: B2CHomeContentProps) {
         {/* Loading spinner while fetching next page */}
         {paginationStatus === "LoadingMore" && (
           <View className="items-center py-4">
-            <ActivityIndicator size="small" color="#FFD400" />
+            <ActivityIndicator size="small" color="#1A4B5F" />
           </View>
         )}
 

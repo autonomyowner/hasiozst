@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ScrollView, View, Text, Pressable, ActivityIndicator, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { TextInput } from "@/components/ui/TextInput";
@@ -97,7 +97,7 @@ export default function EditProfileScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -111,9 +111,9 @@ export default function EditProfileScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">Edit Profile</Text>
+          <Text className="font-mont-bold text-xl text-text-primary">Edit Profile</Text>
         </View>
 
         <View className="px-4">
@@ -125,9 +125,9 @@ export default function EditProfileScreen() {
             <View
               className="w-20 h-20 rounded-full items-center justify-center mb-2 overflow-hidden"
               style={{
-                backgroundColor: avatarUri || user.avatar ? "transparent" : "#FFD400",
+                backgroundColor: avatarUri || user.avatar ? "transparent" : "#1A4B5F",
                 borderWidth: 2,
-                borderColor: "#333",
+                borderColor: "#E3DBCA",
               }}
             >
               {avatarUri ? (
@@ -141,7 +141,7 @@ export default function EditProfileScreen() {
                   style={{ width: 80, height: 80, borderRadius: 40 }}
                 />
               ) : (
-                <Text style={{ fontSize: 32, fontWeight: "700", color: "#000" }}>
+                <Text style={{ fontSize: 32, fontWeight: "700", color: "#FFFFFF" }}>
                   {user.name?.charAt(0)?.toUpperCase() || "?"}
                 </Text>
               )}
@@ -161,7 +161,7 @@ export default function EditProfileScreen() {
 
           <View className="mt-4 mb-8">
             {uploading ? (
-              <ActivityIndicator color="#FFD400" />
+              <ActivityIndicator color="#1A4B5F" />
             ) : (
               <Button title="Save Changes" onPress={handleSubmit} fullWidth />
             )}

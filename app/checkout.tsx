@@ -12,7 +12,7 @@ import { useCart } from "@/hooks/useCart";
 import { useOrderActions } from "@/hooks/useOrderActions";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { formatPrice } from "@/lib/formatters";
-import { getWilayaOptions, getCommuneOptions } from "@/lib/algeriaData";
+import { getRegionOptions, getCityOptions } from "@/lib/saudiData";
 import { isValidPhone, formatPhoneHint } from "@/lib/validation";
 
 const deliveryMethods = [
@@ -37,14 +37,14 @@ export default function CheckoutScreen() {
   const [fullName, setFullName] = useState(user?.name ?? "");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [wilaya, setWilaya] = useState("");
-  const [commune, setCommune] = useState("");
+  const [region, setRegion] = useState("");
+  const [city, setCity] = useState("");
   const [deliveryMethod, setDeliveryMethod] = useState("home");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
 
-  const wilayaOptions = getWilayaOptions();
-  const communeOptions = getCommuneOptions(wilaya);
+  const regionOptions = getRegionOptions();
+  const cityOptions = getCityOptions(region);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -69,7 +69,7 @@ export default function CheckoutScreen() {
     } else if (trimmedAddress.length > 500) {
       newErrors.address = "Address is too long (max 500)";
     }
-    if (!wilaya) newErrors.wilaya = "Wilaya is required";
+    if (!region) newErrors.region = "Region is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -79,15 +79,18 @@ export default function CheckoutScreen() {
     setLoading(true);
 
     try {
-      const selectedWilaya = wilayaOptions.find((w) => w.value === wilaya);
+      const selectedRegion = regionOptions.find((r) => r.value === region);
+      // `wilayaCode`/`wilayaName`/`commune` are inherited schema field names that
+      // now carry Saudi region/city values. Rename them when the booking schema
+      // is migrated server-side.
       const orderId = await placeOrder({
         fullName: fullName.trim(),
         phone: phone.trim(),
         address: address.trim(),
-        city: commune || selectedWilaya?.label || wilaya,
-        wilayaCode: wilaya,
-        wilayaName: selectedWilaya?.label,
-        commune: commune || undefined,
+        city: city || selectedRegion?.label || region,
+        wilayaCode: region,
+        wilayaName: selectedRegion?.label,
+        commune: city || undefined,
       });
       router.replace(`/order-confirmation?orderId=${orderId}`);
     } catch {
@@ -100,7 +103,7 @@ export default function CheckoutScreen() {
   if (items.length === 0) {
     return (
       <SafeAreaView edges={["top"]} className="flex-1 bg-background items-center justify-center px-4">
-        <Text className="font-mont-bold text-lg text-white mb-2">
+        <Text className="font-mont-bold text-lg text-text-primary mb-2">
           Your cart is empty
         </Text>
         <Button
@@ -127,13 +130,13 @@ export default function CheckoutScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
         </View>
 
         {/* Title */}
         <View className="px-4 mb-4">
-          <Text className="font-mont-bold text-2xl text-white">
+          <Text className="font-mont-bold text-2xl text-text-primary">
             <Text className="font-mont-bold">DELIVERY </Text>
             <Text className="font-mont text-lg text-text-secondary">
               Checkout
@@ -148,7 +151,7 @@ export default function CheckoutScreen() {
             style={{ width: 44, height: 44, borderRadius: 10 }}
           />
           <View className="flex-1 ml-3">
-            <Text className="font-mont-semibold text-sm text-white" numberOfLines={1}>
+            <Text className="font-mont-semibold text-sm text-text-primary" numberOfLines={1}>
               {firstItem.product.name}
             </Text>
             <Text className="font-mont text-xs text-text-secondary">
@@ -162,7 +165,7 @@ export default function CheckoutScreen() {
 
         {/* Contact Information */}
         <View className="px-4">
-          <Text className="font-mont-bold text-base text-white mb-3">
+          <Text className="font-mont-bold text-base text-text-primary mb-3">
             Contact Information
           </Text>
 
@@ -192,29 +195,29 @@ export default function CheckoutScreen() {
           />
 
           <Dropdown
-            label="Wilaya *"
-            options={wilayaOptions}
-            value={wilaya}
+            label="Region *"
+            options={regionOptions}
+            value={region}
             onSelect={(val) => {
-              setWilaya(val);
-              setCommune("");
+              setRegion(val);
+              setCity("");
             }}
-            placeholder="Select your wilaya"
-            error={errors.wilaya}
+            placeholder="Select your region"
+            error={errors.region}
           />
 
           <Dropdown
-            label="Commune"
-            options={communeOptions}
-            value={commune}
-            onSelect={setCommune}
-            placeholder="Enter your commune"
+            label="City"
+            options={cityOptions}
+            value={city}
+            onSelect={setCity}
+            placeholder="Select your city"
           />
         </View>
 
         {/* Delivery Method */}
         <View className="px-4 mt-4">
-          <Text className="font-mont-bold text-base text-white mb-3">
+          <Text className="font-mont-bold text-base text-text-primary mb-3">
             Choose Delivery Method
           </Text>
           <RadioButton
@@ -227,7 +230,7 @@ export default function CheckoutScreen() {
         {/* Bottom buttons */}
         <View className="flex-row items-center px-4 mt-6" style={{ gap: 12 }}>
           <Pressable onPress={() => router.back()} className="py-3">
-            <Text className="font-mont-medium text-sm text-white">
+            <Text className="font-mont-medium text-sm text-text-primary">
               Annuler
             </Text>
           </Pressable>

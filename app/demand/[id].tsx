@@ -13,6 +13,7 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useUserRole } from "@/hooks/useUserRole";
 import { formatPrice, formatDate } from "@/lib/formatters";
 import type { DemandResponseStatus } from "@/lib/types";
+import { PHONE_REGEX } from "@/lib/validation";
 
 const responseStatusVariant: Record<DemandResponseStatus, "primary" | "success" | "error"> = {
   pending: "primary",
@@ -58,7 +59,7 @@ export default function DemandDetailScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -83,7 +84,7 @@ export default function DemandDetailScreen() {
 
   const handleSubmitResponse = async () => {
     const newErrors: Record<string, string> = {};
-    if (!phone.trim() || !/^0[5-7][0-9]{8}$/.test(phone.trim()))
+    if (!phone.trim() || !PHONE_REGEX.test(phone.trim()))
       newErrors.phone = "Valid phone required (e.g. 05XXXXXXXX)";
     if (!priceQuote.trim() || isNaN(Number(priceQuote)) || Number(priceQuote) <= 0)
       newErrors.priceQuote = "Valid price quote required";
@@ -120,9 +121,9 @@ export default function DemandDetailScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mb-2"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             {demand.title}
           </Text>
           <Text className="font-mont text-sm text-text-secondary mt-0.5">
@@ -160,7 +161,7 @@ export default function DemandDetailScreen() {
             </View>
             <View className="items-end">
               <Text className="font-mont text-xs text-text-secondary">Deadline</Text>
-              <Text className="font-mont-medium text-sm text-white">
+              <Text className="font-mont-medium text-sm text-text-primary">
                 {formatDate(demand.deadline)}
               </Text>
             </View>
@@ -169,7 +170,7 @@ export default function DemandDetailScreen() {
           {demand.category ? (
             <View className="mt-1">
               <Text className="font-mont text-xs text-text-secondary">Category</Text>
-              <Text className="font-mont-medium text-sm text-white">
+              <Text className="font-mont-medium text-sm text-text-primary">
                 {demand.category}
               </Text>
             </View>
@@ -178,7 +179,7 @@ export default function DemandDetailScreen() {
 
         {/* Responses list */}
         <View className="mx-4 mt-4">
-          <Text className="font-mont-bold text-lg text-white mb-3">
+          <Text className="font-mont-bold text-lg text-text-primary mb-3">
             Responses ({responses.length})
           </Text>
 
@@ -193,7 +194,7 @@ export default function DemandDetailScreen() {
               <View key={resp._id} className="rounded-card bg-card p-4 mb-2">
                 <View className="flex-row items-start justify-between">
                   <View className="flex-1 mr-3">
-                    <Text className="font-mont-semibold text-sm text-white">
+                    <Text className="font-mont-semibold text-sm text-text-primary">
                       {resp.responderName}
                     </Text>
                     <Text className="font-mont-bold text-base text-primary mt-0.5">
@@ -217,10 +218,10 @@ export default function DemandDetailScreen() {
                   <Pressable
                     onPress={() => Linking.openURL(`tel:${resp.phone}`)}
                     className="flex-row items-center self-start mt-2 px-3 py-1.5 rounded-pill"
-                    style={{ backgroundColor: "rgba(34,197,94,0.15)" }}
+                    style={{ backgroundColor: "rgba(31,157,85,0.15)" }}
                   >
-                    <Ionicons name="call" size={14} color="#22C55E" />
-                    <Text className="font-mont-semibold text-sm ml-1.5" style={{ color: "#22C55E" }}>
+                    <Ionicons name="call" size={14} color="#1F9D55" />
+                    <Text className="font-mont-semibold text-sm ml-1.5" style={{ color: "#1F9D55" }}>
                       {resp.phone}
                     </Text>
                   </Pressable>
@@ -260,7 +261,7 @@ export default function DemandDetailScreen() {
         {/* Response form */}
         {canRespond && (
           <View className="mx-4 mt-4">
-            <Text className="font-mont-bold text-lg text-white mb-3">
+            <Text className="font-mont-bold text-lg text-text-primary mb-3">
               Submit Response
             </Text>
             <TextInput
@@ -272,7 +273,7 @@ export default function DemandDetailScreen() {
               error={errors.phone}
             />
             <TextInput
-              label="Price Quote (DA)"
+              label="Price Quote (SAR)"
               value={priceQuote}
               onChangeText={setPriceQuote}
               placeholder="Enter your price quote"

@@ -41,9 +41,9 @@ export function SupplierProductCard({
           backgroundColor: "#0F0F0F",
           borderRadius: 20,
           borderWidth: 1,
-          borderColor: "rgba(255,212,0,0.18)",
+          borderColor: "rgba(245,230,163,0.18)",
           padding: 10,
-          shadowColor: "#FFD400",
+          shadowColor: "#F5E6A3",
           shadowOffset: { width: 0, height: 0 },
           shadowOpacity: 0.08,
           shadowRadius: 12,
@@ -65,11 +65,11 @@ export function SupplierProductCard({
             {categoryLabel && (
               <View
                 className="absolute left-2 top-2 rounded-md px-2 py-0.5"
-                style={{ backgroundColor: "rgba(255,212,0,0.22)" }}
+                style={{ backgroundColor: "rgba(245,230,163,0.22)" }}
               >
                 <Text
                   className="font-mont-semibold text-[10px]"
-                  style={{ color: "#FFD400" }}
+                  style={{ color: "#F5E6A3" }}
                 >
                   {categoryLabel}
                 </Text>
@@ -103,7 +103,7 @@ export function SupplierProductCard({
               className="absolute bottom-2 right-2 flex-row items-center rounded-md px-1.5 py-0.5"
               style={{ backgroundColor: "rgba(0,0,0,0.7)" }}
             >
-              <Ionicons name="star" size={9} color="#FFD400" />
+              <Ionicons name="star" size={9} color="#F5E6A3" />
               <Text className="ml-0.5 font-mont-semibold text-[10px] text-white">
                 {product.rating}
               </Text>
@@ -151,9 +151,9 @@ export function SupplierProductCard({
 
               {/* Location row */}
               <View className="mt-0.5 flex-row items-center">
-                <Ionicons name="location-outline" size={10} color="#898989" />
+                <Ionicons name="location-outline" size={10} color="#B9C9A8" />
                 <Text
-                  className="ml-0.5 font-mont text-[10px] text-text-secondary"
+                  className="ml-0.5 font-mont text-[10px] text-[#B9C9A8]"
                   numberOfLines={1}
                 >
                   {product.supplierLocation}
@@ -169,15 +169,15 @@ export function SupplierProductCard({
               </Text>
 
               {/* Starting from + price */}
-              <Text className="mt-1 font-mont text-[9px] text-text-secondary">
+              <Text className="mt-1 font-mont text-[9px] text-[#B9C9A8]">
                 Starting from
               </Text>
               <Text
                 className="font-mont-bold text-[14px]"
-                style={{ color: "#FFD400" }}
+                style={{ color: "#F5E6A3" }}
               >
                 {formatPrice(product.pricePerUnit)}
-                <Text className="font-mont text-[10px] text-text-secondary">
+                <Text className="font-mont text-[10px] text-[#B9C9A8]">
                   {" "}
                   / {unitLabel}
                 </Text>
@@ -190,9 +190,9 @@ export function SupplierProductCard({
               className="mt-2 self-start flex-row items-center px-3 py-1.5"
               style={{
                 gap: 6,
-                backgroundColor: "#FFD400",
+                backgroundColor: "#F5E6A3",
                 borderRadius: 999,
-                shadowColor: "#FFD400",
+                shadowColor: "#F5E6A3",
                 shadowOffset: { width: 0, height: 0 },
                 shadowOpacity: 0.4,
                 shadowRadius: 8,

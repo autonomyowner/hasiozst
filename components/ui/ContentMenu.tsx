@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, Modal, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
@@ -78,7 +78,7 @@ export function ContentMenu({
         trigger(handleOpen)
       ) : (
         <Pressable onPress={handleOpen} hitSlop={12} className="p-1">
-          <Ionicons name="ellipsis-horizontal" size={20} color="#898989" />
+          <Ionicons name="ellipsis-horizontal" size={20} color="#5F6E63" />
         </Pressable>
       )}
 
@@ -106,8 +106,8 @@ export function ContentMenu({
                 onPress={handleReport}
                 className="flex-row items-center px-5 py-4"
               >
-                <Ionicons name="flag-outline" size={20} color="#EF4444" />
-                <Text className="font-mont-medium text-base text-white ml-3">
+                <Ionicons name="flag-outline" size={20} color="#DC2626" />
+                <Text className="font-mont-medium text-base text-text-primary ml-3">
                   Report
                 </Text>
               </Pressable>
@@ -121,9 +121,9 @@ export function ContentMenu({
                 <Ionicons
                   name={isBlocked ? "person-add-outline" : "remove-circle-outline"}
                   size={20}
-                  color="#EF4444"
+                  color="#DC2626"
                 />
-                <Text className="font-mont-medium text-base text-white ml-3">
+                <Text className="font-mont-medium text-base text-text-primary ml-3">
                   {isBlocked ? "Unblock user" : "Block user"}
                 </Text>
               </Pressable>

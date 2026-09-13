@@ -1,5 +1,5 @@
 import React from "react";
-import Svg, { Path } from "react-native-svg";
+import Svg, { Path, Circle } from "react-native-svg";
 
 interface TabIconProps {
   color: string;
@@ -90,6 +90,63 @@ export function ProfileIcon({ color, size = 24 }: TabIconProps) {
         stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+
+export function ServicesIcon({ color, size = 24 }: TabIconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M2.75 20.5H21.25"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M4.25 17.25C4.25 12.969 7.719 9.5 12 9.5C16.281 9.5 19.75 12.969 19.75 17.25H4.25Z"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M12 9.5V7.25"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+      />
+      <Circle cx={12} cy={5.5} r={1.75} stroke={color} strokeWidth={1.5} />
+    </Svg>
+  );
+}
+
+export function HotelsIcon({ color, size = 24 }: TabIconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M2.75 21H21.25"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M5 21V5.5C5 4.39543 5.89543 3.5 7 3.5H17C18.1046 3.5 19 4.39543 19 5.5V21"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M9 7.5H10.5M13.5 7.5H15M9 11.5H10.5M13.5 11.5H15M9 15.5H10.5M13.5 15.5H15"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M10 21V19C10 17.8954 10.8954 17 12 17C13.1046 17 14 17.8954 14 19V21"
+        stroke={color}
+        strokeWidth={1.5}
         strokeLinejoin="round"
       />
     </Svg>

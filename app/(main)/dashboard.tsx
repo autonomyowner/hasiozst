@@ -1,7 +1,7 @@
 import { ScrollView, View, Text, Pressable, ActivityIndicator } from "react-native";
 import { useState, useMemo } from "react";
 import { useRouter } from "expo-router";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { Ionicons } from "@expo/vector-icons";
 import { api } from "../../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
@@ -75,7 +75,7 @@ function CustomerDashboard() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -87,7 +87,7 @@ function CustomerDashboard() {
         {/* Header */}
         <View className="px-4 pt-2 pb-1 flex-row items-start justify-between">
           <View className="flex-1">
-            <Text className="font-mont-bold text-xl text-white">My Orders</Text>
+            <Text className="font-mont-bold text-xl text-text-primary">My Orders</Text>
             <View className="mt-1 h-0.5 w-10 bg-primary rounded-full" />
             <Text className="font-mont text-sm text-text-secondary mt-1">
               Track your orders
@@ -99,7 +99,7 @@ function CustomerDashboard() {
               hitSlop={8}
               className="h-10 w-10 items-center justify-center rounded-full bg-card active:opacity-70"
             >
-              <Ionicons name="trash-outline" size={18} color="#EF4444" />
+              <Ionicons name="trash-outline" size={18} color="#DC2626" />
             </Pressable>
           )}
         </View>
@@ -108,7 +108,7 @@ function CustomerDashboard() {
         <View className="flex-row mx-4 mt-3 gap-3">
           <View className="flex-1 rounded-card bg-card p-3">
             <Text className="font-mont text-xs text-text-secondary">Total Orders</Text>
-            <Text className="font-mont-bold text-2xl text-white mt-1">
+            <Text className="font-mont-bold text-2xl text-text-primary mt-1">
               {buyerOrders.length}
             </Text>
           </View>
@@ -137,7 +137,7 @@ function CustomerDashboard() {
             >
               <Text
                 className={`font-mont-semibold text-xs ${
-                  filter === tab.key ? "text-black" : "text-text-secondary"
+                  filter === tab.key ? "text-white" : "text-text-secondary"
                 }`}
               >
                 {tab.label}
@@ -149,7 +149,7 @@ function CustomerDashboard() {
         {/* Order list */}
         {filteredOrders.length === 0 ? (
           <View className="items-center justify-center py-20">
-            <Ionicons name="bag-outline" size={48} color="#898989" />
+            <Ionicons name="bag-outline" size={48} color="#5F6E63" />
             <Text className="font-mont text-sm text-text-secondary mt-3">
               {filter === "all" ? "No orders yet" : `No ${filter} orders`}
             </Text>
@@ -158,7 +158,7 @@ function CustomerDashboard() {
                 onPress={() => router.push("/(main)/home")}
                 className="mt-4 rounded-pill bg-primary px-6 py-2.5"
               >
-                <Text className="font-mont-semibold text-sm text-black">
+                <Text className="font-mont-semibold text-sm text-white">
                   Start Shopping
                 </Text>
               </Pressable>
@@ -174,7 +174,7 @@ function CustomerDashboard() {
               >
                 <View className="flex-row items-center justify-between">
                   <View>
-                    <Text className="font-mont-medium text-sm text-white">
+                    <Text className="font-mont-medium text-sm text-text-primary">
                       Order #{order._id.slice(-6).toUpperCase()}
                     </Text>
                     <Text className="font-mont text-xs text-text-secondary mt-0.5">
@@ -193,22 +193,22 @@ function CustomerDashboard() {
                 </View>
                 {order.trackingNumber && (
                   <View className="mt-2 flex-row items-center justify-between">
-                    <View className="flex-row items-center bg-[#22C55E]/10 rounded-[10px] px-3 py-1.5">
-                      <Ionicons name="locate-outline" size={12} color="#22C55E" />
-                      <Text className="font-mont-medium text-[10px] text-[#22C55E] ml-1">
+                    <View className="flex-row items-center bg-success/10 rounded-[10px] px-3 py-1.5">
+                      <Ionicons name="locate-outline" size={12} color="#1F9D55" />
+                      <Text className="font-mont-medium text-[10px] text-success ml-1">
                         {order.trackingNumber}
                       </Text>
                     </View>
                     {order.deliveryProvider && (
-                      <View className="rounded-pill px-2 py-0.5" style={{ backgroundColor: "rgba(255,212,0,0.12)" }}>
+                      <View className="rounded-pill px-2 py-0.5" style={{ backgroundColor: "rgba(26,75,95,0.12)" }}>
                         <Text className="font-mont text-[10px] text-primary">
                           {order.deliveryProvider}
                         </Text>
                       </View>
                     )}
-                    {order.deliveryFee !== undefined && order.deliveryFee > 0 && (
+                    SAR {order.deliveryFee !== undefined && order.deliveryFee > 0 && (
                       <Text className="font-mont text-[10px] text-text-secondary">
-                        {order.deliveryFee.toLocaleString("fr-DZ")} DA
+                        {order.deliveryFee.toLocaleString("en-US")}
                       </Text>
                     )}
                   </View>
@@ -256,7 +256,7 @@ function FreelancerDashboard() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -314,7 +314,7 @@ function FreelancerDashboard() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header with yellow underline */}
         <View className="px-4 pt-2 pb-1">
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             My Dashboard
           </Text>
           <View className="mt-1 h-0.5 w-10 bg-primary rounded-full" />
@@ -326,9 +326,9 @@ function FreelancerDashboard() {
         {/* Opportunity banner */}
         <View
           className="mx-4 mt-3 rounded-card p-4"
-          style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+          style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
         >
-          <Text className="font-mont-semibold text-sm text-white">
+          <Text className="font-mont-semibold text-sm text-text-primary">
             Ready for Your Next Opportunity?
           </Text>
           <Text className="font-mont text-xs text-text-secondary mt-1">
@@ -355,7 +355,7 @@ function FreelancerDashboard() {
             >
               <Text
                 className={`font-mont-semibold text-sm ${
-                  activeTab === tab.key ? "text-white" : "text-text-secondary"
+                  activeTab === tab.key ? "text-text-primary" : "text-text-secondary"
                 }`}
               >
                 {tab.label}

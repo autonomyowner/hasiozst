@@ -30,10 +30,10 @@ export function AppImage({
   if (error) {
     return (
       <View
-        style={[{ backgroundColor: "#1a1a1a", alignItems: "center", justifyContent: "center" }, style as object]}
+        style={[{ backgroundColor: "#F2EAD9", alignItems: "center", justifyContent: "center" }, style as object]}
         className={className}
       >
-        <Ionicons name="image-outline" size={24} color="#555" />
+        <Ionicons name="image-outline" size={24} color="#5F6E63" />
       </View>
     );
   }
@@ -44,7 +44,7 @@ export function AppImage({
         <View
           style={{
             ...({ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 } as const),
-            backgroundColor: "#1a1a1a",
+            backgroundColor: "#F2EAD9",
           }}
         />
       )}

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { TextInput } from "@/components/ui/TextInput";
@@ -154,14 +154,14 @@ export default function CreateReelScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mb-2"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">Post a Reel</Text>
+          <Text className="font-mont-bold text-xl text-text-primary">Post a Reel</Text>
         </View>
 
         <View className="px-4">
           {/* Video picker */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Video <Text className="text-text-secondary">(optional, max 60s)</Text>
           </Text>
           <Pressable
@@ -185,7 +185,7 @@ export default function CreateReelScreen() {
           </Pressable>
 
           {/* Thumbnail picker */}
-          <Text className="font-mont-medium text-sm text-white mb-1.5">
+          <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
             Thumbnail{" "}
             <Text className="text-text-secondary">
               {videoUri ? "(optional)" : "(required if no video)"}
@@ -229,7 +229,7 @@ export default function CreateReelScreen() {
           />
 
           <TextInput
-            label="Price (DA)"
+            label="Price (SAR)"
             value={price}
             onChangeText={setPrice}
             placeholder="4500"
@@ -240,7 +240,7 @@ export default function CreateReelScreen() {
           <View className="mt-4 mb-8">
             {uploading ? (
               <View className="items-center py-4 gap-3">
-                <ActivityIndicator color="#FFD400" />
+                <ActivityIndicator color="#1A4B5F" />
                 <Text className="font-mont text-sm text-text-secondary">
                   {uploadStep}
                 </Text>

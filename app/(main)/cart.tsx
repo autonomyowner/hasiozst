@@ -10,7 +10,7 @@ import { GuestSignInPrompt } from "@/components/ui/GuestSignInPrompt";
 import { useCart } from "@/hooks/useCart";
 import { useGuest } from "@/providers/GuestProvider";
 import { formatPrice } from "@/lib/formatters";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 
 const DELIVERY_FEE = 1000;
@@ -36,7 +36,7 @@ export default function CartScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -49,13 +49,13 @@ export default function CartScreen() {
       {/* Header */}
       <View className="items-center py-4">
         <View className="flex-row items-center">
-          <Text className="font-mont-bold text-xl text-white">Your</Text>
+          <Text className="font-mont-bold text-xl text-text-primary">Your</Text>
           <View className="ml-1.5">
-            <Text className="font-mont-bold text-xl text-white">Cart</Text>
+            <Text className="font-mont-bold text-xl text-text-primary">Cart</Text>
             <View
               style={{
                 height: 3,
-                backgroundColor: "#FFD400",
+                backgroundColor: "#1A4B5F",
                 borderRadius: 2,
                 marginTop: 2,
               }}
@@ -75,8 +75,8 @@ export default function CartScreen() {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}
-                tintColor="#FFD400"
-                colors={["#FFD400"]}
+                tintColor="#1A4B5F"
+                colors={["#1A4B5F"]}
               />
             }
           >
@@ -99,8 +99,8 @@ export default function CartScreen() {
               style={{
                 borderRadius: 16,
                 borderWidth: 1,
-                borderColor: "rgba(51,51,51,0.6)",
-                backgroundColor: "rgba(17,17,17,0.6)",
+                borderColor: "rgba(227,219,202,0.6)",
+                backgroundColor: "rgba(242,234,217,0.6)",
                 paddingHorizontal: 20,
                 paddingVertical: 16,
                 marginBottom: 16,
@@ -109,18 +109,18 @@ export default function CartScreen() {
               {/* Subtotal */}
               <View className="flex-row items-center justify-between mb-3">
                 <Text className="font-mont-medium text-sm text-text-secondary">Subtotal</Text>
-                <Text className="font-mont-semibold text-sm text-white">{formatPrice(total)}</Text>
+                <Text className="font-mont-semibold text-sm text-text-primary">{formatPrice(total)}</Text>
               </View>
               {/* Delivery Fee */}
               <View className="flex-row items-center justify-between mb-3">
                 <Text className="font-mont-medium text-sm text-text-secondary">Delivery Fee</Text>
-                <Text className="font-mont-semibold text-sm text-white">{formatPrice(DELIVERY_FEE)}</Text>
+                <Text className="font-mont-semibold text-sm text-text-primary">{formatPrice(DELIVERY_FEE)}</Text>
               </View>
               {/* Separator */}
-              <View style={{ height: 1, backgroundColor: "rgba(51,51,51,0.8)", marginBottom: 12 }} />
+              <View style={{ height: 1, backgroundColor: "rgba(227,219,202,0.8)", marginBottom: 12 }} />
               {/* Total */}
               <View className="flex-row items-center justify-between">
-                <Text className="font-mont-bold text-base text-white">Total Amount</Text>
+                <Text className="font-mont-bold text-base text-text-primary">Total Amount</Text>
                 <Text className="font-mont-bold text-lg text-primary">{formatPrice(totalAmount)}</Text>
               </View>
             </View>
@@ -130,22 +130,22 @@ export default function CartScreen() {
               onPress={() => router.push("/checkout")}
               className="active:opacity-80"
               style={{
-                backgroundColor: "#FFD400",
+                backgroundColor: "#1A4B5F",
                 borderRadius: 16,
                 paddingVertical: 16,
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 10,
-                shadowColor: "#FFD400",
+                shadowColor: "#1A4B5F",
                 shadowOffset: { width: 0, height: 0 },
                 shadowOpacity: 0.3,
                 shadowRadius: 12,
                 elevation: 8,
               }}
             >
-              <Ionicons name="cart-outline" size={20} color="#000" />
-              <Text className="font-mont-bold text-black" style={{ fontSize: 15, letterSpacing: 0.5 }}>
+              <Ionicons name="cart-outline" size={20} color="#FFFFFF" />
+              <Text className="font-mont-bold text-white" style={{ fontSize: 15, letterSpacing: 0.5 }}>
                 {">>> "}Proceed to Checkout
               </Text>
             </Pressable>

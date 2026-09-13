@@ -44,7 +44,7 @@ export default function ProductDetailScreen() {
   if (product === undefined) {
     return (
       <View className="flex-1 bg-background items-center justify-center">
-        <ActivityIndicator size="large" color="#FFD400" />
+        <ActivityIndicator size="large" color="#1A4B5F" />
       </View>
     );
   }
@@ -52,7 +52,7 @@ export default function ProductDetailScreen() {
   if (!product) {
     return (
       <SafeAreaView className="flex-1 bg-background items-center justify-center">
-        <Text className="font-mont text-white">Product not found</Text>
+        <Text className="font-mont text-text-primary">Product not found</Text>
       </SafeAreaView>
     );
   }
@@ -131,7 +131,7 @@ export default function ProductDetailScreen() {
           <Text className="font-mont text-xs text-text-secondary mb-1">
             Product Title
           </Text>
-          <Text className="font-mont-bold text-2xl text-white leading-tight">
+          <Text className="font-mont-bold text-2xl text-text-primary leading-tight">
             {product.name}
           </Text>
 
@@ -164,12 +164,12 @@ export default function ProductDetailScreen() {
 
           {/* Price */}
           <View className="flex-row items-center mt-4">
-            <Ionicons name="pricetag" size={18} color="#FFD400" />
+            <Ionicons name="pricetag" size={18} color="#1A4B5F" />
             <Text className="font-mont-bold text-2xl text-primary ml-2">
-              {product.price.toLocaleString("fr-DZ")}
+              {product.price.toLocaleString("en-US")}
             </Text>
             <Text className="font-mont-semibold text-sm text-primary ml-1.5">
-              DA
+              SAR
             </Text>
           </View>
 
@@ -189,8 +189,8 @@ export default function ProductDetailScreen() {
           {/* Description */}
           <View className="mt-4 rounded-card bg-card p-4">
             <View className="flex-row items-center mb-2">
-              <Ionicons name="document-text-outline" size={16} color="#898989" />
-              <Text className="font-mont-semibold text-sm text-white ml-2">
+              <Ionicons name="document-text-outline" size={16} color="#5F6E63" />
+              <Text className="font-mont-semibold text-sm text-text-primary ml-2">
                 Description
               </Text>
             </View>
@@ -234,7 +234,7 @@ export default function ProductDetailScreen() {
             className="mt-5 flex-row items-center justify-center rounded-card bg-card py-4"
             style={{ gap: 8 }}
           >
-            <Ionicons name="cart-outline" size={20} color="#FFD400" />
+            <Ionicons name="cart-outline" size={20} color="#1A4B5F" />
             <Text className="font-mont-bold text-primary">
               &gt;&gt;&gt;
             </Text>
@@ -256,9 +256,9 @@ export default function ProductDetailScreen() {
                 if (convId) router.push(`/conversation/${convId}`);
               }}
               className="mt-3 flex-row items-center justify-center rounded-card py-3.5"
-              style={{ backgroundColor: "#0C0C0C", borderWidth: 1, borderColor: "#333", gap: 8 }}
+              style={{ backgroundColor: "#FFFFFF", borderWidth: 1, borderColor: "#E3DBCA", gap: 8 }}
             >
-              <Ionicons name="chatbubble-outline" size={18} color="#FFD400" />
+              <Ionicons name="chatbubble-outline" size={18} color="#1A4B5F" />
               <Text className="font-mont-semibold text-sm text-primary">
                 Message Seller
               </Text>

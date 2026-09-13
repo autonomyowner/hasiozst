@@ -32,7 +32,7 @@ const OrderCard = memo(function OrderCard({ order, onPress }: { order: FullOrder
     >
       <View className="flex-row items-center justify-between">
         <View>
-          <Text className="font-mont-medium text-sm text-white">
+          <Text className="font-mont-medium text-sm text-text-primary">
             Order #{order._id.slice(-6).toUpperCase()}
           </Text>
           <Text className="font-mont text-xs text-text-secondary mt-0.5">
@@ -51,22 +51,22 @@ const OrderCard = memo(function OrderCard({ order, onPress }: { order: FullOrder
       </View>
       {order.trackingNumber && (
         <View className="mt-2 flex-row items-center justify-between">
-          <View className="flex-row items-center bg-[#22C55E]/10 rounded-[10px] px-3 py-1.5">
-            <Ionicons name="locate-outline" size={12} color="#22C55E" />
-            <Text className="font-mont-medium text-[10px] text-[#22C55E] ml-1">
+          <View className="flex-row items-center bg-success/10 rounded-[10px] px-3 py-1.5">
+            <Ionicons name="locate-outline" size={12} color="#1F9D55" />
+            <Text className="font-mont-medium text-[10px] text-success ml-1">
               {order.trackingNumber}
             </Text>
           </View>
           {order.deliveryProvider && (
-            <View className="rounded-pill px-2 py-0.5" style={{ backgroundColor: "rgba(255,212,0,0.12)" }}>
+            <View className="rounded-pill px-2 py-0.5" style={{ backgroundColor: "rgba(26,75,95,0.12)" }}>
               <Text className="font-mont text-[10px] text-primary">
                 {order.deliveryProvider}
               </Text>
             </View>
           )}
-          {order.deliveryFee !== undefined && order.deliveryFee > 0 && (
+          SAR {order.deliveryFee !== undefined && order.deliveryFee > 0 && (
             <Text className="font-mont text-[10px] text-text-secondary">
-              {order.deliveryFee.toLocaleString("fr-DZ")} DA
+              {order.deliveryFee.toLocaleString("en-US")}
             </Text>
           )}
         </View>

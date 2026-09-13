@@ -20,7 +20,7 @@ export function CategoryPill({
       style={[
         { borderRadius: isActive ? 35 : 19 },
         isActive && {
-          shadowColor: "#FFD400",
+          shadowColor: "#1A4B5F",
           shadowOffset: { width: 0, height: 0 },
           shadowOpacity: 0.4,
           shadowRadius: 8,
@@ -30,7 +30,7 @@ export function CategoryPill({
     >
       <Text
         className={`font-mont-medium text-sm ${
-          isActive ? "text-black" : "text-white"
+          isActive ? "text-white" : "text-text-primary"
         }`}
       >
         {label}

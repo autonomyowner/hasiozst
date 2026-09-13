@@ -1,4 +1,4 @@
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { useToast } from "@/providers/ToastProvider";
 import type { OfferType } from "@/lib/types";

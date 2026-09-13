@@ -33,7 +33,7 @@ export default function ClientRequestsScreen() {
     return (
       <SafeAreaView edges={["top"]} className="flex-1 bg-background">
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </SafeAreaView>
     );
@@ -48,18 +48,18 @@ export default function ClientRequestsScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
           {requests.length > 0 && (
             <Pressable
               onPress={() => setShowClearModal(true)}
               className="h-10 w-10 items-center justify-center rounded-full bg-card"
             >
-              <Ionicons name="trash-outline" size={18} color="#EF4444" />
+              <Ionicons name="trash-outline" size={18} color="#DC2626" />
             </Pressable>
           )}
         </View>
-        <Text className="font-mont-bold text-xl text-white">
+        <Text className="font-mont-bold text-xl text-text-primary">
           Client Requests
         </Text>
         <Text className="font-mont text-sm text-text-secondary mt-0.5">
@@ -79,7 +79,7 @@ export default function ClientRequestsScreen() {
           >
             <Text
               className={`font-mont-medium text-xs ${
-                activeTab === tab.key ? "text-black" : "text-white"
+                activeTab === tab.key ? "text-white" : "text-text-primary"
               }`}
             >
               {tab.label}
@@ -114,7 +114,7 @@ export default function ClientRequestsScreen() {
         )}
         ListEmptyComponent={
           <View className="flex-1 items-center justify-center py-20">
-            <Text className="font-mont-medium text-base text-white mb-2">
+            <Text className="font-mont-medium text-base text-text-primary mb-2">
               No client requests yet.
             </Text>
             <Text className="font-mont text-sm text-text-secondary text-center px-10">

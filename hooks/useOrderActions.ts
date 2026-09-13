@@ -1,4 +1,4 @@
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import type { ShippingAddress, OrderStatus, PaymentMethod } from "@/lib/types";
 import type { Id } from "../convex/_generated/dataModel";

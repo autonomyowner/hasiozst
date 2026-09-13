@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, Pressable, ScrollView, KeyboardAvoidingView, Platform, Keyboard } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { BackgroundImage } from "@/components/layout/BackgroundImage";
 import { TextInput } from "@/components/ui/TextInput";
@@ -91,7 +91,7 @@ export default function SignInScreen() {
       >
         {/* Top background image */}
         <BackgroundImage
-          source={require("@/assets/images/profile-cover-gold.jpg")}
+          source={require("@/assets/media/photos/habitas-alula-pool.jpg")}
           height={320}
         >
           <View className="px-6 pt-14">
@@ -103,7 +103,7 @@ export default function SignInScreen() {
 
         {/* Content */}
         <View className="px-6 -mt-8 flex-1">
-          <Text className="font-mont-bold text-3xl text-white mb-1">
+          <Text className="font-mont-bold text-3xl text-text-primary mb-1">
             Welcome Back
           </Text>
           <Text className="font-mont text-sm text-text-secondary mb-6">

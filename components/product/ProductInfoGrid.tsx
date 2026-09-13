@@ -27,16 +27,16 @@ export function ProductInfoGrid({ items }: ProductInfoGridProps) {
               style={{
                 width: 28,
                 height: 28,
-                backgroundColor: "rgba(169,169,169,0.12)",
+                backgroundColor: "rgba(26,75,95,0.10)",
               }}
             >
-              <Ionicons name={item.icon} size={14} color="#898989" />
+              <Ionicons name={item.icon} size={14} color="#5F6E63" />
             </View>
             <Text className="font-mont text-xs text-text-secondary ml-2 flex-1">
               {item.label}
             </Text>
           </View>
-          <Text className="font-mont-semibold text-sm text-white ml-0.5">
+          <Text className="font-mont-semibold text-sm text-text-primary ml-0.5">
             {item.value}
           </Text>
         </View>

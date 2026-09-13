@@ -29,7 +29,7 @@ export function Dropdown({
 
   return (
     <View className="mb-3">
-      <Text className="font-mont-medium text-sm text-white mb-1.5">
+      <Text className="font-mont-medium text-sm text-text-primary mb-1.5">
         {label}
       </Text>
       <Pressable
@@ -40,12 +40,12 @@ export function Dropdown({
       >
         <Text
           className={`font-mont text-sm ${
-            selected ? "text-white" : "text-text-secondary"
+            selected ? "text-text-primary" : "text-text-secondary"
           }`}
         >
           {selected ? selected.label : placeholder}
         </Text>
-        <Ionicons name="chevron-down" size={16} color="#898989" />
+        <Ionicons name="chevron-down" size={16} color="#5F6E63" />
       </Pressable>
       {error ? (
         <Text className="font-mont text-xs text-error mt-1">{error}</Text>
@@ -53,7 +53,7 @@ export function Dropdown({
 
       <Modal visible={open} transparent animationType="slide">
         <Pressable
-          className="flex-1 bg-black/60 justify-end"
+          className="flex-1 bg-background/60 justify-end"
           onPress={() => setOpen(false)}
         >
           <View
@@ -61,11 +61,11 @@ export function Dropdown({
             onStartShouldSetResponder={() => true}
           >
             <View className="flex-row items-center justify-between px-5 pt-4 pb-2">
-              <Text className="font-mont-semibold text-base text-white">
+              <Text className="font-mont-semibold text-base text-text-primary">
                 {label}
               </Text>
               <Pressable onPress={() => setOpen(false)}>
-                <Ionicons name="close" size={22} color="#898989" />
+                <Ionicons name="close" size={22} color="#5F6E63" />
               </Pressable>
             </View>
             <FlatList
@@ -83,13 +83,13 @@ export function Dropdown({
                 >
                   <Text
                     className={`font-mont text-sm ${
-                      item.value === value ? "text-primary" : "text-white"
+                      item.value === value ? "text-primary" : "text-text-primary"
                     }`}
                   >
                     {item.label}
                   </Text>
                   {item.value === value && (
-                    <Ionicons name="checkmark" size={18} color="#FFD400" />
+                    <Ionicons name="checkmark" size={18} color="#1A4B5F" />
                   )}
                 </Pressable>
               )}

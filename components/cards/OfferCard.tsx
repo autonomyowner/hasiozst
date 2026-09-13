@@ -31,7 +31,7 @@ export function OfferCard({ offer }: OfferCardProps) {
       {/* Title & Badges */}
       <View className="flex-row items-start justify-between">
         <View className="flex-1 mr-3">
-          <Text className="font-mont-semibold text-base text-white">
+          <Text className="font-mont-semibold text-base text-text-primary">
             {offer.title}
           </Text>
           <Text className="font-mont text-sm text-text-secondary mt-0.5">
@@ -70,7 +70,7 @@ export function OfferCard({ offer }: OfferCardProps) {
         </View>
         <View className="items-center">
           <Text className="font-mont text-xs text-text-secondary">Bids</Text>
-          <Text className="font-mont-bold text-sm text-white">
+          <Text className="font-mont-bold text-sm text-text-primary">
             {offer.bidCount}
           </Text>
         </View>
@@ -78,7 +78,7 @@ export function OfferCard({ offer }: OfferCardProps) {
           <Text className="font-mont text-xs text-text-secondary">
             Deadline
           </Text>
-          <Text className="font-mont-medium text-sm text-white">
+          <Text className="font-mont-medium text-sm text-text-primary">
             {formatDate(offer.deadline)}
           </Text>
         </View>

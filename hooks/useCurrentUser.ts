@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { authClient } from "@/lib/auth-client";
 import { Sentry } from "@/lib/sentry";

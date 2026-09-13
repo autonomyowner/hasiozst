@@ -58,26 +58,69 @@ Current effective roles (`lib/types.ts` → `getEffectiveRole()`) are
 `customer | fournisseur | importateur | grossiste | freelancer`, split across two
 tab groups `(main)` (B2C) and `(grociste)` (B2B).
 
-Target is far simpler: **guest**, **hotel owner**, **service provider**. The
-two-tab-group split and the `(grociste)` naming are almost certainly more
-structure than a booking app needs — but collapsing roles touches routing, every
-layout, and server-side authorization, so it is **its own migration step**, not a
-side effect of another one.
+Target is exactly **three** roles. The two-tab-group split and the `(grociste)`
+naming are almost certainly more structure than a booking app needs — but
+collapsing roles touches routing, every layout, and server-side authorization, so
+it is **its own migration step**, not a side effect of another one.
+
+| Role | Does | Dashboard? |
+|---|---|---|
+| **Guest / traveller** | Browses listings and reels, saves stays (favorites), books hotels and services | No — consumer surfaces only |
+| **Hotel & lodging provider** | Publishes hotel/room listings (cards + reels), sets prices and availability, manages incoming bookings | **Yes** — property dashboard |
+| **Service provider** | Publishes services (tours, transport, guides, events), sets prices, manages service bookings | **Yes** — service dashboard |
+
+**Keep the dashboard role-based.** The inherited app already gates dashboards by
+role (`(main)/dashboard.tsx` for buyers, `(grociste)/seller-dashboard.tsx` for
+sellers, with `QuickActions` tiles varying per role) — that behaviour is wanted
+and must survive the migration. Do not collapse to one dashboard for everyone:
+
+- A guest never reaches a dashboard at all. Their profile menu is the whole
+  account surface.
+- A provider's dashboard is the operational screen: their own listings, incoming
+  bookings, booking lifecycle actions, and earnings. Reuse the inherited
+  seller-dashboard shell rather than building a new one.
+- Hotel and service providers share the dashboard shell but not its contents —
+  the stats, quick actions and list sections differ (rooms/nights/occupancy vs
+  services/sessions). Branch on role inside the shell, the way the inherited code
+  branches on `effectiveRole`, instead of forking whole screens.
+- Whatever the final route-group shape is, the rule stays: **role decides which
+  dashboard renders and which tabs are visible**, enforced in the layout *and*
+  server-side in the Convex authorization checks.
 
 ## Saudi localization — required, not cosmetic
 
 The inherited app is Algeria/French. Every one of these is a migration step:
 
-| Area | Now | Target |
-|---|---|---|
-| Geography | `lib/algeriaData.ts` — 58 wilayas + communes (93 lines, used by checkout) | Saudi regions & cities (Riyadh, Makkah, Madinah, Jeddah, Dammam, AlUla, NEOM …) |
-| Currency | `formatPrice()` → `fr-DZ` + `"DA"` | **SAR** (`ar-SA`, ﷼) |
-| Dates | `formatDate()` → `fr-FR` | `ar-SA`; booking flows also need **Hijri** awareness |
-| UI language | English/French strings inline in components | **Arabic-first** |
-| Layout | LTR only | **RTL** — this is structural. NativeWind/RN need `I18nManager` + logical properties; retrofitting it late is expensive, so decide early |
+| Area | Status |
+|---|---|
+| Geography | **Done.** `lib/saudiData.ts` — the 13 regions + main cities, replacing `algeriaData.ts`. Consumed by `checkout`, `wholesale-checkout`, `delivery-settings`. The order schema still uses the inherited `wilayaCode`/`wilayaName`/`commune` field names; rename them when the booking schema is migrated. |
+| Currency | **Done.** `formatPrice()` → `SAR 2,450`; `formatRate()` adds `/ night`. No `DA` left in the app. |
+| Dates | **Done (interim).** `en-GB`, Latin digits. Booking flows will also need **Hijri** awareness. |
+| Phone | **Done.** `PHONE_REGEX` accepts `05XXXXXXXX` and `+9665XXXXXXXX`. |
+| UI language | **Open.** English strings inline in components → Arabic-first. |
+| Layout | **Open.** LTR only → **RTL**. Structural: NativeWind/RN need `I18nManager` + logical properties; retrofitting late is expensive, so decide early. |
 
-Seed data (`convex/seed.ts`) is inherited Algerian marketplace mock content and
-should be replaced wholesale with Saudi hotel/service data rather than patched.
+Seed data (`convex/seed.ts`) is still inherited Algerian marketplace mock content
+and should be replaced wholesale rather than patched — the Saudi records now live
+in `lib/demoContent.ts` and are the natural source for it.
+
+## Demo content (no backend)
+
+`lib/demoContent.ts` holds the MVP fixtures — 6 stays/experiences and 8 reels
+built on locally bundled Saudi media in `assets/media/` — and `lib/useDemo.ts`
+swaps them in wherever a query would otherwise return `undefined`:
+
+    const stays = useDemo(useQuery(api.products.list, {}), demoStays);
+
+Wired into: home (`B2CHomeContent`), reels (`ReelsContent`), listings
+(`hooks/useProducts.ts`, which also covers product detail and similar items),
+search, and onboarding imagery. When `BACKEND_ENABLED` flips to true every one of
+these becomes a pass-through with no code change, so seed the same records
+server-side rather than deleting this module.
+
+**Media caveat:** `assets/media/videos/umluj-corniche.mp4` is **45 MB** — about
+half the bundle on its own. Fine over the Metro dev server, too big to ship;
+compress it (or drop it) before any real build.
 
 ## Open decisions — ask the owner, don't guess
 
@@ -90,6 +133,46 @@ should be replaced wholesale with Saudi hotel/service data rather than patched.
   nothing real.
 - Whether `offers`/`bids`/`demandRequests` become group-booking quotes or get removed.
 
+## Running without a backend
+
+The app boots and is fully navigable with **no Convex deployment configured** —
+that is deliberate while Hasio is being rebuilt. `lib/backend.ts` is the single
+source of truth (`BACKEND_ENABLED`); nothing throws on missing env vars.
+
+- **Import Convex hooks from `@/lib/convex`, never from `convex/react`.** The
+  wrapper passes `"skip"` to `useQuery`/`usePaginatedQuery` when no backend is
+  configured, so no subscription opens and the client never retries a dead host.
+  `useMutation`/`useAction` are re-exported unchanged.
+- `lib/auth-client.ts` swaps in an offline stub that reports "signed out"
+  immediately and returns better-auth's `{ error: { message } }` shape, so the auth
+  screens show a normal inline error instead of crashing.
+- `AppProviders` mounts a plain `ConvexProvider` instead of
+  `ConvexBetterAuthProvider` when there is no backend.
+- **To browse the app:** onboarding → sign-in → **Continue as Guest**. The
+  `__DEV__` role panel (tap the role indicator 5× in 2s) switches effective role
+  without any backend.
+- Screens show empty/loading states because every query returns `undefined`. That
+  is expected, not a bug.
+
+Turning the backend on is just filling both URLs in `.env.local` via
+`npx convex dev` (**create a new project**) — no code changes.
+
+## Running in Expo Go
+
+Expo Go works, with one permanent limitation: **`expo-notifications` throws at
+import time** on Android in Expo Go (SDK 53 removed remote push from it). A static
+`import * as Notifications` takes down every module that imports it — which
+surfaces confusingly as *"Route ./_layout.tsx is missing the required default
+export"* and then `Cannot read property 'ErrorBoundary' of undefined`.
+
+So never import `expo-notifications` directly. Use `lib/pushNotifications.ts`:
+`getNotifications()` lazily requires it outside Expo Go and returns `null` inside,
+so every call site guards with `?.` or an early return. Push is best-effort; the
+app must run without it. Use a development build to get real push back.
+
+The `SafeAreaView has been deprecated` warning comes from a dependency, not our
+code — nothing imports it from `react-native`.
+
 ## Migration log
 
 Newest last. One entry per completed step.
@@ -97,6 +180,28 @@ Newest last. One entry per completed step.
 - **2026-09-13** — Forked from AI TRIDI. Severed all original-app infrastructure
   (see table below), rebranded identity strings to HASIO, removed hardcoded AI
   TRIDI storage URLs. App structure otherwise untouched.
+- **2026-09-13** — Upgraded Expo SDK 54 → 57 (RN 0.81 → 0.86). expo-router 57
+  dropped `@react-navigation/*`; tabs now use the vendored `expo-router/js-top-tabs`
+  (swipe preserved). Made the backend optional so the app runs with no Convex,
+  and made `expo-notifications` load lazily so Expo Go boots.
+- **2026-09-13** — First content pass. Replaced all AI TRIDI imagery with the
+  Hasio logo and bundled Saudi media; added `lib/demoContent.ts` + `lib/useDemo.ts`
+  so home, reels, listings and search render without a backend. Localized
+  currency (SAR), dates, phone validation, and swapped Algerian wilayas for the
+  13 Saudi regions. Rewrote onboarding and home/reels copy for travel.
+- **2026-09-13** — Retheme: dark/yellow → light palette sourced from
+  mindshiftarabia.com (teal `#1A4B5F` on cream `#F8F4ED`, sand, sage, soft gold).
+  Tokens live in `tailwind.config.js` + `lib/constants.ts`; media surfaces (reels,
+  gradient-overlay cards, `ImageCarousel`) stay dark with a gold accent so text
+  over photos/video still reads.
+- **2026-09-13** — `(main)` tabs became **Home · Reels · Services · Hotels ·
+  Profile**. Services/Hotels bodies extracted to `components/sections/
+  ServicesContent.tsx` and `HotelsContent.tsx`, shared with the `/services` and
+  `/all-products` stack screens via a `showBack` prop. `cart` and `dashboard`
+  remain registered screens (reached from the home header and the profile menu)
+  but are filtered out of the tab bar by an explicit `TAB_BAR_ROUTES` list —
+  **note this replaced the old role-based tab hiding, which must come back when
+  the three-role model lands** (see Roles above).
 
 ---
 

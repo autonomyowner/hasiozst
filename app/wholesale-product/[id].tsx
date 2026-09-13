@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Pressable, ActivityIndicator } from "react-nati
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { useWholesaleProduct } from "@/hooks/useProducts";
@@ -34,7 +34,7 @@ export default function WholesaleProductDetailScreen() {
   if (product === undefined) {
     return (
       <View className="flex-1 bg-background items-center justify-center">
-        <ActivityIndicator size="large" color="#FFD400" />
+        <ActivityIndicator size="large" color="#1A4B5F" />
       </View>
     );
   }
@@ -47,10 +47,10 @@ export default function WholesaleProductDetailScreen() {
           className="absolute top-14 left-4 h-[42px] w-[42px] items-center justify-center rounded-full"
           style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
-        <Ionicons name="cube-outline" size={48} color="#898989" />
-        <Text className="font-mont-semibold text-white mt-3">Product not found</Text>
+        <Ionicons name="cube-outline" size={48} color="#5F6E63" />
+        <Text className="font-mont-semibold text-text-primary mt-3">Product not found</Text>
         <Text className="font-mont text-sm text-text-secondary mt-1">
           This product may have been removed
         </Text>
@@ -103,7 +103,7 @@ export default function WholesaleProductDetailScreen() {
           <View className="flex-row items-center mb-2">
             <View
               className="rounded-pill px-3 py-1"
-              style={{ backgroundColor: "rgba(255,212,0,0.12)" }}
+              style={{ backgroundColor: "rgba(26,75,95,0.12)" }}
             >
               <Text className="font-mont-semibold text-xs text-primary">
                 Wholesale / B2B
@@ -112,7 +112,7 @@ export default function WholesaleProductDetailScreen() {
           </View>
 
           {/* Product name */}
-          <Text className="font-mont-bold text-2xl text-white leading-tight">
+          <Text className="font-mont-bold text-2xl text-text-primary leading-tight">
             {product.name}
           </Text>
 
@@ -123,7 +123,7 @@ export default function WholesaleProductDetailScreen() {
                 <View
                   key={tag}
                   className="rounded-pill px-2.5 py-1"
-                  style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+                  style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
                 >
                   <Text className="font-mont text-xs text-text-secondary">{tag}</Text>
                 </View>
@@ -145,27 +145,27 @@ export default function WholesaleProductDetailScreen() {
           <View className="mt-4 rounded-card bg-card p-4" style={{ gap: 12 }}>
             <View className="flex-row items-center justify-between">
               <View className="flex-row items-center">
-                <Ionicons name="pricetag" size={18} color="#FFD400" />
+                <Ionicons name="pricetag" size={18} color="#1A4B5F" />
                 <Text className="font-mont-bold text-2xl text-primary ml-2">
-                  {unitPrice.toLocaleString("fr-DZ")}
+                  {unitPrice.toLocaleString("en-US")}
                 </Text>
                 <Text className="font-mont-semibold text-sm text-primary ml-1">
-                  DA / unit
+                  SAR / unit
                 </Text>
               </View>
             </View>
             <View
               className="h-px"
-              style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+              style={{ backgroundColor: "rgba(26,75,95,0.06)" }}
             />
             <View className="flex-row items-center justify-between">
               <View className="flex-row items-center">
-                <Ionicons name="layers-outline" size={16} color="#898989" />
+                <Ionicons name="layers-outline" size={16} color="#5F6E63" />
                 <Text className="font-mont text-sm text-text-secondary ml-2">
                   Minimum Order
                 </Text>
               </View>
-              <Text className="font-mont-semibold text-white">
+              <Text className="font-mont-semibold text-text-primary">
                 {minOrder} units
               </Text>
             </View>
@@ -173,16 +173,16 @@ export default function WholesaleProductDetailScreen() {
               <>
                 <View
                   className="h-px"
-                  style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+                  style={{ backgroundColor: "rgba(26,75,95,0.06)" }}
                 />
                 <View className="flex-row items-center justify-between">
                   <View className="flex-row items-center">
-                    <Ionicons name="grid-outline" size={16} color="#898989" />
+                    <Ionicons name="grid-outline" size={16} color="#5F6E63" />
                     <Text className="font-mont text-sm text-text-secondary ml-2">
                       Category
                     </Text>
                   </View>
-                  <Text className="font-mont-semibold text-white">
+                  <Text className="font-mont-semibold text-text-primary">
                     {product.category}
                   </Text>
                 </View>
@@ -194,8 +194,8 @@ export default function WholesaleProductDetailScreen() {
           {product.description && (
             <View className="mt-4 rounded-card bg-card p-4">
               <View className="flex-row items-center mb-2">
-                <Ionicons name="document-text-outline" size={16} color="#898989" />
-                <Text className="font-mont-semibold text-sm text-white ml-2">
+                <Ionicons name="document-text-outline" size={16} color="#5F6E63" />
+                <Text className="font-mont-semibold text-sm text-text-primary ml-2">
                   Description
                 </Text>
               </View>
@@ -230,12 +230,12 @@ export default function WholesaleProductDetailScreen() {
               onPress={handleBuyNow}
               className="flex-row items-center justify-center rounded-card py-4"
               style={{
-                backgroundColor: "#FFD400",
+                backgroundColor: "#1A4B5F",
                 gap: 8,
               }}
             >
-              <Ionicons name="flash" size={18} color="#000" />
-              <Text className="font-mont-bold text-sm text-black">
+              <Ionicons name="flash" size={18} color="#FFFFFF" />
+              <Text className="font-mont-bold text-sm text-white">
                 Buy Now
               </Text>
             </Pressable>
@@ -245,7 +245,7 @@ export default function WholesaleProductDetailScreen() {
               className="flex-row items-center justify-center rounded-card bg-card py-4"
               style={{ gap: 8 }}
             >
-              <Ionicons name="cart-outline" size={18} color="#FFD400" />
+              <Ionicons name="cart-outline" size={18} color="#1A4B5F" />
               <Text className="font-mont-bold text-sm text-primary">
                 Add to Wholesale Cart
               </Text>

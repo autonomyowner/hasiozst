@@ -15,7 +15,7 @@ export const FreelanceServiceCard = memo(function FreelanceServiceCard({ service
 
   return (
     <Pressable className="mr-3 w-48">
-      <View className="overflow-hidden rounded-card bg-card">
+      <View className="overflow-hidden rounded-card bg-[#141A16]">
         <View className="relative">
           <AppImage
             source={service.imageUrl}
@@ -59,17 +59,17 @@ export const FreelanceServiceCard = memo(function FreelanceServiceCard({ service
               />
             ) : null}
             <Text
-              className="font-mont text-xs text-text-secondary"
+              className="font-mont text-xs text-[#B9C9A8]"
               numberOfLines={1}
             >
               {service.freelancerName}
             </Text>
           </View>
           <View className="flex-row items-center justify-between">
-            <Text className="font-mont-bold text-sm text-primary">
+            <Text className="font-mont-bold text-sm text-gold">
               {formatPrice(service.price)}
             </Text>
-            <Text className="font-mont text-xs text-text-secondary">
+            <Text className="font-mont text-xs text-[#B9C9A8]">
               {service.rating} ({service.completedJobs})
             </Text>
           </View>

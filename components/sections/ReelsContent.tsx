@@ -1,13 +1,15 @@
 import { FlatList, View, Text, Pressable, ActivityIndicator } from "react-native";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "expo-router";
-import { useQuery } from "convex/react";
+import { useQuery } from "@/lib/convex";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api } from "../../convex/_generated/api";
 import { ReelCard } from "@/components/reels/ReelCard";
 import { BackArrowIcon } from "@/components/reels/ReelIcons";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { useTracking } from "@/hooks/useTracking";
+import { useDemo } from "@/lib/useDemo";
+import { demoReels } from "@/lib/demoContent";
 import { useBlockedUsers } from "@/hooks/useBlockedUsers";
 
 interface ReelsContentProps {
@@ -17,7 +19,10 @@ interface ReelsContentProps {
 export function ReelsContent({ isFocused }: ReelsContentProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
-  const reelsQuery = useQuery(api.recommendations.forYouReels, { limit: 30 });
+  const reelsQuery = useDemo(
+    useQuery(api.recommendations.forYouReels, { limit: 30 }),
+    demoReels
+  );
   const blocked = useBlockedUsers();
   const reels = (reelsQuery ?? []).filter((r) => !blocked.has(r.posterId));
   const insets = useSafeAreaInsets();
@@ -49,7 +54,7 @@ export function ReelsContent({ isFocused }: ReelsContentProps) {
   if (reelsQuery === undefined) {
     return (
       <View className="flex-1 bg-black items-center justify-center">
-        <ActivityIndicator size="large" color="#FFD400" />
+        <ActivityIndicator size="large" color="#F5E6A3" />
       </View>
     );
   }
@@ -60,7 +65,7 @@ export function ReelsContent({ isFocused }: ReelsContentProps) {
         <EmptyState
           icon="videocam-outline"
           title="No reels yet"
-          message="Be the first to share a video!"
+          message="Be the first to share your place."
           ctaLabel="Create Reel"
           onPress={() => router.push("/create-reel")}
         />
@@ -118,14 +123,14 @@ export function ReelsContent({ isFocused }: ReelsContentProps) {
               borderColor: "rgba(255,255,255,0.12)",
             }}
           >
-            <BackArrowIcon color="#FFD400" size={20} />
+            <BackArrowIcon color="#F5E6A3" size={20} />
           </Pressable>
           <View className="flex-1 items-center mr-10">
             <Text className="font-mont-bold text-base text-white">
-              Discover & Watch
+              Discover Saudi
             </Text>
             <Text className="font-mont text-xs text-white/50 text-center mt-0.5">
-              Explore short product videos{"\n"}and offers
+              Short videos from hosts{"\n"}and local guides
             </Text>
           </View>
         </View>

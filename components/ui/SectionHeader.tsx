@@ -17,7 +17,7 @@ export function SectionHeader({
   return (
     <View className="flex-row items-start justify-between px-4 pb-2 pt-4">
       <View>
-        <Text className="font-mont-semibold text-2xl text-white">
+        <Text className="font-mont-semibold text-2xl text-text-primary">
           {title}
         </Text>
         {subtitle && (
@@ -31,7 +31,7 @@ export function SectionHeader({
           <Text className="font-mont-medium text-sm text-primary mr-1">
             {actionLabel}
           </Text>
-          <Ionicons name="chevron-forward" size={14} color="#FFD400" />
+          <Ionicons name="chevron-forward" size={14} color="#1A4B5F" />
         </Pressable>
       )}
     </View>

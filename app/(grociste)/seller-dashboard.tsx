@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ScrollView, View, Text, Pressable, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { QuickActions } from "@/components/sections/QuickActions";
@@ -19,8 +19,8 @@ import { formatPrice, formatDate } from "@/lib/formatters";
 import type { FullOrder } from "@/lib/types";
 
 const statCardStyle = {
-  backgroundColor: "rgba(169,169,169,0.18)",
-  borderColor: "#666",
+  backgroundColor: "rgba(26,75,95,0.14)",
+  borderColor: "#5F6E63",
   borderWidth: 1,
   borderRadius: 16,
 };
@@ -71,7 +71,7 @@ export default function GrocisteSellerDashboardScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -127,7 +127,7 @@ export default function GrocisteSellerDashboardScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header with yellow underline */}
         <View className="px-4 pt-2 pb-1">
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             My Dashboard
           </Text>
           <View className="mt-1 h-0.5 w-10 bg-primary rounded-full" />
@@ -139,9 +139,9 @@ export default function GrocisteSellerDashboardScreen() {
         {/* Opportunity banner */}
         <View
           className="mx-4 mt-3 rounded-card p-4"
-          style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+          style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
         >
-          <Text className="font-mont-semibold text-sm text-white">
+          <Text className="font-mont-semibold text-sm text-text-primary">
             Ready for Your Next Opportunity?
           </Text>
           <Pressable
@@ -169,7 +169,7 @@ export default function GrocisteSellerDashboardScreen() {
               <Text className="font-mont text-xs text-text-secondary">
                 Total Orders
               </Text>
-              <Text className="mt-1 font-mont-bold text-xl text-white">
+              <Text className="mt-1 font-mont-bold text-xl text-text-primary">
                 {totalOrders}
               </Text>
             </View>
@@ -198,7 +198,7 @@ export default function GrocisteSellerDashboardScreen() {
             <Text className="font-mont text-xs text-text-secondary">
               Total Bids
             </Text>
-            <Text className="mt-1 font-mont-bold text-xl text-white">
+            <Text className="mt-1 font-mont-bold text-xl text-text-primary">
               {totalBids}
             </Text>
           </View>
@@ -208,20 +208,20 @@ export default function GrocisteSellerDashboardScreen() {
         <Pressable
           onPress={() => router.push("/notifications")}
           className="mx-4 mt-3 rounded-card p-4 flex-row items-center justify-between"
-          style={{ backgroundColor: "rgba(169,169,169,0.12)" }}
+          style={{ backgroundColor: "rgba(26,75,95,0.10)" }}
         >
-          <Text className="font-mont-medium text-sm text-white">
+          <Text className="font-mont-medium text-sm text-text-primary">
             Notifications
           </Text>
           <View className="flex-row items-center">
             {unreadCount > 0 && (
               <View className="bg-primary rounded-full px-2 py-0.5 mr-2">
-                <Text className="font-mont-bold text-xs text-black">
+                <Text className="font-mont-bold text-xs text-white">
                   {unreadCount}
                 </Text>
               </View>
             )}
-            <Ionicons name="chevron-forward" size={16} color="#898989" />
+            <Ionicons name="chevron-forward" size={16} color="#5F6E63" />
           </View>
         </Pressable>
 
@@ -232,7 +232,7 @@ export default function GrocisteSellerDashboardScreen() {
         {myOffers.length > 0 && (
           <View className="mt-4">
             <View className="mx-4 mb-3">
-              <Text className="font-mont-bold text-lg text-white">
+              <Text className="font-mont-bold text-lg text-text-primary">
                 My Offers
               </Text>
             </View>
@@ -246,7 +246,7 @@ export default function GrocisteSellerDashboardScreen() {
         {sellerOrders.length > 0 && (
           <View className="mx-4 mt-4">
             <View className="flex-row items-center justify-between mb-3">
-              <Text className="font-mont-bold text-lg text-white">
+              <Text className="font-mont-bold text-lg text-text-primary">
                 My Orders
               </Text>
               {deliveredCount > 0 && (
@@ -255,8 +255,8 @@ export default function GrocisteSellerDashboardScreen() {
                   hitSlop={8}
                   className="flex-row items-center rounded-pill bg-card px-3 py-1.5 active:opacity-70"
                 >
-                  <Ionicons name="trash-outline" size={14} color="#EF4444" />
-                  <Text className="font-mont-semibold text-xs text-[#EF4444] ml-1.5">
+                  <Ionicons name="trash-outline" size={14} color="#DC2626" />
+                  <Text className="font-mont-semibold text-xs text-error ml-1.5">
                     Clear Delivered ({deliveredCount})
                   </Text>
                 </Pressable>
@@ -270,7 +270,7 @@ export default function GrocisteSellerDashboardScreen() {
               >
                 <View className="flex-row items-center justify-between">
                   <View className="flex-1">
-                    <Text className="font-mont-medium text-sm text-white">
+                    <Text className="font-mont-medium text-sm text-text-primary">
                       {order._id.slice(-6).toUpperCase()}
                     </Text>
                     <Text className="font-mont text-xs text-text-secondary mt-0.5">
@@ -295,16 +295,16 @@ export default function GrocisteSellerDashboardScreen() {
                     }}
                     className="mt-2 flex-row items-center justify-center rounded-[12px] bg-primary/15 border border-primary/30 py-2.5"
                   >
-                    <Ionicons name="car-outline" size={16} color="#FFD400" />
+                    <Ionicons name="car-outline" size={16} color="#1A4B5F" />
                     <Text className="font-mont-semibold text-sm text-primary ml-2">
                       شحن مع شركة توصيل
                     </Text>
                   </Pressable>
                 )}
                 {order.trackingNumber && (
-                  <View className="mt-2 flex-row items-center bg-[#22C55E]/10 rounded-[10px] px-3 py-1.5">
-                    <Ionicons name="locate-outline" size={14} color="#22C55E" />
-                    <Text className="font-mont-medium text-xs text-[#22C55E] ml-1.5">
+                  <View className="mt-2 flex-row items-center bg-success/10 rounded-[10px] px-3 py-1.5">
+                    <Ionicons name="locate-outline" size={14} color="#1F9D55" />
+                    <Text className="font-mont-medium text-xs text-success ml-1.5">
                       {order.trackingNumber}
                     </Text>
                   </View>

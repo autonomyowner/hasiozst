@@ -51,7 +51,7 @@ function RightDeleteAction({
         onPress={onDelete}
         className="flex-1 items-center justify-center bg-error mr-4 rounded-card"
       >
-        <Ionicons name="trash-outline" size={22} color="#fff" />
+        <Ionicons name="trash-outline" size={22} color="#FFFFFF" />
         <Text className="font-mont-medium text-xs text-white mt-1">
           Delete
         </Text>
@@ -102,16 +102,16 @@ export default function ConversationsScreen() {
           onPress={() => router.back()}
           className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
         >
-          <Ionicons name="arrow-back" size={20} color="#fff" />
+          <Ionicons name="arrow-back" size={20} color="#0D1A12" />
         </Pressable>
-        <Text className="font-mont-bold text-xl text-white flex-1">
+        <Text className="font-mont-bold text-xl text-text-primary flex-1">
           Messages
         </Text>
       </View>
 
       {conversations.length === 0 ? (
         <View className="flex-1 items-center justify-center py-20">
-          <Ionicons name="chatbubbles-outline" size={48} color="#898989" />
+          <Ionicons name="chatbubbles-outline" size={48} color="#5F6E63" />
           <Text className="font-mont-medium text-base text-text-secondary mt-4">
             No conversations yet
           </Text>
@@ -130,8 +130,8 @@ export default function ConversationsScreen() {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
-              tintColor="#FFD400"
-              colors={["#FFD400"]}
+              tintColor="#1A4B5F"
+              colors={["#1A4B5F"]}
             />
           }
           renderItem={({ item: conv }) => {
@@ -169,7 +169,7 @@ export default function ConversationsScreen() {
                         <View
                           className="absolute -top-1 -right-1 h-5 min-w-[20px] items-center justify-center rounded-full bg-primary px-1"
                         >
-                          <Text className="font-mont-bold text-[10px] text-black">
+                          <Text className="font-mont-bold text-[10px] text-white">
                             {unread > 99 ? "99+" : unread}
                           </Text>
                         </View>
@@ -181,7 +181,7 @@ export default function ConversationsScreen() {
                       <View className="flex-row items-center justify-between">
                         <Text
                           className={`font-mont-semibold text-sm ${
-                            unread > 0 ? "text-white" : "text-white"
+                            unread > 0 ? "text-text-primary" : "text-text-primary"
                           }`}
                           numberOfLines={1}
                         >
@@ -197,7 +197,7 @@ export default function ConversationsScreen() {
                       {/* Context badge */}
                       <View className="flex-row items-center mt-1">
                         <View className="flex-row items-center bg-surface rounded-full px-2 py-0.5">
-                          <Ionicons name={contextIcon} size={10} color="#898989" />
+                          <Ionicons name={contextIcon} size={10} color="#5F6E63" />
                           <Text
                             className="font-mont text-[10px] text-text-secondary ml-1"
                             numberOfLines={1}
@@ -212,7 +212,7 @@ export default function ConversationsScreen() {
                         <Text
                           className={`font-mont text-sm mt-1 ${
                             unread > 0
-                              ? "text-white"
+                              ? "text-text-primary"
                               : "text-text-secondary"
                           }`}
                           numberOfLines={1}

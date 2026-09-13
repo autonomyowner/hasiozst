@@ -2,13 +2,14 @@ import { useState } from "react";
 import { View, Text, Pressable, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useMutation } from "convex/react";
+import { useMutation } from "@/lib/convex";
 import { api } from "../convex/_generated/api";
 import { BackgroundImage } from "@/components/layout/BackgroundImage";
 import { TextInput } from "@/components/ui/TextInput";
 import { Button } from "@/components/ui/Button";
 import { authClient } from "@/lib/auth-client";
 import type { UserRole, SellerType } from "@/lib/types";
+import { PHONE_REGEX } from "@/lib/validation";
 
 type Step = "role" | "form";
 
@@ -71,7 +72,7 @@ export default function SignUpScreen() {
     if (!email.trim()) newErrors.email = "Email is required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
       newErrors.email = "Invalid email format";
-    if (phone.trim() && !/^0[5-7][0-9]{8}$/.test(phone.trim()))
+    if (phone.trim() && !PHONE_REGEX.test(phone.trim()))
       newErrors.phone = "Invalid phone format (e.g. 05XXXXXXXX)";
     if (!password.trim()) newErrors.password = "Password is required";
     if (password.length < 8) newErrors.password = "Minimum 8 characters";
@@ -145,7 +146,7 @@ export default function SignUpScreen() {
           contentContainerStyle={{ flexGrow: 1 }}
         >
           <BackgroundImage
-            source={require("@/assets/images/profile-cover-gold.jpg")}
+            source={require("@/assets/media/photos/habitas-alula-pool.jpg")}
             height={320}
           >
             <View className="px-6 pt-14">
@@ -156,7 +157,7 @@ export default function SignUpScreen() {
           </BackgroundImage>
 
           <View className="px-6 -mt-8 flex-1">
-            <Text className="font-mont-bold text-3xl text-white mb-1">
+            <Text className="font-mont-bold text-3xl text-text-primary mb-1">
               Create Your{"\n"}Account
             </Text>
             <Text className="font-mont text-sm text-text-secondary mb-6">
@@ -181,26 +182,26 @@ export default function SignUpScreen() {
                   >
                     <View
                       className={`h-11 w-11 rounded-xl items-center justify-center mr-3 ${
-                        isSelected ? "bg-black/20" : "bg-surface"
+                        isSelected ? "bg-background/20" : "bg-surface"
                       }`}
                     >
                       <Ionicons
                         name={r.icon}
                         size={22}
-                        color={isSelected ? "#000" : "#898989"}
+                        color={isSelected ? "#FFFFFF" : "#5F6E63"}
                       />
                     </View>
                     <View className="flex-1">
                       <Text
                         className={`font-mont-semibold text-sm ${
-                          isSelected ? "text-black" : "text-white"
+                          isSelected ? "text-white" : "text-text-primary"
                         }`}
                       >
                         {r.label}
                       </Text>
                       <Text
                         className={`font-mont text-xs mt-0.5 ${
-                          isSelected ? "text-black/70" : "text-text-secondary"
+                          isSelected ? "text-white/70" : "text-text-secondary"
                         }`}
                         numberOfLines={2}
                       >
@@ -215,7 +216,7 @@ export default function SignUpScreen() {
             {/* Seller type sub-selection */}
             {role === "seller" && (
               <View className="mt-4" style={{ gap: 8 }}>
-                <Text className="font-mont-medium text-sm text-white">
+                <Text className="font-mont-medium text-sm text-text-primary">
                   Seller Type
                 </Text>
                 {sellerTypes.map((st) => (
@@ -230,7 +231,7 @@ export default function SignUpScreen() {
                   >
                     <Text
                       className={`font-mont-medium text-sm ${
-                        sellerType === st.key ? "text-primary" : "text-white"
+                        sellerType === st.key ? "text-primary" : "text-text-primary"
                       }`}
                     >
                       {st.label}
@@ -278,10 +279,10 @@ export default function SignUpScreen() {
       >
         {/* Back button */}
         <Pressable onPress={() => setStep("role")} className="mb-4">
-          <Ionicons name="arrow-back" size={24} color="#fff" />
+          <Ionicons name="arrow-back" size={24} color="#0D1A12" />
         </Pressable>
 
-        <Text className="font-mont-bold text-3xl text-white mb-1">
+        <Text className="font-mont-bold text-3xl text-text-primary mb-1">
           Create Your{"\n"}Account
         </Text>
         <Text className="font-mont text-sm text-text-secondary mb-6">

@@ -17,9 +17,9 @@ export default function PrivacyPolicyScreen() {
             onPress={() => router.back()}
             className="h-10 w-10 items-center justify-center rounded-full bg-card mr-3"
           >
-            <Ionicons name="arrow-back" size={20} color="#fff" />
+            <Ionicons name="arrow-back" size={20} color="#0D1A12" />
           </Pressable>
-          <Text className="font-mont-bold text-xl text-white">
+          <Text className="font-mont-bold text-xl text-text-primary">
             Privacy Policy
           </Text>
         </View>
@@ -201,7 +201,7 @@ function Section({
 }) {
   return (
     <View className={last ? "" : "mb-5"}>
-      <Text className="font-mont-bold text-base text-white mb-2">{title}</Text>
+      <Text className="font-mont-bold text-base text-text-primary mb-2">{title}</Text>
       <Text className="font-mont text-sm text-text-secondary leading-[22px]">
         {children}
       </Text>

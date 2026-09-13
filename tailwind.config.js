@@ -9,16 +9,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#FFD400",
-        background: "#000000",
-        card: "#0C0C0C",
-        surface: "#111111",
-        "text-primary": "#FFFFFF",
-        "text-secondary": "#898989",
-        success: "#22C55E",
-        error: "#EF4444",
-        "badge-new": "#2866ED",
-        "pill-inactive": "rgba(217,217,217,0.08)",
+        // Palette sourced from mindshiftarabia.com
+        primary: "#1A4B5F",
+        "primary-dark": "#123847",
+        background: "#F8F4ED",
+        card: "#FFFFFF",
+        surface: "#F2EAD9",
+        "text-primary": "#0D1A12",
+        "text-secondary": "#5F6E63",
+        sage: "#8A9B7A",
+        "sage-soft": "#B9C9A8",
+        gold: "#F5E6A3",
+        success: "#1F9D55",
+        error: "#DC2626",
+        "badge-new": "#8B5CF6",
+        border: "#E3DBCA",
+        "pill-inactive": "rgba(26,75,95,0.08)",
       },
       fontFamily: {
         mont: ["Montserrat_400Regular"],

@@ -46,7 +46,7 @@ export function RadioButton({
             <View className="flex-1">
               <Text
                 className={`font-mont-medium text-sm ${
-                  isSelected ? "text-primary" : "text-white"
+                  isSelected ? "text-primary" : "text-text-primary"
                 }`}
               >
                 {option.label}

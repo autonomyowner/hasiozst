@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
 import { ScrollView, View, Text, Pressable, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
-import { useIsFocused } from "@react-navigation/native";
-import { useQuery } from "convex/react";
+import { useIsFocused } from "expo-router";
+import { useQuery } from "@/lib/convex";
 import { api } from "../../convex/_generated/api";
 import { ScreenContainer } from "@/components/layout/ScreenContainer";
 import { SearchBar } from "@/components/ui/SearchBar";
@@ -59,7 +59,7 @@ export default function DemandesScreen() {
     return (
       <ScreenContainer>
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#FFD400" />
+          <ActivityIndicator size="large" color="#1A4B5F" />
         </View>
       </ScreenContainer>
     );
@@ -75,7 +75,7 @@ export default function DemandesScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="px-4 pt-2 pb-3 flex-row items-start justify-between">
           <View>
-            <Text className="font-mont-bold text-xl text-white">Demandes</Text>
+            <Text className="font-mont-bold text-xl text-text-primary">Demandes</Text>
             <Text className="font-mont text-sm text-text-secondary">
               Buyer requests & wholesale offers
             </Text>
@@ -85,7 +85,7 @@ export default function DemandesScreen() {
               onPress={() => router.push("/create-demand")}
               className="bg-primary rounded-pill px-4 py-2 mt-1"
             >
-              <Text className="font-mont-semibold text-sm text-black">
+              <Text className="font-mont-semibold text-sm text-white">
                 Post Demand
               </Text>
             </Pressable>
@@ -132,7 +132,7 @@ export default function DemandesScreen() {
               >
                 <View className="flex-row items-start justify-between">
                   <View className="flex-1 mr-3">
-                    <Text className="font-mont-semibold text-base text-white">
+                    <Text className="font-mont-semibold text-base text-text-primary">
                       {item.title}
                     </Text>
                     <Text className="font-mont text-sm text-text-secondary mt-1">
@@ -165,7 +165,7 @@ export default function DemandesScreen() {
                     <Text className="font-mont text-xs text-text-secondary">
                       Deadline
                     </Text>
-                    <Text className="font-mont-medium text-sm text-white">
+                    <Text className="font-mont-medium text-sm text-text-primary">
                       {formatDate(item.deadline)}
                     </Text>
                   </View>
@@ -209,12 +209,12 @@ export default function DemandesScreen() {
                 onPress={() => setOfferCategory("all")}
                 className="rounded-pill px-4 py-2"
                 style={{
-                  backgroundColor: offerCategory === "all" ? "#FFD400" : "rgba(169,169,169,0.12)",
+                  backgroundColor: offerCategory === "all" ? "#1A4B5F" : "rgba(26,75,95,0.10)",
                 }}
               >
                 <Text
                   className={`font-mont-semibold text-[13px] ${
-                    offerCategory === "all" ? "text-black" : "text-text-secondary"
+                    offerCategory === "all" ? "text-white" : "text-text-secondary"
                   }`}
                 >
                   All
@@ -228,12 +228,12 @@ export default function DemandesScreen() {
                     onPress={() => setOfferCategory(cat.slug)}
                     className="rounded-pill px-4 py-2"
                     style={{
-                      backgroundColor: isActive ? "#FFD400" : "rgba(169,169,169,0.12)",
+                      backgroundColor: isActive ? "#1A4B5F" : "rgba(26,75,95,0.10)",
                     }}
                   >
                     <Text
                       className={`font-mont-semibold text-[13px] ${
-                        isActive ? "text-black" : "text-text-secondary"
+                        isActive ? "text-white" : "text-text-secondary"
                       }`}
                     >
                       {cat.label}

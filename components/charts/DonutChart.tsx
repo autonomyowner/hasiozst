@@ -10,7 +10,7 @@ interface DonutChartProps {
 
 export function DonutChart({
   percentage,
-  color = "#FFD400",
+  color = "#1A4B5F",
   size = 48,
   strokeWidth = 5,
 }: DonutChartProps) {
@@ -26,7 +26,7 @@ export function DonutChart({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#222"
+          stroke="#E3DBCA"
           strokeWidth={strokeWidth}
           fill="transparent"
         />
